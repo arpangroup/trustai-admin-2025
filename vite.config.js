@@ -6,7 +6,7 @@ export default defineConfig({
   base: '/', // 👈 Important!
   plugins: [react()],
   server: {
-    proxy: {
+    proxy: {// only works during local development
       // This proxies any request starting with /api to your backend server
       '/api': {
         target: 'https://api.trustai.co.in', // Replace with your backend URL
