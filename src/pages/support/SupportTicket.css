@@ -1,0 +1,21 @@
+.table-description {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* space between icon and text */
+}
+
+.schema-cell {
+  display: flex;
+  flex-direction: column; /* stack ticket name and username vertically */
+}
+
+.icon-wrapper {
+    height: 45px;
+    width: 45px;
+    line-height: 42px;
+    border-radius: 50%;
+    background: rgba(94, 63, 201, 0.2);
+    color: #5e3fc9;
+    text-align: center;
+    margin-right: 15px;
+}

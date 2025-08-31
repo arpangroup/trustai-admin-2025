@@ -1,0 +1,39 @@
+.tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 125%; /* Tooltip above the button */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1d4ed8; /* Tailwind blue-700 */  
+  background-color: #000;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+
+.tooltip-wrapper:hover .custom-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.custom-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%; /* Bottom of tooltip */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: #1d4ed8 transparent transparent transparent;
+  border-color: #000 transparent transparent transparent;
+}

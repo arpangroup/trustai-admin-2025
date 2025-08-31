@@ -1,0 +1,11 @@
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+.image-preview-wrapper:hover .image-delete-btn {
+  display: block;
+}
+
+.image-delete-btn {
+  display: none;
+}

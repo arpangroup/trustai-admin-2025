@@ -1,0 +1,23 @@
+/* POSSIBLY CAUSING THE ISSUE */
+.dropdown-items {
+  display: block;
+}
+
+.side-nav-dropdown.open .dropdown-items {
+  display: block;
+}
+
+
+.layout .side-nav .side-nav-inside .side-nav-menu .side-nav-item a svg {
+  width: 24px;
+  height: 18px;
+}
+
+
+
+.side-nav-link.active,
+.dropdown-link.active {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  color: #007bff;
+}

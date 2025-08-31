@@ -1,0 +1,61 @@
+
+.progress-steps-form .transaction-status {
+  background: rgba(190, 227, 219, 0.8);
+  padding: 50px 30px;
+  border-radius: 8px;
+  text-align: center;
+  color: #001219;
+  margin-bottom: 30px;
+}
+.progress-steps-form .transaction-status {
+  background: #003049;
+  color: #ffffff;
+}
+
+
+.centered {
+  text-align: center;
+}
+
+.progress-steps-form .transaction-status .icon {
+  height: 70px;
+  width: 70px;
+  line-height: 70px;
+  text-align: center;
+  color: #ffffff;
+  border-radius: 50%;
+  display: inline-block;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.progress-steps-form .transaction-status .icon.success {
+  background: #2a9d8f;
+}
+
+.anticon {
+  line-height: 0;
+  vertical-align: -0.125em;
+}
+.progress-steps-form .transaction-status h2 {
+  margin-bottom: 10px;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: sofia pro;
+  font-weight: 500;
+}
+.progress-steps-form .transaction-status p {
+  margin-bottom: 30px;
+}
+
+.site-btn {
+  display: inline-block;
+  padding: 13px 27px;
+  border-radius: 50px;
+  color: #001219;
+  background: #ffffff;
+  font-weight: 500;
+  font-size: 13px;
+  text-transform: uppercase;
+  box-shadow: 0px 0px 2px #00304966;
+}

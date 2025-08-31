@@ -1,0 +1,36 @@
+.ag-theme-alpine .schema-cell {
+  white-space: normal; /* allow wrapping */
+  line-height: 1.4;
+  padding-bottom: 12px;
+}
+
+.invested-date {
+  font-size: 12px;
+  color: #888;
+  margin-top: 4px;
+  padding-bottom: 6px;
+  text-align: left;
+}
+
+.schema-cell {
+    white-space: normal;
+    line-height: 1.4;
+    padding-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+}
+.site-datatable .data-table tbody tr td .investment-timeline {
+    background: #d2d3d8;
+    height: 0.5rem;
+}
+.site-datatable .data-table tbody tr td .investment-timeline .progress-bar {
+    background: #ef476f;
+}
+
+.centered-cell {
+  display: flex;
+  justify-content: center; /* horizontal centering */
+  align-items: center;     /* vertical centering */
+  height: 100%;            /* fill the cell vertically */
+  width: 100%;             /* fill the cell horizontally */
+}

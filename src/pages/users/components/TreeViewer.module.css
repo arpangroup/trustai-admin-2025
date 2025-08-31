@@ -1,0 +1,93 @@
+.tree-container {
+  width: 100%;
+  height: 600px;
+  overflow: auto;
+  border: 1px solid #ccc;
+  position: relative;
+}
+
+.tree-wrapper {
+  transition: transform 0.2s ease;
+  transform-origin: top center;
+}
+
+.tree ul {
+  position: relative;
+  padding-top: 20px;
+  display: table;
+  margin: 0 auto;
+}
+
+.tree li {
+  display: table-cell;
+  text-align: center;
+  position: relative;
+  padding: 20px 5px 0 5px;
+  vertical-align: top;
+}
+
+.tree li::before,
+.tree li::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 20px;
+  border-top: 2px solid #333;
+}
+
+.tree li::before {
+  left: 0;
+  border-right: 2px solid #333;
+}
+
+.tree li::after {
+  right: 0;
+  border-left: 2px solid #333;
+}
+
+.tree li:only-child::before,
+.tree li:only-child::after {
+  content: none;
+}
+
+.tree li:only-child {
+  padding-top: 0;
+}
+
+.tree ul::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  border-left: 2px solid #333;
+  height: 20px;
+}
+
+.node {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #fff;
+  border: 1px solid #333;
+  border-radius: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.node.selected {
+  background-color: #ff9800;
+  color: white;
+  font-weight: bold;
+  border-color: #d17d00;
+}
+
+.controls > div {
+  transition: color 0.2s;
+}
+
+.controls > div:hover {
+  color: #0d6efd; /* Bootstrap primary or your theme color */
+}
+
+
+/* ########################################## */

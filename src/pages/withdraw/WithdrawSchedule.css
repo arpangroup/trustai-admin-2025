@@ -1,0 +1,5 @@
+.switch-field input:checked + label {
+    background-color: #2a9d8f;
+    box-shadow: none;
+    color: #ffffff;
+}

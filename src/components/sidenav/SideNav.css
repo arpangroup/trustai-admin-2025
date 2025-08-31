@@ -1,0 +1,8 @@
+/* POSSIBLY CAUSING THE ISSUE */
+.dropdown-items {
+  display: block;
+}
+
+.side-nav-dropdown.open .dropdown-items {
+  display: block;
+}

@@ -1,0 +1,70 @@
+.fullscreen-tree-tab {
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  overflow: hidden;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.fullscreen-tree-tab .site-card-body {
+  height: 80vh;
+  overflow-y: auto; /* Optional: scroll if content overflows */
+}
+
+.hide-scrollbar {
+  overflow: hidden;
+}
+
+/* ###################################### */
+/* Animate fullscreen transition */
+.fullscreen-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Optional smoother fade/scale */
+.fullscreen-tree-tab {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  padding: 20px;
+  overflow-y: auto;
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* When entering fullscreen, apply transition smoothly */
+.fullscreen-enter {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.fullscreen-enter-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.fullscreen-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.fullscreen-exit-active {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.fullscreen-tree-tab .site-card-body {
+  height: 80vh;
+  overflow-y: auto;
+}
+
+.hide-scrollbar {
+  overflow: hidden;
+}

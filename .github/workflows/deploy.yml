@@ -1,0 +1,55 @@
+name: Deploy TrustAI Admin App
+
+on:
+  push:
+    branches: ["main"]
+
+env:
+  DEPLOY_PATH: "/var/www/admin.trustai.co.in"
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout source
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Setup Node
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 3. Install and build
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build React app
+        run: npm run build
+
+      # 4. Clean target directory on server before deployment
+      - name: Clean target directory on server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "Cleaning target directory: ${{ env.DEPLOY_PATH }}"
+            sudo rm -rf ${{ env.DEPLOY_PATH }}/*
+            echo "Contents after clean:"
+            ls -la ${{ env.DEPLOY_PATH }}
+
+
+      # 5. Copy build folder to remote server
+      - name: Deploy to server
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "dist/**"
+          strip_components: 1
+          target: ${{ env.DEPLOY_PATH }}
