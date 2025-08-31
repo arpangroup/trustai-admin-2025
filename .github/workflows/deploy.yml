@@ -8,7 +8,8 @@ env:
   DEPLOY_PATH: "/var/www/admin.trustai.co.in"
 
 jobs:
-  build-and-deploy:
+  build:
+    name: Build React App
     runs-on: ubuntu-latest
 
     steps:
@@ -29,7 +30,27 @@ jobs:
       - name: Build React app
         run: npm run build
 
-      # 4. Clean target directory on server before deployment
+      # 4. Upload build artifacts
+      - name: Upload dist folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  deploy:
+    name: Deploy to Server
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      # 1. Download build artifact
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      # 2. Clean target directory on server
       - name: Clean target directory on server
         uses: appleboy/ssh-action@v1
         with:
@@ -42,8 +63,7 @@ jobs:
             echo "Contents after clean:"
             ls -la ${{ env.DEPLOY_PATH }}
 
-
-      # 5. Copy build folder to remote server
+      # 3. Copy build folder to remote server
       - name: Deploy to server
         uses: appleboy/scp-action@v1
         with:
