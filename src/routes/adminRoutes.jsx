@@ -1,43 +1,55 @@
-import Dashboard from '../pages/dashboard/Dashboard';
-import Users from '../pages/users/Users';
-import EditUser from '../pages/users/EditUser';
-import EditUserV1 from '../pages/users/EditUserV1';
-import KycList from '../pages/kyc/KycList';
-import KycFormEdit from '../pages/kyc/KycFormEdit';
-import KycForms from '../pages/kyc/KycForms';
-import KycFormCreate from '../pages/kyc/KycFormCreate';
-import EditRole from '../pages/role/EditRole';
-import Roles from '../pages/role/Roles';
-import StakeEditor from '../pages/schema/StakeEditor';
-import SchemaForm from '../pages/schema/SchemaForm';
-import Schema from '../pages/schema/Schema';
-import Transactions from '../pages/transaction/Transactions';
-import PaymentGateway from '../pages/gateway/PaymentGateway';
-import DepositHistory from '../pages/deposit/DepositHistory';
-import WithdrawMethodManual from '../pages/withdraw/WithdrawMethodManual';
-import UserRankingFormV1 from '../pages/ranking/UserRankingFormV1';
-import NotificationTuneSetting from '../pages/settings/NotificationTuneSetting';
-import NotificationSetting from '../pages/settings/NotificationSetting';
-import SmsSetting from '../pages/settings/SmsSetting';
-import PluginSetting from '../pages/settings/PluginSetting';
-import EmailSetting from '../pages/settings/EmailSetting';
-import SiteSetting from '../pages/settings/SiteSetting';
-import SupportTicket from '../pages/support/SupportTicket';
-import TicketDetails from '../pages/support/TicketDetails';
-import CustomCss from '../pages/custom_css/CustomCss';
-import PushNotificationTemplateEdit from '../pages/notification/PushNotificationTemplateEdit';
-import PushNotificationTemplate from '../pages/notification/PushNotificationTemplate';
-import SmsTemplateEdit from '../pages/sms/SmsTemplateEdit';
-import SmsTemplate from '../pages/sms/SmsTemplate';
-import EmailTemplateEdit from '../pages/email/EmailTemplateEdit';
-import EmailTemplate from '../pages/email/EmailTemplate';
-import SendEmail from '../pages/email/SendEmail';
-import UserProfit from '../pages/users/UserProfit';
-import Investments from '../pages/investment/Investments';
-import Notifications from '../pages/notification/Notifications';
-import WithdrawSchedule from '../pages/withdraw/WithdrawSchedule';
-import WithdrawHistory from '../pages/withdraw/WithdrawHistory';
-import UserRanking from '../pages/ranking/UserRanking';
+import Dashboard from '../../pages/dashboard/Dashboard';
+import Users from '../../pages/users/Users';
+import EditUser from '../../pages/users/EditUser';
+import EditUserV1 from '../../pages/users/EditUserV1';
+
+import KycList from '../../pages/kyc/KycList';
+import KycFormEdit from '../../pages/kyc/KycFormEdit';
+import KycForms from '../../pages/kyc/KycForms';
+import KycFormCreate from '../../pages/kyc/KycFormCreate';
+
+import EditRole from '../../pages/role/EditRole';
+import Roles from '../../pages/role/Roles';
+
+import StakeEditor from '../../pages/schema/StakeEditor';
+import SchemaForm from '../../pages/schema/SchemaForm';
+import Schema from '../../pages/schema/Schema';
+
+import Transactions from '../../pages/transaction/Transactions';
+import PaymentGateway from '../../pages/gateway/PaymentGateway';
+
+import DepositHistory from '../../pages/deposit/DepositHistory';
+
+import WithdrawMethodManual from '../../pages/withdraw/WithdrawMethodManual';
+import UserRankingFormV1 from '../../pages/ranking/UserRankingFormV1';
+
+import NotificationTuneSetting from '../../pages/settings/NotificationTuneSetting';
+import NotificationSetting from '../../pages/settings/NotificationSetting';
+import SmsSetting from '../../pages/settings/SmsSetting';
+import PluginSetting from '../../pages/settings/PluginSetting';
+import EmailSetting from '../../pages/settings/EmailSetting';
+import SiteSetting from '../../pages/settings/SiteSetting';
+
+import SupportTicket from '../../pages/support/SupportTicket';
+import TicketDetails from '../../pages/support/TicketDetails';
+
+import CustomCss from '../../pages/custom_css/CustomCss';
+
+import PushNotificationTemplateEdit from '../../pages/notification/PushNotificationTemplateEdit';
+import PushNotificationTemplate from '../../pages/notification/PushNotificationTemplate';
+import SmsTemplateEdit from '../../pages/sms/SmsTemplateEdit';
+import SmsTemplate from '../../pages/sms/SmsTemplate';
+import EmailTemplateEdit from '../../pages/email/EmailTemplateEdit';
+import EmailTemplate from '../../pages/email/EmailTemplate';
+
+import SendEmail from '../../pages/email/SendEmail';
+
+import UserProfit from '../../pages/users/UserProfit';
+import Investments from '../../pages/investment/Investments';
+import Notifications from '../../pages/notification/Notifications';
+import WithdrawSchedule from '../../pages/withdraw/WithdrawSchedule';
+import WithdrawHistory from '../../pages/withdraw/WithdrawHistory';
+import UserRanking from '../../pages/ranking/UserRanking';
 
 const adminRoutes = [
   { path: '', element: <Dashboard /> },

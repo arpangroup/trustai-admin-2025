@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Switch from '../../components/form/Switch';
+import apiClient from '../../api/apiClient';
+import { API_ROUTES } from '../../routes';
 
 const switchFields = [
     { label: 'Deposit Status', name: 'depositEnabled' },
@@ -28,31 +30,26 @@ const TransactionStatusForm = ({ initialStatus, userId }) => {
         }));
         
         setLoadingField(field);
-        console.log("UPDATE_TRANSACTION_STARTUS: ", field, value);
-        let url = '/api/v1/users/1/transaction-status?';
-        if(field === 'depositEnabled') url += `depositStatus=${value === true ? 'ENABLED' : 'DISABLED'}`
-        if(field === 'withdrawEnabled') url += `withdrawStatus=${value === true ? 'ENABLED' : 'DISABLED'}`
-        if(field === 'sendMoneyEnabled') url += `sendMoneyStatus=${value === true ? 'ENABLED' : 'DISABLED'}`
+        //console.log("UPDATE_TRANSACTION_STARTUS: ", field, value);
+        let url = API_ROUTES.USERS.TRANSACTION_STATUS(userId);
+
+        // Build params object conditionally based on the field
+        const params = {};
+        const newStatus = value === true ? 'ENABLED' : 'DISABLED';
+        if (field === 'depositEnabled') params.depositStatus = newStatus;
+        if (field === 'withdrawEnabled') params.withdrawStatus = newStatus;
+        if (field === 'sendMoneyEnabled') params.sendMoneyStatus = newStatus;
 
         try {
-            const response = await fetch(url, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    [field]: value
-                }),
-            });
-
-            if (!response.ok) throw new Error('Failed to update');
+            await apiClient.put(url, null, { params });
 
             setFormData((prev) => ({
                 ...prev,
                 [field]: value,
             }));
         } catch (err) {
-            alert(`Failed to update ${field}`);
+            console.error('Error updating transaction status:', err);
+            alert(`Failed to update ${field}: ${err.message}`);
         } finally {
             setLoadingField(null);
         }

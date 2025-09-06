@@ -4,7 +4,7 @@ import './Users.css';
 import FormInput from "../../components/form/FormInput";
 import { LuSend } from "react-icons/lu";
 import apiClient from "../../api/apiClient";
-import { API_ROUTES } from "../../constants/apiRoutes";
+import { API_ROUTES } from "../../routes";
 
 const SendEmailPanel = ({ email, username, isAllEmail = false, isOpen, onClose }) => {
     const [subject, setSubject] = useState("");

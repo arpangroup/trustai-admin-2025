@@ -10,7 +10,7 @@ import Badge from '../../components/Badge';
 import KycDetailsPanel from './KycDetailsPanel';
 
 import { usePaginatedFetch } from '../../api/usePaginatedFetch';
-import { API_ROUTES } from '../../constants/apiRoutes';
+import { API_ROUTES } from '../../routes';
 import RightPanel from '../../components/panel/RightPanel';
 
 

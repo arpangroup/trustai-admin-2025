@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Switch from "../../components/form/Switch";
 import FormInputWithUnit from "../../components/form/FormInputWithUnit";
-import { API_ROUTES } from "../../constants/apiRoutes";
+import { API_ROUTES } from "../../routes";
 import apiClient from "../../api/apiClient";
 import { CURRENCY_UNIT } from "../../constants/config";
 

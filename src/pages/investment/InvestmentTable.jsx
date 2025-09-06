@@ -13,7 +13,7 @@ import Badge from './Badge';
 */
 
 import { useCallback, useState } from "react";
-import { API_ROUTES } from "../../constants/apiRoutes";
+import { API_ROUTES } from "../../routes";
 import { usePaginatedFetch } from "../../api/usePaginatedFetch";
 import { NavLink } from "react-router-dom";
 import { LuArrowBigRight } from "react-icons/lu";

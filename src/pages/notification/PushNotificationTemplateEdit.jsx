@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import FormTextarea from '../../components/form/FormTextarea';
 import Switch from '../../components/form/Switch';
-import { API_ROUTES } from '../../constants/apiRoutes';
+import { API_ROUTES } from '../../routes';
 import FormInput from '../../components/form/FormInput';
 
 const PushNotificationTemplateEdit = ({ type = "push" }) => {

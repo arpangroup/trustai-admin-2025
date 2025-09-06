@@ -16,7 +16,7 @@ import rank4 from '../../assets/icons/rank4.svg';
 import rank5 from '../../assets/icons/rank5.jpg';
 
 import { usePaginatedFetch } from '../../api/usePaginatedFetch';
-import { API_ROUTES } from '../../constants/apiRoutes';
+import { API_ROUTES } from '../../routes';
 import moment from 'moment';
 import { CURRENCY_SYMBOL } from '../../constants/config';
 import TeamIncomeConfigTable from '../income/TeamIncomeConfigTable';

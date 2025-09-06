@@ -5,7 +5,7 @@ import FormInput from '../../components/form/FormInput';
 import FormTextarea from '../../components/form/FormTextarea';
 import Switch from '../../components/form/Switch';
 import FileInput from '../../components/form/FileInput';
-import { API_ROUTES } from '../../constants/apiRoutes';
+import { API_ROUTES } from '../../routes';
 
 const EmailTemplateEdit = ({ type = "email" }) => {
   const { id } = useParams();

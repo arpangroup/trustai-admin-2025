@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { LuUser, LuAnchor, LuCreditCard, LuCast, LuNetwork, LuWrench, } from "react-icons/lu";
 
+import { API_ROUTES, WEB_ROUTES } from "../../routes";
+
 import PageTitle from "../../components/page_title/PageTitle";
 import EarningTab from "./components/EarningTab";
 import InvestmentTab from "./components/InvestmentTab";
@@ -24,7 +26,6 @@ import InvestNow from "../investment/InvestNow";
 import DepositSuccess from "../deposit/DepositSuccess";
 import SendMoney from "../deposit/SendMoney";
 import WithdrawRequest from "../deposit/WithdrawRequest";
-import { API_ROUTES } from "../../constants/apiRoutes";
 import { CURRENCY_UNIT } from "../../constants/config";
 
 
@@ -95,7 +96,7 @@ export default function EditUserV1() {
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                const response = await apiClient.get(API_ROUTES.USER_BY_ID(userId));
+                const response = await apiClient.get(API_ROUTES.USERS.BY_ID(userId));
                 const data = response.data;
                 setUserInfo(data);
             } catch (err) {

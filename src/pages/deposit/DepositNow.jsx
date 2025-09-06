@@ -2,7 +2,7 @@ import { useState } from "react";
 import FormInput from "../../components/form/FormInput";
 import FormDropdown from "../../components/form/FormDropdown";
 import { LuSend } from "react-icons/lu";
-import { API_ROUTES } from "../../constants/apiRoutes";
+import { API_ROUTES } from "../../routes";
 import apiClient from "../../api/apiClient";
 
 // Dropdown options

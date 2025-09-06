@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { LuPlus, LuTrash } from "react-icons/lu";
 import apiClient from "../../api/apiClient";
-import { API_ROUTES } from "../../constants/apiRoutes";
+import { API_ROUTES } from "../../routes";
 import { SCHEDULE_OPTIONS } from "../../constants/config";
 import FormInput from "../../components/form/FormInput";
 import FormDropdown from "../../components/form/FormDropdown";

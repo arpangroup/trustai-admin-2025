@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { API_ROUTES } from "../../constants/apiRoutes";
+import { API_ROUTES } from "../../routes";
 import apiClient from "../../api/apiClient";
 import FormInput from "../../components/form/FormInput";
 

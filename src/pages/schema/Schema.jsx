@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import PageTitle from "../../components/page_title/PageTitle";
 import Badge from '../../components/Badge';
 import { useFetchJson } from '../../api/useFetchJson';
-import { API_ROUTES } from "../../constants/apiRoutes";
+import { API_ROUTES } from "../../routes";
 import { usePaginatedFetch } from "../../api/usePaginatedFetch";
 
 const Schema = (props) => {

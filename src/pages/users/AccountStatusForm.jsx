@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Switch from '../../components/form/Switch';
+import apiClient from '../../api/apiClient';
+import { API_ROUTES } from "../../routes";
 
 const switchFields = [
     { label: 'Account Status', name: 'accountActive' },
@@ -32,31 +34,22 @@ const AccountStatusForm = ({ initialStatus, userId }) => {
         }));
         setLoadingField(field);
         console.log("UPDATE_ACCOUNT: ", field, value);
+        if(field !== 'accountActive') return;
         
-        let url = '';
-        if(field === 'accountActive') {
-            url = `/api/v1/users/${userId}/account-status?status=${value === true ? 'ACTIVE' : 'DISABLED'}`
-        }
+        const newStatus = value === true ? 'ACTIVE' : 'DISABLED';
+        let url = API_ROUTES.USERS.ACCOUNT_STATUS(userId);
 
          try {
-            const response = await fetch(url, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    [field]: value
-                }),
-            });
+            await apiClient.put(url, null, { params: { status: newStatus } });
 
-            if (!response.ok) throw new Error('Failed to update');
-
+            // If backend returns updated user, you can use response.data
             setFormData((prev) => ({
-                ...prev,
-                [field]: value,
+            ...prev,
+            [field]: value,
             }));
         } catch (err) {
-            alert(`Failed to update ${field}`);
+            console.error('Error updating account status:', err);
+            alert(`Failed to update ${field}: ${err.message}`);
         } finally {
             setLoadingField(null);
         }

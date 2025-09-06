@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import "./Login.css"; // Import custom CSS for background styling
 import { useLocation, useNavigate } from "react-router";
 import { AuthContext } from '../../context/AuthContext.jsx';
-import { API_ROUTES } from "../../constants/apiRoutes.js";
+import { API_ROUTES } from "../../routes";
 import apiClient from '../../api/apiClient.jsx';
 
 const Login = () => {  

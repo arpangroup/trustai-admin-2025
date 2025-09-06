@@ -4,7 +4,7 @@ import PageTitle from "../../components/page_title/PageTitle";
 import RightPanel from "../../components/panel/RightPanel";
 import FormInput from "../../components/form/FormInput";
 import apiClient from "../../api/apiClient";
-import { API_ROUTES } from "../../constants/apiRoutes";
+import { API_ROUTES } from "../../routes";
 import './Loader.css';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 

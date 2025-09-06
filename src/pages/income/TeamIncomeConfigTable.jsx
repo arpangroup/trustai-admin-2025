@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import FormInputWithUnit from '../../components/form/FormInputWithUnit';
 import './TeamIncomeConfigTable.css';
-import { API_ROUTES } from '../../constants/apiRoutes';
+import { API_ROUTES } from '../../routes';
 
 const RANKS = ['RANK_1', 'RANK_2', 'RANK_3', 'RANK_4', 'RANK_5'];
 const LEVEL_LABELS = {

@@ -9,7 +9,7 @@ import { useParams } from 'react-router';
 import FormInputWithSelect from '../../components/form/FormInputWithSelect';
 import FormDropdown from '../../components/form/FormDropdown';
 import apiClient from '../../api/apiClient';
-import { API_ROUTES } from '../../constants/apiRoutes';
+import { API_ROUTES } from '../../routes';
 
 const CURRENCY_UNIT = "INR";
 

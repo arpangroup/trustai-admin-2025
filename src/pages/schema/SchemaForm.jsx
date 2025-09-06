@@ -8,7 +8,7 @@ import Switch from '../../components/form/Switch';
 import LoaderOverlay from '../../components/LoaderOverlay';
 import { useParams } from 'react-router';
 import apiClient from '../../api/apiClient';
-import { API_ROUTES } from '../../constants/apiRoutes';
+import { API_ROUTES } from '../../routes';
 import FileInput from '../../components/form/FileInput';
 import { CURRENCY_SYMBOL, CURRENCY_UNIT, CURRENCY_UNIT_DEFAULT } from '../../constants/config';
 

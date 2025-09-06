@@ -1,6 +1,6 @@
 import axios from 'axios';
 import createAuthRefreshInterceptor from 'axios-auth-refresh';
-import { API_ROUTES } from '../constants/apiRoutes';
+import { API_ROUTES } from '../routes/apiRoutes';
 
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL, // Adjust if your backend URL is different

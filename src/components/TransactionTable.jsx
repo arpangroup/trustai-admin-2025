@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { AgGridReact } from 'ag-grid-react';
 
 // Internal project imports
-import { API_ROUTES } from '../constants/apiRoutes';
+import { API_ROUTES } from '../routes';
 import { formatDate } from '../utils/dateUtils';
 import { usePaginatedFetch } from '../api/usePaginatedFetch';
 import Badge from './Badge';

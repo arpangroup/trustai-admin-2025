@@ -4,7 +4,7 @@ import Badge from "../../components/Badge";
 
 import { AgGridReact } from "ag-grid-react";
 import { NavLink } from 'react-router-dom';
-import { API_ROUTES } from '../../constants/apiRoutes';
+import { API_ROUTES } from '../../routes';
 import { usePaginatedFetch } from '../../api/usePaginatedFetch';
 import { formatDate } from '../../utils/dateUtils';
 import { LuEye } from 'react-icons/lu';

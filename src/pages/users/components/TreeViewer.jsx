@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './TreeViewer.module.css';
 import { LuMaximize2, LuRefreshCw, LuZoomIn, LuZoomOut } from 'react-icons/lu';
-import { API_ROUTES } from '../../../constants/apiRoutes';
+import { API_ROUTES } from '../../../routes';
 import apiClient from '../../../api/apiClient';
 
 const TreeViewer = ({ userId }) => {

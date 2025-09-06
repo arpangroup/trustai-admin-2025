@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { LuCheck, LuX } from 'react-icons/lu';
 import FormTextarea from '../../components/form/FormTextarea';
 import apiClient from "../../api/apiClient";
-import { API_ROUTES } from '../../constants/apiRoutes';
+import { API_ROUTES } from '../../routes';
 
 const defaultScreenshot = 'https://81habibi.com/assets/global/images/qcVxCDUguY174izjLz37.jpg';
 

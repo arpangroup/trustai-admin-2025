@@ -2,6 +2,9 @@ import React, { useCallback, useMemo, useState } from "react";
 import { LuPencilLine, LuMail, LuTrash } from "react-icons/lu";
 import './Users.css';
 
+import { API_ROUTES, WEB_ROUTES } from "../../routes";
+import { generatePath } from 'react-router-dom';
+
 import { AgGridReact } from "ag-grid-react";
 
 import PageTitle from "../../components/page_title/PageTitle";
@@ -9,7 +12,6 @@ import { NavLink, useParams } from "react-router-dom";
 import SendEmailPanel from "./SendEmailPanel";
 import Badge from "../../components/Badge";
 import RightPanel from "../../components/panel/RightPanel";
-import { API_ROUTES } from "../../constants/apiRoutes";
 import { usePaginatedFetch } from "../../api/usePaginatedFetch";
 import { DataGrid } from '@mui/x-data-grid';
 import { TextField } from '@mui/material';
@@ -20,13 +22,17 @@ const Users = ({status = ""}) => {
   const [page, setPage] = useState(0);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState("");  
-  const { data, totalPages, loading, error } = usePaginatedFetch(API_ROUTES.USERS, page, 9999, {status: status});
+  const { data, totalPages, loading, error } = usePaginatedFetch(API_ROUTES.USERS.BASE, page, 9999, {status: status});
   const [searchText, setSearchText] = useState('');
 
   const ActionLink = (props) => {
+    const userId = props.data.id;
+    const url = generatePath(WEB_ROUTES.USERS.USER_EDIT.path, { userId });
+
     return (
       <>
-        <NavLink to={`/users/${props.data.id}/edit`} className="round-icon-btn purple">
+        <NavLink to={url} className="round-icon-btn purple">
+        {/* <NavLink to={`/users/${props.data.id}/edit`} className="round-icon-btn purple"> */}
           <LuPencilLine />
         </NavLink>
 

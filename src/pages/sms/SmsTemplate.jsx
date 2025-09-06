@@ -10,7 +10,7 @@ import { LuPencilLine, LuMail, LuTrash } from "react-icons/lu";
 import { usePaginatedFetch } from '../../api/usePaginatedFetch';
 
 // Constants
-import { API_ROUTES } from '../../constants/apiRoutes';
+import { API_ROUTES } from '../../routes';
 
 // Components
 import PageTitle from '../../components/page_title/PageTitle';
