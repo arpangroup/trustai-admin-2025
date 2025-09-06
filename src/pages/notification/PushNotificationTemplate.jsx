@@ -39,7 +39,7 @@ const PushNotificationTemplate = ({ type = "push", pageSize = 9999 }) => {
     const ActionLink = (props) => {
       return (
         <>
-          <NavLink to={`/admin/template/notification/${props.data.id}/edit`} style={styleActionButtonEdit} class="round-icon-btn red-btn editKyc">
+          <NavLink to={`/template/notification/${props.data.id}/edit`} style={styleActionButtonEdit} class="round-icon-btn red-btn editKyc">
             <LuPencilLine />
           </NavLink>
         </>
@@ -70,7 +70,7 @@ const PushNotificationTemplate = ({ type = "push", pageSize = 9999 }) => {
 
       const ActionPushNotificationConfig = (props) => {
       return (
-        <a href="/admin/setting/notification"
+        <a href="/setting/notification"
           class="title-btn">
           <LuMail />
           <span> Push Notification Config</span>

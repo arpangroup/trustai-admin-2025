@@ -33,7 +33,7 @@ const menuData = [
       { label: 'All Customers', href: '/users', icon: <FiUsers /> },
       { label: 'Active Customers', href: '/users/active', icon: <FiUserCheck /> },
       { label: 'Disabled Customers', href: '/users/disabled', icon: <FiUserX /> },
-      // { label: 'Notifications', href: '/admin/notifications', icon: <LuMegaphone /> },
+      // { label: 'Notifications', href: '/notifications', icon: <LuMegaphone /> },
       { label: 'Send Email to all', href: '/users/mail-send/all', icon: <FiSend /> }
     ],
   },
@@ -42,10 +42,10 @@ const menuData = [
     label: 'KYC Management',
     icon: <FiCheckSquare />,
     items: [
-      { label: 'Pending KYC', href: '/admin/kyc/pending', icon: <FiAirplay /> },
-      { label: 'Rejected KYC', href: '/admin/kyc/rejected', icon: <LuFileWarning /> },
-      { label: 'All KYC Logs', href: '/admin/kyc', icon: <LuContact /> },
-      // { label: 'KYC Form', href: '/admin/kyc_forms', icon: <FiCheckSquare /> },
+      { label: 'Pending KYC', href: '/kyc/pending', icon: <FiAirplay /> },
+      { label: 'Rejected KYC', href: '/kyc/rejected', icon: <LuFileWarning /> },
+      { label: 'All KYC Logs', href: '/kyc', icon: <LuContact /> },
+      // { label: 'KYC Form', href: '/kyc_forms', icon: <FiCheckSquare /> },
     ],
   },
   // {
@@ -55,7 +55,7 @@ const menuData = [
   // {
   //   type: 'link',
   //   label: 'Manage Roles',
-  //   href: '/admin/roles',
+  //   href: '/roles',
   //   icon: <LuContact />,
   // },
   // {
@@ -74,8 +74,8 @@ const menuData = [
     icon: <LuAlbum />,
     items: [
       // { label: 'Schedule', href: '#', icon: <LuAlarmClock /> },
-      { label: 'Investment Schemas', href: '/admin/schemas', icon: <FiAirplay /> },
-      { label: 'Stakes', href: '/admin/schemas/stakes', icon: <FiAirplay /> },
+      { label: 'Investment Schemas', href: '/schemas', icon: <FiAirplay /> },
+      { label: 'Stakes', href: '/schemas/stakes', icon: <FiAirplay /> },
     ],
   },
 
@@ -86,20 +86,20 @@ const menuData = [
   {
     type: 'link',
     label: 'Transactions',
-    href: '/admin/transactions',
+    href: '/transactions',
     icon: <LuCast />,
   },
   {
     type: 'link',
     label: 'Investments',
-    href: '/admin/investments',
+    href: '/investments',
     icon: <LuAnchor />,
   },
 
   {
     type: 'link',
     label: 'User Profits',
-    href: '/admin/users/profit',
+    href: '/users/profit',
     icon: <LuCreditCard />,
   },
 
@@ -110,7 +110,7 @@ const menuData = [
   // {
   //   type: 'link',
   //   label: 'Automatic Gateways',
-  //   href: '/admin/payment/gateway',
+  //   href: '/payment/gateway',
   //   icon: <LuDoorOpen />,
   // },
 
@@ -119,11 +119,11 @@ const menuData = [
     label: 'Deposits',
     icon: <LuWallet  />,
     items: [
-      // { label: 'Automatic Methods', href: '/admin/deposit/method/auto', icon: <LuWorkflow /> },
-      // { label: 'Manual Methods', href: '/admin/deposit/method/manual', icon: <LuCompass /> },
-      { label: 'Pending Manual Deposits', href: '/admin/deposit/pending', icon: <LuWallet /> },
-      { label: 'Rejected Deposits', href: '/admin/deposit/rejected', icon: <LuBan /> },
-      { label: 'Deposit History', href: '/admin/deposit/history', icon: <LuClipboardCheck /> },
+      // { label: 'Automatic Methods', href: '/deposit/method/auto', icon: <LuWorkflow /> },
+      // { label: 'Manual Methods', href: '/deposit/method/manual', icon: <LuCompass /> },
+      { label: 'Pending Manual Deposits', href: '/deposit/pending', icon: <LuWallet /> },
+      { label: 'Rejected Deposits', href: '/deposit/rejected', icon: <LuBan /> },
+      { label: 'Deposit History', href: '/deposit/history', icon: <LuClipboardCheck /> },
     ],
   },
 
@@ -132,11 +132,11 @@ const menuData = [
     label: 'Withdraw',
     icon: <LuLandmark />,
     items: [
-      // { label: 'Automatic Methods', href: '/admin/withdraw/method/auto', icon: <LuWorkflow /> },
-      // { label: 'Manual Methods', href: '/admin/withdraw/method/manual', icon: <LuCompass /> },
-      { label: 'Pending Withdraws', href: '/admin/withdraw/pending', icon: <LuWallet /> },
-      { label: 'Withdraw Schedule', href: '/admin/withdraw/schedule', icon: <LuAlarmClock /> },
-      { label: 'Withdraw History', href: '/admin/withdraw/history', icon: <LuPiggyBank /> },
+      // { label: 'Automatic Methods', href: '/withdraw/method/auto', icon: <LuWorkflow /> },
+      // { label: 'Manual Methods', href: '/withdraw/method/manual', icon: <LuCompass /> },
+      { label: 'Pending Withdraws', href: '/withdraw/pending', icon: <LuWallet /> },
+      { label: 'Withdraw Schedule', href: '/withdraw/schedule', icon: <LuAlarmClock /> },
+      { label: 'Withdraw History', href: '/withdraw/history', icon: <LuPiggyBank /> },
     ],
   },
 
@@ -153,7 +153,7 @@ const menuData = [
   // {
   //   type: 'link',
   //   label: 'User Rankings',
-  //   href: '/admin/rankings',
+  //   href: '/rankings',
   //   icon: <LuMedal />,
   // },
   {
@@ -161,7 +161,7 @@ const menuData = [
     label: 'User Rankings',
     icon: <LuMedal />,
     items: [
-      { label: 'Rankings', href: '/admin/rankings', icon: <LuAlarmClock /> },
+      { label: 'Rankings', href: '/rankings', icon: <LuAlarmClock /> },
     ],
   },
   
@@ -177,12 +177,12 @@ const menuData = [
     label: ' Settings',
     icon: <LuSettings />,
     items: [
-      { label: 'Site Settings', href: '/admin/setting/site', icon: <LuSettings2 /> },
-      { label: 'Email Settings', href: '/admin/setting/mail', icon: <LuInbox /> },
-      { label: 'Plugin Settings', href: '/admin/setting/plugin', icon: <LuToyBrick /> },
-      { label: 'SMS Settings', href: '/admin/setting/sms', icon: <LuMessageCircle /> },
-      { label: 'Push Notification', href: '/admin/setting/notification', icon: <LuBellRing /> },
-      { label: 'Notification Tune', href: '/admin/setting/tune', icon: <LuVolume2 /> }
+      { label: 'Site Settings', href: '/setting/site', icon: <LuSettings2 /> },
+      { label: 'Email Settings', href: '/setting/mail', icon: <LuInbox /> },
+      { label: 'Plugin Settings', href: '/setting/plugin', icon: <LuToyBrick /> },
+      { label: 'SMS Settings', href: '/setting/sms', icon: <LuMessageCircle /> },
+      { label: 'Push Notification', href: '/setting/notification', icon: <LuBellRing /> },
+      { label: 'Notification Tune', href: '/setting/tune', icon: <LuVolume2 /> }
     ],
   },
 
@@ -263,19 +263,19 @@ const menuData = [
   {
     type: 'link',
     label: 'Email Template',
-    href: '/admin/template/email',
+    href: '/template/email',
     icon: <LuMail />,
   },
   {
     type: 'link',
     label: 'SMS Template',
-    href: '/admin/template/sms',
+    href: '/template/sms',
     icon: <LuMessageSquare />,
   },
   {
     type: 'link',
     label: 'Push Notification Template',
-    href: '/admin/template/notification',
+    href: '/template/notification',
     icon: <LuBellRing />,
   },
 
@@ -288,14 +288,14 @@ const menuData = [
   {
     type: 'link',
     label: 'Support Tickets',
-    href: '/admin/tickets',
+    href: '/tickets',
     icon: <LuWrench />,
   },
 
   {
     type: 'link',
     label: 'Custom CSS',
-    href: '/admin/custom-css',
+    href: '/custom-css',
     icon: <LuBraces />,
   },
   {

@@ -16,7 +16,7 @@ const Schema = (props) => {
     
     const ActionLinkAddNew = (props) => {
         return (
-            <a href="/admin/schemas/create"
+            <a href="/schemas/create"
                 class="title-btn">
                 <LuPlus />
                 <span> ADD NEW</span>
@@ -46,7 +46,7 @@ const Schema = (props) => {
 
     const ActionLink = (props) => {
         return (
-            <NavLink to={`/admin/schemas/edit/${props.data.id}`} className="round-icon-btn purple">
+            <NavLink to={`/schemas/edit/${props.data.id}`} className="round-icon-btn purple">
                 <LuPencilLine />
             </NavLink>
         );

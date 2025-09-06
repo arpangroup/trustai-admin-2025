@@ -95,8 +95,7 @@ export default function EditUserV1() {
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                const response = await apiClient.get(API_ROUTES.USER_BY_ID(userId));
-                const data = response.data;
+                const data = await apiClient.get(API_ROUTES.USER_BY_ID(userId));
                 setUserInfo(data);
             } catch (err) {
                 console.error("Error fetching user info:", err);
@@ -141,7 +140,7 @@ export default function EditUserV1() {
                 </div>
 
                 <div className="row justify-content-center">
-                    <div className="col-xxl-3 col-xl-4 col-lg-4 col-md-12 mb-4">
+                    <div className="col-xxl-3 col-xl-6 col-lg-8 col-md-6 col-sm-12">
                         {/* <ProfileCard /> */}
 
                         <div className="profile-card">
@@ -180,7 +179,7 @@ export default function EditUserV1() {
                     </div>
 
 
-                    <div className="col-xxl-9 col-xl-8 col-lg-8 col-md-12">
+                    <div className="col-xxl-9 col-xl-12 col-lg-12 col-md-12 col-sm-12">
                         <div className="site-tab-bars">
                             <ul className="nav nav-pills" id="pills-tab" role="tablist">
                                 {tabs.map((tab) => (

@@ -4,7 +4,7 @@ import {Navbar,NavbarV2,Footer, SideNav} from './components'
 import { Routes, Route, useLocation } from "react-router-dom";
 
 
-import './assets/css/bootstrap.min.css';
+// import './assets/css/bootstrap.min.css';
 import './assets/css/styles.css';
 import Header from './components/header/Header';
 import SideNavV1 from './components/sidenavV1/SideNavV1';

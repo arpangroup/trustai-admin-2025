@@ -77,7 +77,7 @@ const UserRanking = (props) => {
                     <span> Rank Config</span>
                 </button>
 
-                <a href="/admin/rankings/create"
+                <a href="/rankings/create"
                     className="title-btn">
                     <LuPlus />
                     <span> ADD NEW</span>
@@ -102,7 +102,7 @@ const UserRanking = (props) => {
 
     const ActionLink = (props) => {
         return (
-            <NavLink to={`/admin/rankings/edit/${props.data.id}`} className="round-icon-btn purple">
+            <NavLink to={`/rankings/edit/${props.data.id}`} className="round-icon-btn purple">
                 <LuPencilLine />
             </NavLink>
         );
@@ -179,7 +179,7 @@ const UserRanking = (props) => {
                             </a>
                         ))}
                         
-                        <a href="/admin/rankings/create" className="btn btn-outline-primary btn-sm me-2">
+                        <a href="/rankings/create" className="btn btn-outline-primary btn-sm me-2">
                             <LuPlus />
                             <span> ADD NEW</span>
                         </a>

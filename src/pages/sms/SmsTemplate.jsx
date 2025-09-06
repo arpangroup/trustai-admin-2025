@@ -17,13 +17,13 @@ import PageTitle from '../../components/page_title/PageTitle';
 import Badge from '../../components/Badge';
 
 const styleActionButtonEdit = {
-  background: "#ef476f",
+  // background: "#ef476f",
   width: "30px",
   height: "30px",
   lineHeight: "30px",
   borderRadius: "50%",
   marginRight: "3px",
-  color: "#ffffff",
+  // color: "#ffffff",
   display: "inline-block",
   textAlign: "center",
   color: "#ffffff",
@@ -38,7 +38,7 @@ const SmsTemplate = ({ type = "sms", pageSize = 9999 }) => {
     const ActionLink = (props) => {
       return (
         <>
-          <NavLink to={`/admin/template/sms/${props.data.id}/edit`} style={styleActionButtonEdit} class="round-icon-btn red-btn editKyc">
+          <NavLink to={`/template/sms/${props.data.id}/edit`} style={styleActionButtonEdit} class="round-icon-btn red-btn editKyc">
             <LuPencilLine />
           </NavLink>
         </>
@@ -69,7 +69,7 @@ const SmsTemplate = ({ type = "sms", pageSize = 9999 }) => {
 
       const ActionSmsConfig = (props) => {
       return (
-        <a href="/admin/setting/sms"
+        <a href="/setting/sms"
           class="title-btn">
           <LuMail />
           <span> SMS Config</span>

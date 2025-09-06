@@ -7,7 +7,8 @@ import Login from './pages/login/Login'
 import DefaultLayout from './layout/DefaultLayout'
 import ProtectedRoute from './utils/ProtectedRoute'
 
-import './assets/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import './assets/css/bootstrap.min.css';
 import './assets/css/styles.css';
 import Header from './components/header/Header';
 import SideNavV1 from './components/sidenavV1/SideNavV1';

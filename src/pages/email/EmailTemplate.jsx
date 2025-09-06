@@ -25,7 +25,7 @@ const EmailTemplate = ({ type = "email", pageSize = 9999 }) => {
     const ActionLink = (props) => {
       return (
         <>
-          <NavLink to={`/admin/template/email/${props.data.id}/edit`} className="round-icon-btn purple">
+          <NavLink to={`/template/email/${props.data.id}/edit`} className="round-icon-btn purple">
             <LuPencilLine />
           </NavLink>
         </>
@@ -56,7 +56,7 @@ const EmailTemplate = ({ type = "email", pageSize = 9999 }) => {
 
       const ActionEmailConfig = (props) => {
       return (
-        <a href="/admin/setting/mail"
+        <a href="/setting/mail"
           className="title-btn">
           <LuMail />
           <span> Email Config</span>

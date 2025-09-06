@@ -34,8 +34,8 @@ export const usePaginatedFetch = (baseUrl, page = 0, size = 9999, filters = {}) 
         // console.log("RESPONSE: ", response);
 
         if(isMounted){
-          setData(response.content || []);
-          setTotalPages(response.totalPages || 0);
+          setData(response.data?.content || []);
+          setTotalPages(response.data?.totalPages || 0);
         }
       } catch (err) {
         console.error("usePaginatedFetch error:", err);

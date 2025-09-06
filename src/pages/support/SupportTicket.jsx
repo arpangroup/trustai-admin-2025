@@ -46,7 +46,7 @@ export default function SupportTicket() {
 
   const ActionLinkAddNew = (props) => {
     return (
-      <a href="/admin/ranking/create"
+      <a href="/ranking/create"
         class="title-btn">
         <LuPlus />
         <span> ADD NEW</span>
@@ -56,7 +56,7 @@ export default function SupportTicket() {
 
   const ActionLink = (props) => {
     return (
-      <NavLink to={`/admin/tickets/${props.data.id}/details`} style={styleActionButtonEdit} class="round-icon-btn red-btn editKyc">
+      <NavLink to={`/tickets/${props.data.id}/details`} style={styleActionButtonEdit} class="round-icon-btn red-btn editKyc">
         <LuEye />
       </NavLink>
     );
@@ -73,7 +73,7 @@ export default function SupportTicket() {
         
         <div className="schema-cell">
           {ticketName}
-          <NavLink to={`/admin/tickets/${userId}/details`}>
+          <NavLink to={`/tickets/${userId}/details`}>
             <strong>{username}</strong>
           </NavLink>
         </div>

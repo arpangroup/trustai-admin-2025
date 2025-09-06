@@ -26,7 +26,7 @@ const Users = ({status = ""}) => {
   const ActionLink = (props) => {
     return (
       <>
-        <NavLink to={`/admin/users/${props.data.id}/edit`} className="round-icon-btn purple">
+        <NavLink to={`/users/${props.data.id}/edit`} className="round-icon-btn purple">
           <LuPencilLine />
         </NavLink>
 
@@ -133,7 +133,7 @@ const Users = ({status = ""}) => {
               <div className="site-card-body table-responsive">
                 <div className="site-datatable">
                   <div style={{ height: 400 }} className="ag-theme-alpine">
-                     <TextField
+                     {/* <TextField
                         label="Search"
                         variant="outlined"
                         fullWidth
@@ -141,9 +141,9 @@ const Users = ({status = ""}) => {
                         sx={{ mb: 2 }}
                         value={searchText}
                         onChange={(e) => setSearchText(e.target.value)}
-                      />
-                    <DataGrid rows={filteredRows} columns={columns} pageSize={5} rowsPerPageOptions={[3]} />
-                    {/* <AgGridReact
+                      /> */}
+                    {/* <DataGrid rows={filteredRows} columns={columns} pageSize={5} rowsPerPageOptions={[3]} /> */}
+                    <AgGridReact
                       theme={"legacy"}
                       rowData={data}
                       loading={loading}
@@ -152,7 +152,7 @@ const Users = ({status = ""}) => {
                       pagination={true}                      
                       paginationPageSize={10}
                       paginationPageSizeSelector={[10, 20, 50, 100]}
-                      onPaginationChanged={onPaginationChanged} /> */}
+                      onPaginationChanged={onPaginationChanged} />
                   </div>
                 </div>
               </div>

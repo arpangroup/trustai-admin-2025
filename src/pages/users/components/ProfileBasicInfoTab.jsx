@@ -8,7 +8,7 @@ const ProfileBasicInfoTab = ({ activeTab, userInfo, onFormChange }) => {
   const basicFields = [
     { label: "First Name", name: "firstname" },
     { label: "Last Name", name: "lastname" },
-    { label: "Country", name: "country", disabled: true },
+    { label: "Country", name: "country", defaultValue:"INDIA", disabled: true },
     { label: "Phone", name: "mobile", disabled: true, valueKey: "phone" },
     { label: "Username", name: "username", disabled: true },
     { label: "Email", name: "email", disabled: true },
@@ -109,7 +109,7 @@ const ProfileBasicInfoTab = ({ activeTab, userInfo, onFormChange }) => {
                         label={field.label}
                         name={field.name}
                         type={field.type || "text"}
-                        value={userInfo[field.name || field.valueKey] || ""}
+                        value={userInfo[field.name || field.valueKey] || field.defaultValue || ""}
                         required
                         disabled={field.disabled}
                         onChange={onFormChange}

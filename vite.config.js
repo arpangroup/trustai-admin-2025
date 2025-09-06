@@ -9,7 +9,7 @@ export default defineConfig({
     proxy: {// only works during local development
       // This proxies any request starting with /api to your backend server
       '/api': {
-        target: 'https://api.trustai.co.in', // Replace with your backend URL
+        target: 'http://localhost:8080/', // Replace with your backend URL
         changeOrigin: true,
         secure: false,
         // Optionally rewrite the path
