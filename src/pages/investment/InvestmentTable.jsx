@@ -1,19 +1,8 @@
-
-/*
-// External imports
-import { useCallback, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { AgGridReact } from 'ag-grid-react';
-
-// Internal project imports
-import { API_ROUTES } from '../constants/apiRoutes';
-import { formatDate } from '../utils/dateUtils';
-import { usePaginatedFetch } from '../api/usePaginatedFetch';
-import Badge from './Badge';
-*/
-
 import { useCallback, useState } from "react";
-import { API_ROUTES } from "../../routes";
+
+import { API_ROUTES, WEB_ROUTES } from "../../routes";
+import { generatePath } from 'react-router-dom';
+
 import { usePaginatedFetch } from "../../api/usePaginatedFetch";
 import { NavLink } from "react-router-dom";
 import { LuArrowBigRight } from "react-icons/lu";
@@ -27,21 +16,21 @@ import InvestmentSummary from "./InvestmentSummary";
 
 
 
-
-
 // Main component
 const InvestmentTable = ({ userId = null, pageSize = 9999 }) => {
-  const [page, setPage] = useState(0);  
-  const url = userId ? API_ROUTES.INVESTMENTS_BY_USER_ID(userId) : API_ROUTES.INVESTMENTS;
-  const { data, totalPages, loading, error } = usePaginatedFetch(url, page, pageSize);
+  const [page, setPage] = useState(0);
+  const { data, totalPages, loading, error } = usePaginatedFetch(API_ROUTES.INVESTMENTS.BASE, page, pageSize);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState({});
 
 
   const UserCell = ({ data }) => {
     const { userId, user } = data;
+    const url = generatePath(WEB_ROUTES.USERS.USER_EDIT.path, { userId });
+
+    WEB_ROUTES
     return (
-      <NavLink to={`/admin/users/${userId}/edit`}>
+      <NavLink to={url}>
         {user}
       </NavLink>
     )

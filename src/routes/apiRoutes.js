@@ -55,7 +55,7 @@ export const API_ROUTES = {
   INVESTMENTS: {
     BASE: "/api/v1/investments",
     SUBSCRIBE: "/api/v1/investments/subscribe",
-    BY_USER: (userId) => `/api/v1/investments/user/${userId}`,
+    // BY_USER: (userId) => `/api/v1/investments/user/${userId}`,
   },
 
   REFERRAL_TREE: (userId, maxLevel = 3) => `/api/v1/tree/${userId}?maxLevel=${maxLevel}`,
@@ -88,10 +88,7 @@ export const API_ROUTES = {
   SCHEMA_By_ID: (id) =>`/api/v1/investment-schemas/${id}`,
   // Team Income Config:
   TEAM_INCOME_CONFIGS: '/api/v1/income/configs',
-  // Investment:
-  INVESTMENTS: "/api/v1/investments",
-  INVESTMENT_SUBSCRIBE: "/api/v1/investments/subscribe",
-  INVESTMENTS_BY_USER_ID: (userId) => `/api/v1/investments/user/${userId}`,
+
   // Referral tree View
   REFERRAL_TREE: (userId, maxLevel = 3) => `/api/v1/tree/${userId}?maxLevel=${maxLevel}`,
   // Notification Templates

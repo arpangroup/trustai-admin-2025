@@ -52,7 +52,7 @@ const BalanceCell = ({ data }) => {
 // Main component
 const TransactionTable = ({ userId = null, pageSize = 9999 }) => {
   const [page, setPage] = useState(0);  
-  const url = userId ? API_ROUTES.USER_TRANSACTIONS(userId) : API_ROUTES.TRANSACTIONS;
+  const url = userId ? API_ROUTES.TRANSACTIONS.BY_USER(userId) : API_ROUTES.TRANSACTIONS.BASE;
   const { data, totalPages, loading, error } = usePaginatedFetch(url, page, pageSize);
 
   const colDefs = [
