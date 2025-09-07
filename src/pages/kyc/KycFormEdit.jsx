@@ -48,7 +48,7 @@ export default function KycFormEdit() {
                     <div class="col-xl-8 col-lg-12 col-md-12 col-12">
                         <div class="site-card">
                             <div class="site-card-body">
-                                <form action="https://81habibi.com/admin/kyc-form/2" method="post" class="row">
+                                <form action="#" method="post" class="row">
                                     <input type="hidden" name="_method" value="PUT" />
                                     <input type="hidden" name="_token" value="fgpBEaTjxA9GoVm7n9MYp7N9YkJPVyAJOjsqLTxo" />
                                     <div class="col-xl-12">

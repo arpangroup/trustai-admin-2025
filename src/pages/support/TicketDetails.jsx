@@ -16,7 +16,7 @@ const TicketDetails = ({ name }) => {
                                     <span class="site-badge pending">Open</span>
                                 </h3>
                                 <div class="card-header-links">
-                                    <a href="https://81habibi.com/admin/support-ticket/close-now/SUPT587998" class="card-header-link rounded-pill">Close it</a>
+                                    <a href="#" class="card-header-link rounded-pill">Close it</a>
                                 </div>
                             </div>
                             <div class="site-card-body">
@@ -36,7 +36,7 @@ const TicketDetails = ({ name }) => {
                                         <div class="single-attachment">
 
                                             <div class="attach">
-                                                <a href="https://81habibi.com/assets/global/images/b8cMsSNLmTxzzwKKBEG1.jpg" target="_blank"><i class="anticon anticon-picture"></i>b8cMsSNLmTxzzwKKBEG1.jpg
+                                                <a href="" target="_blank"><i class="anticon anticon-picture"></i>b8cMsSNLmTxzzwKKBEG1.jpg
                                                 </a>
                                             </div>
                                         </div>
@@ -45,7 +45,7 @@ const TicketDetails = ({ name }) => {
 
                                 <div class="support-ticket-single-message  admin ">
                                     <div class="logo">
-                                        <img class="avatar avatar-round" src="https://81habibi.com/assets/global/images/EUoylC7k0QRdvMIpRMnd.jpg" alt="" height="40" width="40" />
+                                        <img class="avatar avatar-round" src="" alt="" height="40" width="40" />
                                     </div>
                                     <div class="message-body">
                                         <div class="article">
@@ -59,7 +59,7 @@ const TicketDetails = ({ name }) => {
                                         <div class="title">Attachments</div>
                                         <div class="single-attachment">
                                             <div class="attach">
-                                                <a href="https://81habibi.com/assets/global/images/0qtR4RYVH9i0F03KQP7y.png" target="_blank"><i class="anticon anticon-picture"></i>0qtR4RYVH9i0F03KQP7y.png
+                                                <a href="" target="_blank"><i class="anticon anticon-picture"></i>0qtR4RYVH9i0F03KQP7y.png
                                                 </a>
                                             </div>
                                         </div>
@@ -72,7 +72,7 @@ const TicketDetails = ({ name }) => {
 
                             <div class="site-card-body">
                                 <div class="progress-steps-form">
-                                    <form action="https://81habibi.com/admin/support-ticket/reply" method="post" enctype="multipart/form-data">
+                                    <form action="#" method="post" enctype="multipart/form-data">
                                         <input type="hidden" name="_token" value="RtOih6ujzDcML9cSdZ1x5oykyYyUfNL7EXkZgrod" />
                                         <input type="hidden" name="uuid" value="SUPT587998" />
                                         <div class="row mb-3">
@@ -80,7 +80,7 @@ const TicketDetails = ({ name }) => {
                                                 <div class="wrap-custom-file">
                                                     <input type="file" name="attach" id="attach" accept=".gif, .jpg, .png" />
                                                     <label for="attach">
-                                                        <img class="upload-icon" src="https://81habibi.com/assets/admin-assets/images/avatar/upload.svg" alt="" />
+                                                        <img class="upload-icon" src="404.svg" alt="" />
                                                         <span>Attach Image</span>
                                                     </label>
                                                 </div>

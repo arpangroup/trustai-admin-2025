@@ -23,7 +23,7 @@ const SmsSetting = ({ name }) => {
                 <div class="single-gateway">
                   <div class="gateway-name">
                     <div class="gateway-icon">
-                      <img src="https://81habibi.com/assets/global/plugin/nexmo.png" alt="" />
+                      <img src="https://trustai.co.in/assets/global/plugin/nexmo.png" alt="" />
                     </div>
                     <div class="gateway-title">
                       <h4>Nexmo</h4>
@@ -45,7 +45,7 @@ const SmsSetting = ({ name }) => {
                 <div class="single-gateway">
                   <div class="gateway-name">
                     <div class="gateway-icon">
-                      <img src="https://81habibi.com/assets/global/plugin/twilio.png" alt="" />
+                      <img src="https://trustai.co.in/assets/global/plugin/twilio.png" alt="" />
                     </div>
                     <div class="gateway-title">
                       <h4>Twilio</h4>

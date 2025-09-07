@@ -11,8 +11,18 @@ import PageTitle from "../../components/page_title/PageTitle";
 import { NavLink } from "react-router-dom";
 import RightPanel from "../../components/panel/RightPanel";
 import PaypalSetting from "./PaypalSetting";
-
 ModuleRegistry.registerModules([AllCommunityModule]);
+
+import { LogoRenderer } from "./LogoRenderer";
+
+import StripeIcon from "../../assets/icons/stripe.png";
+
+const iconImports = import.meta.glob('../../assets/icons/*.{png,jpg,jpeg,svg}', { eager: true });
+const iconsMap = {};
+for (const path in iconImports) {
+  const fileName = path.split('/').pop().split('.')[0].toLowerCase(); // "stripe.png" → "stripe"
+  iconsMap[fileName] = iconImports[path].default;
+}
 
 const styleActionButtonEdit = {
   background: "#ef476f",
@@ -43,7 +53,6 @@ const styleActionButtonDelete = {
   color: "#ffffff",
   background: "#ef476f",
 };
-
 
 const PaymentGateway = () => {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
@@ -128,28 +137,28 @@ const PaymentGateway = () => {
   };
 
   const [rowData] = useState([
-    { id: "1", name: "Paypal", supportedCurrency: "30", withdrawsAvailable: "Yes", status: "Deactivated", logo: ""},
-    { id: "2", name: "Stripe", supportedCurrency: "16", withdrawsAvailable: "No", status: "Activated", logo: "https://81habibi.com/assets/global/gateway/stripe.png"},
-    { id: "3", name: "Mollie", supportedCurrency: "17", withdrawsAvailable: "No", status: "Activated", logo: "https://81habibi.com/assets/global/gateway/mollie.png"},
-    { id: "4", name: "Perfect Money ", supportedCurrency: "4", withdrawsAvailable: "No", status: "Activated", logo: "https://81habibi.com/assets/global/gateway/perfectmoney.png"},
-    { id: "5", name: "Coinbase", supportedCurrency: "12", withdrawsAvailable: "Ye", status: "Activated", logo: "https://81habibi.com/assets/global/gateway/coinbase.png"},
-    { id: "6", name: "Paystack", supportedCurrency: "10", withdrawsAvailable: "NoNo", status: "Activated", logo: "https://81habibi.com/assets/global/gateway/paystack.png"},
-    { id: "7", name: "Voguepay", supportedCurrency: "10", withdrawsAvailable: "No", status: "Activated", logo: "https://81habibi.com/assets/global/gateway/voguepay.png"},
-    { id: "8", name: "Flutterwave", supportedCurrency: "14", withdrawsAvailable: "No", status: "Activated", logo: "https://81habibi.com/assets/global/gateway/flutterwave.png"},
-    { id: "9", name: "CoinGate", supportedCurrency: "11", withdrawsAvailable: "No", status: "Activated", logo: "https://81habibi.com/assets/global/gateway/coingate.png"},
-    { id: "10", name: "Monnify", supportedCurrency: "1", withdrawsAvailable: "No", status: "Activated", logo: "https://81habibi.com/assets/global/gateway/monnify.svg"},
-    { id: "11", name: "SecurionPay", supportedCurrency: "10", withdrawsAvailable: "No", status: "Activated", logo: "https://81habibi.com/assets/global/gateway/securionpay.png"},
-    { id: "12", name: "CoinPayments", supportedCurrency: "70", withdrawsAvailable: "No", status: "Activated", logo: "https://81habibi.com/assets/global/gateway/coinpayments.svg"},
-    { id: "13", name: "Nowpayments", supportedCurrency: "20", withdrawsAvailable: "No", status: "Activated", logo: "https://81habibi.com/assets/global/gateway/nowpayments.png"},
-    { id: "14", name: "Coinremitter", supportedCurrency: "2", withdrawsAvailable: "Yes", status: "Activated", logo: "https://81habibi.com/assets/global/gateway/coinremitter.png"},
-    { id: "15", name: "Cryptomus", supportedCurrency: "17", withdrawsAvailable: "Yes", status: "Activated", logo: "https://81habibi.com/assets/global/gateway/cryptomus.png"},
-    { id: "16", name: "Paymongo", supportedCurrency: "9", withdrawsAvailable: "No", status: "Activated", logo: "https://81habibi.com/assets/global/gateway/paymongo.png"},
-    { id: "17", name: "Btcpayserver", supportedCurrency: "10", withdrawsAvailable: "No", status: "Activated", logo: "https://81habibi.com/assets/global/gateway/paymongo.png"}
+    { id: "1", name: "Paypal", supportedCurrency: "30", withdrawsAvailable: "Yes", status: "Deactivated", logo: iconsMap["paypal"] || ""},
+    { id: "2", name: "Stripe", supportedCurrency: "16", withdrawsAvailable: "No", status: "Activated", logo: StripeIcon},
+    { id: "3", name: "Mollie", supportedCurrency: "17", withdrawsAvailable: "No", status: "Activated", logo: iconsMap["mobile"] || ""},
+    { id: "4", name: "Perfect Money ", supportedCurrency: "4", withdrawsAvailable: "No", status: "Activated", logo: iconsMap["perfectmoney"] || ""},
+    { id: "5", name: "Coinbase", supportedCurrency: "12", withdrawsAvailable: "Ye", status: "Activated", logo: iconsMap["coinbase"] || ""},
+    { id: "6", name: "Paystack", supportedCurrency: "10", withdrawsAvailable: "NoNo", status: "Activated", logo: iconsMap["paystack"] || ""},
+    { id: "7", name: "Voguepay", supportedCurrency: "10", withdrawsAvailable: "No", status: "Activated", logo: iconsMap["voguepay"] || ""},
+    { id: "8", name: "Flutterwave", supportedCurrency: "14", withdrawsAvailable: "No", status: "Activated", logo: iconsMap["flutterwave"] || ""},
+    { id: "9", name: "CoinGate", supportedCurrency: "11", withdrawsAvailable: "No", status: "Activated", logo: iconsMap["coingate"] || ""},
+    { id: "10", name: "Monnify", supportedCurrency: "1", withdrawsAvailable: "No", status: "Activated", logo: iconsMap["monnify"] || ""},
+    { id: "11", name: "SecurionPay", supportedCurrency: "10", withdrawsAvailable: "No", status: "Activated", logo: iconsMap["securionpay"] || ""},
+    { id: "12", name: "CoinPayments", supportedCurrency: "70", withdrawsAvailable: "No", status: "Activated", logo: iconsMap["coinpayments"] || ""},
+    { id: "13", name: "Nowpayments", supportedCurrency: "20", withdrawsAvailable: "No", status: "Activated", logo: iconsMap["nowpayments"] || ""},
+    { id: "14", name: "Coinremitter", supportedCurrency: "2", withdrawsAvailable: "Yes", status: "Activated", logo: iconsMap["coinremitter"] || ""},
+    { id: "15", name: "Cryptomus", supportedCurrency: "17", withdrawsAvailable: "Yes", status: "Activated", logo: iconsMap["cryptomus"] || ""},
+    { id: "16", name: "Paymongo", supportedCurrency: "9", withdrawsAvailable: "No", status: "Activated", logo: iconsMap["paymongo"] || ""},
+    { id: "17", name: "Btcpayserver", supportedCurrency: "10", withdrawsAvailable: "No", status: "Activated", logo: iconsMap["btcpayserver"] || ""}
   ]);
 
   const [colDefs] = useState([
-    { field: "logo", cellRenderer: Avatar, width: 80, resizable: false, sortable: false, filter: false, suppressSizeToFit: true },
-    { field: "name", width: 300, filter: true, filterParams: {} },
+    { field: "logo", cellRenderer: LogoRenderer, width: 100, resizable: false, sortable: false, filter: false, suppressSizeToFit: true },
+    { field: "name", width: 150, filter: true, filterParams: {} },
     { field: "withdrawsAvailable"},
     { field: "status", width: 160, cellRenderer: Badge },
     { field: "manage", cellRenderer: ActionLink },
@@ -177,6 +186,7 @@ const PaymentGateway = () => {
                       rowData={rowData}
                       columnDefs={colDefs}
                       defaultColDef={defaultColDef}
+                      rowHeight={60}
                       pagination={true} />
                   </div>
                 </div>

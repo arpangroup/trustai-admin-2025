@@ -84,6 +84,7 @@ export default function Dashboard() {
               count={card.count}
               backgroundColor={getColor(index)}
               actionLink={card.action}
+              icon={card.icon}
             />
           ))}
 

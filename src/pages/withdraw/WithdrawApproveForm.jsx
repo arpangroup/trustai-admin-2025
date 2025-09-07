@@ -10,7 +10,7 @@ const WithdrawApproveForm = ({ isOpen, onClose, userId, depositRequestId }) => {
                 </li>
             </ul>
 
-            <form action="https://81habibi.com/admin/withdraw/action-now" method="post">
+            <form action="#" method="post">
                 <input type="hidden" name="_token" value="6uNwVKwHHRc8JgwVXPyPPcMCbWrA8kRaWXOJrYqQ" />
                 <input type="hidden" name="id" value="188" />
 

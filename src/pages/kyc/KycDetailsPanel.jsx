@@ -3,7 +3,7 @@ import { API_ROUTES } from "../../routes";
 import apiClient from "../../api/apiClient";
 import FormInput from "../../components/form/FormInput";
 
-const defaultImageUrl = 'https://81habibi.com/assets/global/images/wIzOWakjUq1xWMgBg6vh.jpg';
+const defaultImageUrl = 'https://www.uidai.gov.in/images/Aadhaar_letter_large.png';
 
 const KycDetailsPanel = ({ kycId }) => {
   const [kycData, setKycData] = useState(null);

@@ -24,15 +24,6 @@ import InvestmentSchemaSummary from '../schema/InvestmentSchemaSummary';
 import apiClient from '../../api/apiClient';
 
 
-// const fallbackIcons = {
-//   1: "https://cdn-icons-png.flaticon.com/512/8037/8037137.png",
-//   2: "https://81habibi.com/assets/global/images/sCQgIyl0OKzFiO73nmWF.svg",
-//   3: "https://81habibi.com/assets/global/images/TQDUvbD48kmhmV9qifzh.svg",
-//   4: "https://81habibi.com/assets/global/images/hGHllGGCIYfpx5Z2VKrW.svg",
-//   5: "https://81habibi.com/assets/global/images/SaNfYL7WD2pzAAME8Sqb.svg",
-//   6: rank5,
-// };
-
 const fallbackIcons = {
   1: rank0,
   2: rank1,

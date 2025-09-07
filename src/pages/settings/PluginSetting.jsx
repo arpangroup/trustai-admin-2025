@@ -23,7 +23,7 @@ const PluginSetting = ({ name }) => {
                 <div class="single-gateway">
                   <div class="gateway-name">
                     <div class="gateway-icon">
-                      <img src="https://81habibi.com/assets/global/plugin/tawk.png" alt=""/>
+                      <img src="https://trustai.co.in/assets/global/plugin/tawk.png" alt=""/>
                     </div>
                     <div class="gateway-title">
                       <h4>Tawk Chat</h4>
@@ -44,7 +44,7 @@ const PluginSetting = ({ name }) => {
                 <div class="single-gateway">
                   <div class="gateway-name">
                     <div class="gateway-icon">
-                      <img src="https://81habibi.com/assets/global/plugin/reCaptcha.png" alt=""/>
+                      <img src="https://trustai.co.in/assets/global/plugin/reCaptcha.png" alt=""/>
                     </div>
                     <div class="gateway-title">
                       <h4>Google reCaptcha</h4>
@@ -67,7 +67,7 @@ const PluginSetting = ({ name }) => {
                 <div class="single-gateway">
                   <div class="gateway-name">
                     <div class="gateway-icon">
-                      <img src="https://81habibi.com/assets/global/plugin/analytics.png" alt=""/>
+                      <img src="https://trustai.co.in/assets/global/plugin/analytics.png" alt=""/>
                     </div>
                     <div class="gateway-title">
                       <h4>Google Analytics</h4>
@@ -90,7 +90,7 @@ const PluginSetting = ({ name }) => {
                 <div class="single-gateway">
                   <div class="gateway-name">
                     <div class="gateway-icon">
-                      <img src="https://81habibi.com/assets/global/plugin/fb.png" alt=""/>
+                      <img src="https://trustai.co.in/assets/global/plugin/fb.png" alt=""/>
                     </div>
                     <div class="gateway-title">
                       <h4>Facebook Messenger</h4>
