@@ -34,23 +34,32 @@ export const API_ROUTES = {
 
   RANKINGS: {
     BASE: "/api/v1/rankings",
-    BY_ID: (id) => `/api/v1/rankings/${id}`,
+    BY_ID: (rankId) => `/api/v1/rankings/${rankId}`,
     UPDATE: "/api/v1/rankings/update",
   },
 
+   //...
+  RANK_CONFIGS_BULK_UPSERT: "/api/v1/investment-schemas/bulk-upsert",
+
   SCHEMAS: {
     BASE: "/api/v1/investment-schemas",
+    BY_ID: (id) => `/api/v1/investment-schemas/${id}`,
     FILTER: (filters = {}) => {
       const queryString = new URLSearchParams(filters).toString();
       return `/api/v1/investment-schemas${queryString ? `?${queryString}` : ""}`;
     },
-    BY_ID: (id) => `/api/v1/investment-schemas/${id}`,
     BULK_UPSERT: "/api/v1/investment-schemas/bulk-upsert",
   },
+
+   
 
   INCOME: {
     TEAM_CONFIGS: "/api/v1/income/configs",
   },
+
+  
+  // Team Income Config:
+  TEAM_INCOME_CONFIGS: '/api/v1/income/configs',
 
   INVESTMENTS: {
     BASE: "/api/v1/investments",
@@ -75,19 +84,12 @@ export const API_ROUTES = {
     UPDATE: "http://localhost:8888/api/v1/configs/update",
   },
 
-  //...
-  RANK_CONFIGS: "/api/v1/rankings",
-  RANK_CONFIGS_BY_ID: (rankId) => `/api/v1/rankings/${rankId}`,
-  RANK_CONFIGS_UPDATE: "/api/v1/rankings/update",
-  RANK_CONFIGS_BULK_UPSERT: "/api/v1/investment-schemas/bulk-upsert",
-  SCHEMA_LIST: `/api/v1/investment-schemas`,
-  SCHEMA_LIST_FILTER: (filters = {}) => {
-    const queryString = new URLSearchParams(filters).toString();
-    return `/api/v1/investment-schemas${queryString ? `?${queryString}` : ''}`;
+  STORAGE: {
+    IMAGES: "/api/v1/images",
+    UPLOAD: "/api/v1/images/upload-multiple"
   },
-  SCHEMA_By_ID: (id) =>`/api/v1/investment-schemas/${id}`,
-  // Team Income Config:
-  TEAM_INCOME_CONFIGS: '/api/v1/income/configs',
+
+
 
   // Referral tree View
   REFERRAL_TREE: (userId, maxLevel = 3) => `/api/v1/tree/${userId}?maxLevel=${maxLevel}`,

@@ -11,7 +11,7 @@ import { API_ROUTES } from "../../routes";
 import { usePaginatedFetch } from "../../api/usePaginatedFetch";
 
 const Schema = (props) => {
-  const [page, setPage] = useState(0);
+    const [page, setPage] = useState(0);
     const { data, totalPages, loading, error } = usePaginatedFetch(API_ROUTES.SCHEMA_LIST, page, 9999);
     
     const ActionLinkAddNew = (props) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { LuPlus, LuTrash } from "react-icons/lu";
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from "../../routes";
@@ -33,19 +33,24 @@ const StakeEditor = () => {
   const [newRows, setNewRows] = useState(new Set());
   const [fullRankList, setFullRankList] = useState([]);
   const [validationErrors, setValidationErrors] = useState({});
+  const bottomRef = useRef(null);
 
   useEffect(() => {
     Promise.all([
-      apiClient.get(API_ROUTES.SCHEMA_LIST_FILTER({ type: 'STAKE' })),
-      apiClient.get(API_ROUTES.RANK_CONFIGS),
+      apiClient.get(API_ROUTES.SCHEMAS.FILTER({ type: 'STAKE' })),
+      apiClient.get(API_ROUTES.RANKINGS.BASE),
     ])
       .then(([schemaRes, rankRes]) => {
-        const ranks = rankRes?.content || [];
+        const ranks = rankRes?.data || [];
+        const stakes = schemaRes?.data?.content || [];
+
+        //console.log("STAKES: ", schemaRes);
+        //console.log("RANKS: ", ranks);
         setFullRankList(ranks);
         setRankOptions(
           ranks.filter((r) => r.active).map((r) => ({ label: r.code, value: r.code }))
         );
-        const enrichedSchemas = (schemaRes?.content || []).map((schema) => ({
+        const enrichedSchemas = (stakes).map((schema) => ({
           ...schema,
           linkedRank: schema.linkedRank || "",
           returnSchedule: { id: schema.returnSchedule?.id || 2 },
@@ -172,6 +177,11 @@ const StakeEditor = () => {
     setSchemas((prev) => [...prev, newRow]);
     setNewRows((prev) => new Set(prev).add(schemas.length));
     setHighlightedIndices((prev) => [...prev, schemas.length]);
+
+    // 🔹 Scroll after a small delay to ensure DOM updates
+    setTimeout(() => {
+      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
   };
 
   const handleDeleteRow = async (schemaId) => {
@@ -357,6 +367,9 @@ const StakeEditor = () => {
                 </td> */}
               </tr>
             ))}
+
+            {/* 🔹 Scroll target */}
+            <tr ref={bottomRef} />
           </tbody>
         </table>
         <button className="btn btn-success mt-3" onClick={handleSubmit}>
