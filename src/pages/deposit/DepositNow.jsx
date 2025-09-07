@@ -4,6 +4,7 @@ import FormDropdown from "../../components/form/FormDropdown";
 import { LuSend } from "react-icons/lu";
 import { API_ROUTES } from "../../routes";
 import apiClient from "../../api/apiClient";
+import UploadIcon from '../../assets/icons/upload.svg';
 
 // Dropdown options
 const paymentGateways = [
@@ -166,7 +167,7 @@ const DepositNow = ({ userId, onClose }) => {
                             >
                                 <img
                                     className="upload-icon"
-                                    src="https://81habibi.com/assets/global/materials/upload.svg"
+                                    src={UploadIcon}
                                     alt=""
                                 />
                                 <span>

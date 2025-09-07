@@ -1,5 +1,6 @@
 import React from "react";
 import PageTitle from "../../components/page_title/PageTitle";
+import { WEB_ROUTES } from "../../routes";
 
 export default function CustomCss() {
   return (
@@ -35,7 +36,7 @@ export default function CustomCss() {
                 </div>
 
                 <form
-                  action="https://81habibi.com/admin/custom-css-update"
+                  action={WEB_ROUTES.CUSTOM_CSS.path}
                   method="POST"
                 >
                   <input

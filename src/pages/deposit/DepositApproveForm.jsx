@@ -4,10 +4,8 @@ import FormTextarea from '../../components/form/FormTextarea';
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from '../../routes';
 
-const defaultScreenshot = 'https://81habibi.com/assets/global/images/qcVxCDUguY174izjLz37.jpg';
-
 const DepositApproveForm = ({ depositData, onClose }) => {
-  const { txnRefId, id: depositId } = depositData;
+  const { txnRefId, id: depositId, screenshot } = depositData;
 
   const [message, setMessage] = useState('');
   const [isRejecting, setIsRejecting] = useState(false);
@@ -52,7 +50,7 @@ const DepositApproveForm = ({ depositData, onClose }) => {
         </li>
         <li className="list-group-item">
           <img
-            src={defaultScreenshot}
+            src={screenshot}
             style={{ width: '300px', height: '300px' }}
             alt="Deposit Screenshot"
           />

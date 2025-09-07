@@ -1,3 +1,5 @@
+import UploadIcon from '../../assets/icons/upload.svg';
+
 // components/form/FileInput.jsx
 const FileInput = ({ name, file, previewUrl, onChange }) => {
   return (
@@ -18,7 +20,7 @@ const FileInput = ({ name, file, previewUrl, onChange }) => {
       >
         <img
           className="upload-icon"
-          src="https://81habibi.com/assets/global/materials/upload.svg"
+          src={UploadIcon}
           alt="upload"
         />
         <span>{file?.name || "Select Screenshot (Required)"}</span>
