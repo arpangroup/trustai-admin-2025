@@ -1,3 +1,7 @@
 .data-card {
     /* background: #ef476f!important; */
 }
+
+.data-card .icon {
+    color: black !important;
+}

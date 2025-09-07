@@ -2,6 +2,8 @@ import PageTitle from "../../components/page_title/PageTitle";
 import Card from "../../components/card/Card";
 import Banner from "../../components/banner/Banner";
 import { APP_NAME } from "../../constants/config";
+import apiClient from "../../api/apiClient";
+import { useEffect, useState } from "react";
 
 const cardTitles = [
   'Registered User',
@@ -33,12 +35,37 @@ const backgroundColors = [
   '#607d8b'  // blue grey
 ];
 
+function getColor(index) {
+  return backgroundColors[index % backgroundColors.length];
+}
+
 function getRandomColor(index) {
   // Ensures reproducibility by mapping index to color array
   return backgroundColors[index % backgroundColors.length];
 }
 
 export default function Dashboard() {
+  const [cards, setCards] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    apiClient.get('/api/v1/dashboard')
+      .then(response => {
+        setCards(response.data?.stats);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError(err.message || 'Failed to load dashboard data');
+        setLoading(false);
+      });
+  }, []);
+
+  
+  if (loading) return <p>Loading dashboard...</p>;
+  if (error) return <p style={{ color: 'red' }}>Error: {error}</p>;
+
+
   return (
     <div className="main-content">
       <PageTitle title={`${APP_NAME}  Dashboard`} />
@@ -46,9 +73,22 @@ export default function Dashboard() {
         <Banner />
 
         <div className="row">
-          {cardTitles.map((title, index) => (
+          {/* {cardTitles.map((title, index) => (
             <Card key={index} title={title} count={10} backgroundColor={getRandomColor(index)} />
+          ))} */}
+
+          {cards.map((card, index) => (
+            <Card
+              key={index}
+              title={card.title}
+              count={card.count}
+              backgroundColor={getColor(index)}
+              // actionLink={card.action}
+              icon={card.icon}
+            />
           ))}
+
+
         </div>
       </div>
     </div>

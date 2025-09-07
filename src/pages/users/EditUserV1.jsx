@@ -122,7 +122,7 @@ export default function EditUserV1() {
                 <div className="row">
                     <div className="col-xl-12">
                         <div className="admin-latest-announcements"key="actions">
-                            <div className="content">
+                            <div className="content text-start">
                                 {sidePanelButtons.map((panel) => (
                                     <a href="#" className="btn btn-outline-primary btn-sm me-2" key={panel.id}
                                         onClick={(e) => {

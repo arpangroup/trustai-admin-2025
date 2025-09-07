@@ -42,6 +42,7 @@ const Header = ({ onToggleSidebar }) => {
           >
             <LuList/>
           </button>
+          <div className='title' style={{fontWeight: 'bold', }}>Trust AI Dashboard</div>
         </div>
         <div className="nav-right">
           {/* <div className="single-nav-right admin-language-switch">
