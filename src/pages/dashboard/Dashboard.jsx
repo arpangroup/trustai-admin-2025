@@ -83,8 +83,7 @@ export default function Dashboard() {
               title={card.title}
               count={card.count}
               backgroundColor={getColor(index)}
-              // actionLink={card.action}
-              icon={card.icon}
+              actionLink={card.action}
             />
           ))}
 
