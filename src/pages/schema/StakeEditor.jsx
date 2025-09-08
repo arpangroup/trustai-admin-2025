@@ -63,6 +63,7 @@ const StakeEditor = () => {
             returnScheduleId: schema.returnSchedule?.id,
             linkedRankCode: schema.linkedRank,
             capitalReturned: schema.capitalReturned,
+            imageUrl: schema.imageUrl || null,
             active: schema.active,
           },
         }));
@@ -96,6 +97,7 @@ const StakeEditor = () => {
 
   const handleImageChange = (index, fileOrUrl) => {
     const updated = [...schemas];
+    //console.log("fileOrUrl: ", fileOrUrl);  
 
     updated[index].imageUrl = {
       file: fileOrUrl,
@@ -104,12 +106,14 @@ const StakeEditor = () => {
         : fileOrUrl, // direct URL from modal
     };
     setSchemas(updated);
+    setModifiedRows((prev) => new Set(prev).add(index));
   };
 
   const handleImageDelete = (index) => {
     const updated = [...schemas];
     updated[index].imageUrl = null;
     setSchemas(updated);
+    setModifiedRows((prev) => new Set(prev).add(index));
   };
 
   const handleMinInvestmentBlur = (index) => {
@@ -209,6 +213,7 @@ const StakeEditor = () => {
             totalReturnPeriods: schema.totalReturnPeriods,
             returnScheduleId: schema.returnSchedule?.id,
             capitalReturned: schema.capitalReturned,
+            imageUrl: schema.imageUrl.file,
             active: schema.active,
           };
         }
@@ -229,9 +234,21 @@ const StakeEditor = () => {
           if (schema.linkedRank !== _original.linkedRankCode)
             modified.linkedRankCode = schema.linkedRank;
           if (schema.capitalReturned !== _original.capitalReturned)
-            modified.capitalReturned = schema.capitalReturned;
+            modified.capitalReturned = schema.capitalReturned; 
           if (schema.active !== _original.active)
             modified.active = schema.active;
+
+          const oldImage = _original.imageUrl;
+          const newImage = schema.imageUrl;
+
+          const newFile = newImage?.file ?? null;
+
+          console.log("oldImage: ", oldImage);
+          console.log("newImage: ", newImage);
+          console.log("newFile: ", newFile);
+          if (oldImage !== newFile) {
+            modified.imageUrl = newFile; // Will be File object or null
+          }
 
           return Object.keys(modified).length > 1 ? modified : null;
         }
