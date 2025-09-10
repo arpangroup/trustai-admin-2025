@@ -25,13 +25,14 @@ const InvestmentTable = ({ userId = null, pageSize = 9999 }) => {
 
 
   const UserCell = ({ data }) => {
-    const { userId, user } = data;
-    const url = generatePath(WEB_ROUTES.USERS.USER_EDIT.path, { userId });
+    const { createdBy } = data;
+    if(!createdBy) return;
+    const url = generatePath(WEB_ROUTES.USERS.USER_EDIT.path, { userId: createdBy });
 
     WEB_ROUTES
     return (
       <NavLink to={url}>
-        {user}
+        {createdBy}
       </NavLink>
     )
   }

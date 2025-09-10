@@ -1,18 +1,24 @@
 // External imports
 import { useCallback, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { generatePath, NavLink } from 'react-router-dom';
 import { AgGridReact } from 'ag-grid-react';
 
 // Internal project imports
-import { API_ROUTES } from '../routes';
+import { API_ROUTES, WEB_ROUTES } from '../routes';
 import { formatDate } from '../utils/dateUtils';
 import { usePaginatedFetch } from '../api/usePaginatedFetch';
 import Badge from './Badge';
+import { CURRENCY_SYMBOL } from '../constants/config';
 
 // Cell renderers
 const UserCell = ({ data }) => {
-  const { userId, user } = data;
-  return <NavLink to={`/admin/users/${userId}/edit`}>{user}</NavLink>;
+  console.log("DATA: ", data);
+  const { user } = data;
+  console.log("USER: ", user);
+  if (!user) return;
+  
+  const url = generatePath(WEB_ROUTES.USERS.USER_EDIT.path, { userId: user });
+  return <NavLink to={url}>{user}</NavLink>;
 };
 
 const DateCell = ({ value }) => {
@@ -33,7 +39,7 @@ const AmountCell = ({ data }) => {
     fontWeight: 'bold',
   };
 
-  return <span style={style}>{sign} {strValue}{` ${currencyCode}`}</span>;
+  return <span style={style}>{sign} {strValue}{` ${currencyCode || CURRENCY_SYMBOL}`}</span>;
 };
 
 const BalanceCell = ({ data }) => {
@@ -45,7 +51,7 @@ const BalanceCell = ({ data }) => {
     fontWeight: 'bold',
   };
 
-  return <span style={style}>{balance}{` ${currencyCode}`}</span>;
+  return <span style={style}>{balance}{` ${currencyCode || CURRENCY_SYMBOL}`}</span>;
 };
 
 
@@ -60,7 +66,7 @@ const TransactionTable = ({ userId = null, pageSize = 9999 }) => {
     ...(!userId ? [{ field: "user", headerName: 'USER', width: 100, cellRenderer: UserCell }] : []),
     { field: "txnRefId", headerName: 'TXN_ID', width: 220 },
     {
-      field: "txnType",
+      field: "txnTypeDisplayName",
       headerName: 'TYPE',
       width: 150,
       cellRenderer: (params) => (
