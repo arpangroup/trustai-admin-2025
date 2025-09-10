@@ -54,8 +54,8 @@ const UserRanking = (props) => {
 
 
     const fetchRanks = async () => {
-        const data = await apiClient.get(API_ROUTES.RANK_CONFIGS);
-        setData(data);
+        const response = await apiClient.get(API_ROUTES.RANKINGS.BASE);
+        setData(response.data);
         setLoading(false);
     }
 
@@ -199,7 +199,8 @@ const UserRanking = (props) => {
                                             defaultColDef={defaultColDef}
                                             pagination={true}                      
                                             paginationPageSize={10}
-                                            paginationPageSizeSelector={[10, 20, 50, 100]} />
+                                            // paginationPageSizeSelector={[10, 20, 50, 100]} 
+                                        />
                                     </div>
                                 </div>
                             </div>

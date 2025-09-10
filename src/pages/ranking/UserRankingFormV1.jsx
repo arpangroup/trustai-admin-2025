@@ -89,7 +89,8 @@ const UserRankingFormV1 = () => {
     const fetchRanking = async () => {
       setLoading(true);
       try {         
-        const data = await apiClient.get(API_ROUTES.RANK_CONFIGS_BY_ID(rankingId));
+        const response = await apiClient.get(API_ROUTES.RANKINGS.BY_ID(rankingId));
+        const data = response.data;
         const dataObj = {
           ...data,
           icon: null,

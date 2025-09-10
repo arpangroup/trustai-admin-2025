@@ -33,6 +33,12 @@ export const API_ROUTES = {
     ACTION: (action, id) => `/api/v1/deposits/${action}/${id}`,  // ['approve', 'reject']
   },
 
+
+  WITHDRAWAL: {
+    BASE: "/api/v1/withdraws",
+    ACTION: (action, id) => `/api/v1/withdraws/${action}/${id}`,  // ['approve', 'reject']
+  },
+
   RANKINGS: {
     BASE: "/api/v1/rankings",
     BY_ID: (rankId) => `/api/v1/rankings/${rankId}`,

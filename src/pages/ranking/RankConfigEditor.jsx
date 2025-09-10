@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { API_ROUTES } from "../../routes";
 import apiClient from "../../api/apiClient";
@@ -11,8 +10,8 @@ const RankConfigEditor = () => {
   useEffect(() => {
     const fetchRanks = async () => {
       try {
-        const res = await apiClient.get(API_ROUTES.RANK_CONFIGS);
-        const flattened = res.map((rank) => ({
+        const response = await apiClient.get(API_ROUTES.RANKINGS.BASE);
+        const flattened = response.data.map((rank) => ({
           ...rank,
           minLevel1Count: rank.requiredLevelCounts?.["1"] || 0,
           minLevel2Count: rank.requiredLevelCounts?.["2"] || 0,
@@ -61,8 +60,8 @@ const RankConfigEditor = () => {
       return updated;
     });
 
-    axios
-      .patch(`${API_ROUTES.RANK_CONFIGS_UPDATE}`, payload)
+    apiClient
+      .patch(API_ROUTES.RANKINGS.UPDATE, payload)
       .then(() => {
         alert("Ranks updated successfully!");
         setChanges({});
@@ -128,7 +127,7 @@ const RankConfigEditor = () => {
                       value={rank[field]}
                       onChange={(e) =>
                         handleChange(rank.id, field, Number(e.target.value))
-                      }          
+                      }
                       onWheel={(e) => e.target.blur()}
                     />
                   </td>
