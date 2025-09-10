@@ -10,8 +10,9 @@ import { useParams } from 'react-router';
 import apiClient from '../../api/apiClient';
 import { API_ROUTES } from '../../routes';
 import FileInput from '../../components/form/FileInput';
-import { CURRENCY_SYMBOL, CURRENCY_UNIT, CURRENCY_UNIT_DEFAULT, MIN_INVEST_AMOUNT } from '../../constants/config';
+import { CURRENCY_SYMBOL, CURRENCY_UNIT, CURRENCY_UNIT_DEFAULT } from '../../constants/config';
 import Toast from "../../components/toast/Toast";
+import ImageUploadCell from '../../components/form/file/ImageUploadCell';
 
 const scheduleOptions = [
   { label: 'Hourly', value: 1 },
@@ -85,7 +86,7 @@ const defaultFormState = {
   name: '',
   schemaBadge: '',
   schemaType: true, // true = Fixed, false = Range,
-  stakePrice: MIN_INVEST_AMOUNT,
+  stakePrice: '0',
   minimumInvestmentAmount: '0',
   maximumInvestmentAmount: '0',
   returnRate: '20',
@@ -127,6 +128,7 @@ const SchemaForm = () => {
   const [message, setMessage] = useState(null);
   const [screenshotFile, setScreenshotFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(null)
   const [toast, setToast] = useState(null);
 
   useEffect(() => {
@@ -152,6 +154,7 @@ const SchemaForm = () => {
         };
         setFormData(normalizedData);
         setInitialData(normalizedData)
+        setImageUrl({preview: data.imageUrl})
       } catch (err) {
         setMessage({ type: 'error', text: err.message });
         console.error("Error fetching schema info:", err);
@@ -170,6 +173,23 @@ const SchemaForm = () => {
   };
 
 
+  const handleImageChange = (fileOrUrl) => {
+    console.log("fileOrUrl: ", fileOrUrl);
+
+    const imageUrl = {
+      file: fileOrUrl,
+      preview: fileOrUrl instanceof File
+        ? URL.createObjectURL(fileOrUrl)
+        : fileOrUrl, // direct URL from modal
+    };
+    setImageUrl(imageUrl);
+  };
+
+  
+  const handleImageDelete = () => {
+    const imageUrl = null;
+    setImageUrl(imageUrl);
+  };
 
 
 
@@ -290,6 +310,7 @@ const SchemaForm = () => {
         payload = { ...formData };
         payload.schemaType = formData.schemaType ? 'FIXED' : 'RANGE';
         payload.returnType = formData.returnType ? 'PERIOD' : 'LIFETIME';
+        payload.imageUrl = imageUrl?.file || imageUrl?.preview || ""; // imageUrl.preview
         payload.active = formData.status;
         payload.currency = formData.currency ? CURRENCY_UNIT : CURRENCY_UNIT_DEFAULT;
         delete payload.schema_img;
@@ -522,12 +543,20 @@ const SchemaForm = () => {
                       <div className="site-input-groups">
                         <label className="box-input-label" htmlFor="schema-icon">Upload Icon:</label>
                         <div className="wrap-custom-file">
-                          <FileInput
+                          {/* <FileInput
                             name="screenshot"
                             file={screenshotFile}
-                            previewUrl={previewUrl}
+                            previewUrl={"http://localhost:8080/images/santosh.jpg"}
                             onChange={handleChange}
-                          />
+                          /> */}
+                           <ImageUploadCell
+                              // image={{ preview: previewUrl || "http://localhost:8080/images/santosh.jpg" }}
+                              image={imageUrl}
+                              onChange={(file) => handleImageChange(file)}
+                              onDelete={handleImageDelete}
+                              previewWidth={160}
+                              previewHeight={160}
+                            />
                         </div>
                       </div>
                     </div>

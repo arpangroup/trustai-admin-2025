@@ -16,7 +16,7 @@ const FIELD_DEFINITIONS = [
   // { key: "minimumInvestmentAmount", label: "Min Invest", type: "number", blurHandler: "handleMinInvestmentBlur", validationKey: true },
   
   { key: "name", label: "Stake Name", type: "text", disabled: false, thStyle: { minWidth: "250px" } },
-  { key: "price", label: `Stake Price(${CURRENCY_SYMBOL})`, type: "number", disabled: false },
+  { key: "stakePrice", label: `Stake Price(${CURRENCY_SYMBOL})`, type: "number", disabled: false },
   { key: "returnRate", label: "Return Rate(%)", type: "number" },
   { key: "handlingFee", label: `Handling Fee(${CURRENCY_SYMBOL})`, type: "number", disabled: true },
   { key: "minimumWithdrawalAmount", label: "Minimum Withdraw", type: "number", disabled: true },
@@ -26,6 +26,10 @@ const FIELD_DEFINITIONS = [
   { key: "capitalReturned", label: "Capital Returned", type: "checkbox" },
   { key: "active", label: "Active", type: "checkbox" },
 ];
+
+const capitalizeWords = (str) => {
+  return str.replace(/\b\w/g, (char) => char.toUpperCase());
+};
 
 const Stakes = () => {
   const [schemas, setSchemas] = useState([]);
@@ -61,7 +65,7 @@ const Stakes = () => {
           imageUrl: schema.imageUrl ? { file: schema.imageUrl, preview: schema.imageUrl } : null,
           _original: {
             name: schema.name || "",
-            price: schema.price,
+            stakePrice: schema.stakePrice,
             minimumInvestmentAmount: schema.minimumInvestmentAmount,
             maximumInvestmentAmount: schema.maximumInvestmentAmount,
             returnRate: schema.returnRate,
@@ -214,6 +218,8 @@ const Stakes = () => {
 
         if (newRows.has(index)) {
           return {
+            name: schema.name,
+            stakePrice: schema.stakePrice,
             linkedRankCode: schema.linkedRank,
             minimumInvestmentAmount: schema.minimumInvestmentAmount,
             maximumInvestmentAmount: schema.maximumInvestmentAmount,
@@ -221,7 +227,7 @@ const Stakes = () => {
             totalReturnPeriods: schema.totalReturnPeriods,
             returnScheduleId: schema.returnSchedule?.id,
             capitalReturned: schema.capitalReturned,
-            imageUrl: schema.imageUrl.file,
+            imageUrl: schema.imageUrl?.file || "",
             active: schema.active,
           };
         }
@@ -229,22 +235,16 @@ const Stakes = () => {
         if (modifiedRows.has(index) && schema._original) {
           const modified = { id: schema.id };
           const { _original } = schema;
-          if (schema.minimumInvestmentAmount !== _original.minimumInvestmentAmount)
-            modified.minimumInvestmentAmount = schema.minimumInvestmentAmount;
-          if (schema.maximumInvestmentAmount !== _original.maximumInvestmentAmount)
-            modified.maximumInvestmentAmount = schema.maximumInvestmentAmount;
-          if (schema.returnRate !== _original.returnRate)
-            modified.returnRate = schema.returnRate;
-          if (schema.totalReturnPeriods !== _original.totalReturnPeriods)
-            modified.totalReturnPeriods = schema.totalReturnPeriods;
-          if ((schema.returnSchedule?.id || 2) !== _original.returnScheduleId)
-            modified.returnScheduleId = schema.returnSchedule?.id;
-          if (schema.linkedRank !== _original.linkedRankCode)
-            modified.linkedRankCode = schema.linkedRank;
-          if (schema.capitalReturned !== _original.capitalReturned)
-            modified.capitalReturned = schema.capitalReturned; 
-          if (schema.active !== _original.active)
-            modified.active = schema.active;
+          if (schema.name !== _original.name) modified.name = schema.name;
+          if (schema.stakePrice !== _original.stakePrice) modified.stakePrice = schema.stakePrice;
+          if (schema.minimumInvestmentAmount !== _original.minimumInvestmentAmount) modified.minimumInvestmentAmount = schema.minimumInvestmentAmount;
+          if (schema.maximumInvestmentAmount !== _original.maximumInvestmentAmount) modified.maximumInvestmentAmount = schema.maximumInvestmentAmount;
+          if (schema.returnRate !== _original.returnRate) modified.returnRate = schema.returnRate;
+          if (schema.totalReturnPeriods !== _original.totalReturnPeriods) modified.totalReturnPeriods = schema.totalReturnPeriods;
+          if ((schema.returnSchedule?.id || 2) !== _original.returnScheduleId) modified.returnScheduleId = schema.returnSchedule?.id;
+          if (schema.linkedRank !== _original.linkedRankCode) modified.linkedRankCode = schema.linkedRank;
+          if (schema.capitalReturned !== _original.capitalReturned) modified.capitalReturned = schema.capitalReturned; 
+          if (schema.active !== _original.active) modified.active = schema.active;
 
           const oldImage = _original.imageUrl;
           const newImage = schema.imageUrl;

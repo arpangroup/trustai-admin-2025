@@ -1,3 +1,7 @@
 .cell-changed {
   background-color: #ffff4b !important; /* Light yellow highlight */
 }
+
+input[name="name"] {
+  text-transform: capitalize;
+}
