@@ -39,7 +39,7 @@ const AmountCell = ({ data }) => {
     fontWeight: 'bold',
   };
 
-  return <span style={style}>{sign} {strValue}{` ${currencyCode || CURRENCY_SYMBOL}`}</span>;
+  return <span style={style}>{sign} {`${currencyCode || CURRENCY_SYMBOL} `}{strValue}</span>;
 };
 
 const BalanceCell = ({ data }) => {
