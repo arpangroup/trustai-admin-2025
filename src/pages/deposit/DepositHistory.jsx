@@ -14,7 +14,7 @@ import RightPanel from '../../components/panel/RightPanel';
 
 const DepositHistory = ({ status = '', pageSize = 9999 }) => {
   const [page, setPage] = useState(0);
-  const { data, totalPages, loading, error } = usePaginatedFetch(API_ROUTES.DEPOSIT_LIST, page, pageSize, {status});
+  const { data, totalPages, loading, error } = usePaginatedFetch(API_ROUTES.DEPOSITS.BASE, page, pageSize, {status});
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [selectedDeposit, setSelectedDeposit] = useState({});
 

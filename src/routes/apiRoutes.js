@@ -24,6 +24,7 @@ export const API_ROUTES = {
     BASE: "/api/v1/transactions",
     BY_USER: (userId) => `/api/v1/transactions/user/${userId}`,
     ADJUST_BALANCE: (isCredit) =>`/api/v1/transactions/adjustments/${isCredit ? "add" : "subtract"}`,
+    PROFITS: "/api/v1/transactions/profits",
   },
 
   DEPOSITS: {

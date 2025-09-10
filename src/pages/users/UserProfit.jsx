@@ -8,6 +8,7 @@ import "ag-grid-community/styles/ag-theme-alpine.css"; // Add your preferred the
 import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 import { NavLink } from 'react-router-dom';
 import { usePaginatedFetch } from '../../api/usePaginatedFetch';
+import { API_ROUTES } from '../../routes';
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 const formatDate = (dateString) => {
@@ -32,7 +33,7 @@ const formatDate = (dateString) => {
 const UserProfit = () => {
   const pageSize = 9999;
   const [page, setPage] = useState(0);
-  const { data, totalPages, loading } = usePaginatedFetch(`/api/v1/profits`, page, pageSize, null);
+  const { data, totalPages, loading } = usePaginatedFetch(API_ROUTES.TRANSACTIONS.PROFITS, page, pageSize, null);
 
 
   const UserCell = ({ data }) => {

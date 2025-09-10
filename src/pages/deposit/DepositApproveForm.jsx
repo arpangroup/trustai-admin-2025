@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { LuCheck, LuX } from 'react-icons/lu';
+import { LuCheck, LuX, LuDownload  } from 'react-icons/lu';
 import FormTextarea from '../../components/form/FormTextarea';
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from '../../routes';
 
 const DepositApproveForm = ({ depositData, onClose }) => {
-  const { txnRefId, id: depositId, screenshot } = depositData;
+  const { linkedTxnId: txnRefId, id: depositId, imageUrl } = depositData;
 
   const [message, setMessage] = useState('');
   const [isRejecting, setIsRejecting] = useState(false);
@@ -29,7 +29,7 @@ const DepositApproveForm = ({ depositData, onClose }) => {
     }
 
     try {
-      await apiClient.post(API_ROUTES.DEPOSIT_ACTION(action, depositId), payload);
+      await apiClient.post(API_ROUTES.DEPOSITS.ACTION(action, depositId), payload);
 
       alert(`Deposit successfully ${action}ed.`);
       // Optionally trigger a page reload, modal close, or callback
@@ -49,12 +49,34 @@ const DepositApproveForm = ({ depositData, onClose }) => {
           TransactionRef ID: <strong>{txnRefId}</strong>
         </li>
         <li className="list-group-item">
-          <img
-            src={screenshot}
-            style={{ width: '300px', height: '300px' }}
-            alt="Deposit Screenshot"
-          />
-        </li>
+          <div style={{ position: 'relative', display: 'inline-block' }}>
+            <img
+              src={imageUrl}
+              style={{ width: '300px', height: '300px' }}
+              alt="Deposit Screenshot"
+            />
+            <a
+              href={imageUrl}
+              target="_blank"
+              download={`deposit-${txnRefId}.jpg`} // optional filename
+              style={{
+                position: 'absolute',
+                top: 10,
+                right: 10,
+                background: 'white',
+                padding: '5px',
+                borderRadius: '50%',
+                boxShadow: '0 2px 5px rgba(0,0,0,0.3)',
+                textDecoration: 'none',
+                color: 'black'
+              }}
+              title="Download image"
+            >
+              <LuDownload size={20} />
+            </a>
+          </div>
+        </li> 
+
       </ul>
 
       <div className="site-input-groups mb-0">

@@ -121,7 +121,7 @@ export const WEB_ROUTES = {
 
 
   DEPOSIT: {
-    HISTORY:      { path: 'deposit/history', element: <DepositHistory status='PENDING' /> },
+    HISTORY:      { path: 'deposit/history', element: <DepositHistory /> },
     PENDING:      { path: 'deposit/pending', element: <DepositHistory status='PENDING' /> },
     REJECTED:     { path: 'deposit/rejected', element: <DepositHistory status='REJECTED' /> },
   },
