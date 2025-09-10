@@ -297,7 +297,7 @@ const SchemaForm = () => {
 
       let response;
       if (isEditMode) {
-        response = await apiClient.put(API_ROUTES.SCHEMA_By_ID(schemaId), payload);
+        response = await apiClient.put(API_ROUTES.SCHEMAS.BY_ID(schemaId), payload);
       } else {
         response = await apiClient.post(API_ROUTES.SCHEMAS.BASE, payload);
       }
