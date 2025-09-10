@@ -12,12 +12,12 @@ import { usePaginatedFetch } from "../../api/usePaginatedFetch";
 
 const Schema = (props) => {
     const [page, setPage] = useState(0);
-    const { data, totalPages, loading, error } = usePaginatedFetch(API_ROUTES.SCHEMA_LIST, page, 9999);
+    const { data, totalPages, loading, error } = usePaginatedFetch(API_ROUTES.SCHEMAS.BASE, page, 9999);
     
     const ActionLinkAddNew = (props) => {
         return (
             <a href="/schemas/create"
-                class="title-btn">
+                className="title-btn">
                 <LuPlus />
                 <span> ADD NEW</span>
             </a>
@@ -32,9 +32,10 @@ const Schema = (props) => {
     };
 
     const AmountRangeCell = (props) => {
-        const { schemaType, minimumInvestmentAmount, maximumInvestmentAmount, currency } = props.data;
+        const { investmentType, schemaType, minimumInvestmentAmount, maximumInvestmentAmount, stakePrice, currency } = props.data;
+        const minAmount = investmentType === 'STAKE' ?  stakePrice : minimumInvestmentAmount;
 
-        let amountRangeStr = `${minimumInvestmentAmount} ${currency}`;
+        let amountRangeStr = `${minAmount} ${currency}`;
         if (schemaType == 'RANGE' && (maximumInvestmentAmount !== null && maximumInvestmentAmount !== 0)) {
             amountRangeStr += ` - ${maximumInvestmentAmount} ${currency}`;
         }
@@ -52,9 +53,18 @@ const Schema = (props) => {
         );
     };
 
+     const IconCell = (props) => {
+        const { id, imageUrl } = props.data;
+        const rankIcon = imageUrl || '';
+
+        return (
+            <img src={rankIcon} style={{ width: '40px', height: '40px' }} alt="" />
+        );
+    };
+
     const [colDefs] = useState([
-        { field: "icon", headerName: 'ICON', width: 80 },
-        { field: "title", headerName: 'PLAN NAME' },
+        { field: "icon", headerName: 'ICON', width: 80, cellRenderer: IconCell },
+        { field: "name", headerName: 'PLAN NAME' },
         { field: "amountRange", headerName: 'AMOUNT', cellRenderer: AmountRangeCell, filter: true, filterParams: {} },
         { field: "schemaBadge", headerName: 'BADGE', width: 150, cellRenderer: Badge },
         { field: "status", headerName: 'STATUS', cellRenderer: StatusBadge },
@@ -93,8 +103,11 @@ const Schema = (props) => {
                                             defaultColDef={defaultColDef}
                                             pagination={true}                      
                                             paginationPageSize={10}
-                                            onPaginationChanged={onPaginationChanged}
-                                            paginationPageSizeSelector={[10, 20, 50, 100]} />
+                                            // onPaginationChanged={onPaginationChanged}
+                                            // paginationPageSizeSelector={[10, 20, 50, 100]}                                             
+                                            // rowModelType="infinite" // or "serverSide"
+                                            // datasource={data}
+                                            />
                                     </div>
                                 </div>
                             </div>

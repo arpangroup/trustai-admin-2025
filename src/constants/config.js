@@ -2,6 +2,7 @@
 export const API_VERSION = '/api/v1';
 
 export const APP_NAME = 'TrustAI'
+export const MIN_INVEST_AMOUNT = '100';
 
 export const CURRENCY_UNIT = "USDT";
 export const CURRENCY_UNIT_DEFAULT = "INR";

@@ -10,7 +10,8 @@ import { useParams } from 'react-router';
 import apiClient from '../../api/apiClient';
 import { API_ROUTES } from '../../routes';
 import FileInput from '../../components/form/FileInput';
-import { CURRENCY_SYMBOL, CURRENCY_UNIT, CURRENCY_UNIT_DEFAULT } from '../../constants/config';
+import { CURRENCY_SYMBOL, CURRENCY_UNIT, CURRENCY_UNIT_DEFAULT, MIN_INVEST_AMOUNT } from '../../constants/config';
+import Toast from "../../components/toast/Toast";
 
 const scheduleOptions = [
   { label: 'Hourly', value: 1 },
@@ -20,16 +21,25 @@ const scheduleOptions = [
   { label: 'Monthly', value: 5 }
 ];
 
+const investmentTypeOptions = [
+  { label: 'Standard', value: "STANDARD" },
+  { label: 'Stake', value: "STAKE" }
+];
+
 
 const fields = [
-  { label: "Schema Name", name: "title", inputType: "text", type: "text" },
-  { label: "Schema Badge", name: "schemaBadge", inputType: "text", type: "text" },
+  { label: "Investment Type", name: "investmentType", type: "select", options: investmentTypeOptions},
+  { type: "DIV", name: "div_2", conditionalOn: { field: "investmentType", value: "STANDARD" } },
+
+  { label: "Schema Name", name: "name", inputType: "text", type: "text" },
+  { label: "Schema Badge", name: "schemaBadge", inputType: "text", type: "text", conditionalOn: { field: "investmentType", value: "STANDARD" } },
 
   // Toggle: Fixed = true, Range = false
   { label: "Schema Type", name: "schemaType", type: "toggle", labels: ["Fixed", "Range"] },
 
   // Only show when schema_type is Fixed (true)
-  { label: "Amount", name: "minimumInvestmentAmount", inputType: "number", unit: CURRENCY_UNIT, type: "unit", conditionalOn: { field: "schemaType", value: true } },
+  { label: "Stake Price", name: "stakePrice", inputType: "number", unit: CURRENCY_UNIT, type: "unit", conditionalOn: { field: "investmentType", value: "STAKE" } },
+  { label: "Amount", name: "minimumInvestmentAmount", inputType: "number", unit: CURRENCY_UNIT, type: "unit", conditionalOn: {all: [{ field: "schemaType", value: true }, { field: "investmentType", not: "STAKE" }] }},
   { label: "Range", name: "amount_range", type: "range", min: 0, max: 0, conditionalOn: { field: "schemaType", value: false } },
 
   // Only show when schema_type is Range (false)
@@ -37,7 +47,7 @@ const fields = [
   // { label: "Max Amount", name: "max_amount", inputType: "number", unit: CURRENCY_UNIT, type: "unit", conditionalOn: { field: "schema_type", value: false } },
 
   { label: "Return Of Interest", name: "returnRate", inputType: "number", type: "number_with_select" },
-  { label: "Return Period", name: "returnSchedule", type: "select", options: scheduleOptions },
+  { label: "Return Period", name: "returnScheduleId", type: "select", options: scheduleOptions },
 
   // Toggle: Period = true, Lifetime = false
   { label: "Return Type", name: "returnType", type: "toggle", labels: ["Period", "Lifetime"] },
@@ -71,20 +81,23 @@ const interestTypeOptions = [
 ];
 
 const defaultFormState = {
-  title: '',
+  investmentType: 'STAKE',
+  name: '',
   schemaBadge: '',
   schemaType: true, // true = Fixed, false = Range,
+  stakePrice: MIN_INVEST_AMOUNT,
   minimumInvestmentAmount: '0',
   maximumInvestmentAmount: '0',
   returnRate: '20',
-  returnSchedule: 2,
-  returnType: false,  // true = Period, false = Lifetime
+  returnScheduleId: 2,
+  returnType: true,  // true = Period, false = Lifetime
   totalReturnPeriods: 0,
   capitalReturned: true,
   featured: true,
   cancellable: false,
   cancellationGracePeriodMinutes: 0,
   tradeable: true,
+  currency: CURRENCY_UNIT,
 
   status: true, // Active
   off_days: [],
@@ -114,17 +127,19 @@ const SchemaForm = () => {
   const [message, setMessage] = useState(null);
   const [screenshotFile, setScreenshotFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
+  const [toast, setToast] = useState(null);
 
   useEffect(() => {
     if (!isEditMode) return;
 
     const fetchSchemaInfo = async () => {
       try {
-        const data = await apiClient.get(API_ROUTES.SCHEMA_By_ID(schemaId));
+        const response = await apiClient.get(API_ROUTES.SCHEMAS.BY_ID(schemaId));
+        const data = response.data;
         const normalizedData = {
           ...defaultFormState,
           ...data,
-          returnSchedule: String(data.returnSchedule?.id ?? 2),
+          returnScheduleId: String(data.returnSchedule?.id ?? 2),
           schemaType: data.schemaType === 'FIXED',
           returnType: data.returnType === 'PERIOD',
           currency: data.currency === CURRENCY_UNIT,
@@ -150,13 +165,17 @@ const SchemaForm = () => {
     }
   }, [schemaId]);
 
+  const showToast = (message, type = "success") => {
+    setToast({ message, type });
+  };
+
 
 
 
 
   // Generic change handler
   const handleChange = useCallback((e) => {
-    const { name, value, type, files, options } = e.target;
+    const { name, value, type, files, options } = e.target;   
 
     if (type === 'file' && files.length > 0) {
       const file = files[0];
@@ -170,7 +189,21 @@ const SchemaForm = () => {
     } else if (type === 'select-multiple') {
       const selected = Array.from(options).filter(o => o.selected).map(o => o.value);
       setFormData(prev => ({ ...prev, [name]: selected }));
-    } else {      
+    } else if(name === 'investmentType' && value === 'STAKE') { // Ensure default locking on investmentType change
+      setFormData(prev => ({
+        ...prev,
+        [name]: value,
+        schemaType: true,       // Force to Fixed
+        returnType: true        // Force to Period
+      }));
+    } else if (name === 'investmentType' && value === 'STANDARD') {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value,
+        // don’t override schemaType/returnType
+      }));
+    } else {
+      // Default behavior
       // Find the field definition
       const fieldMeta = fields.find(f => f.name === name);
       const isNumber = fieldMeta?.inputType === 'number' || fieldMeta?.type === 'number';
@@ -195,11 +228,24 @@ const SchemaForm = () => {
 
     // const value = labels ? (enabled ? labels[0] : labels[1]) : (enabled ? '1' : '0');
 
+    const isStake = formData.investmentType === 'STAKE';
+    // Prevent toggling schemaType to Range
+    if (isStake && name === 'schemaType' && enabled === false) {
+      showToast('Schema Type cannot be "Range" for STAKE investment.', 'error');
+      return;
+    }
+
+    // Prevent toggling returnType to Lifetime
+    if (isStake && name === 'returnType' && enabled === false) {
+      showToast('Return Type must be "Period" for STAKE investment.', 'error');
+      return;
+    }
+
     setFormData(prev => ({
       ...prev,
       [name]: enabled,
     }));
-  }, []);
+  }, [formData, showToast]);
 
   // Special handlers for number_with_select field
   const handleReturnInterestChange = useCallback((name, val) => {
@@ -253,7 +299,7 @@ const SchemaForm = () => {
       if (isEditMode) {
         response = await apiClient.put(API_ROUTES.SCHEMA_By_ID(schemaId), payload);
       } else {
-        response = await apiClient.post(API_ROUTES.SCHEMA_LIST, payload);
+        response = await apiClient.post(API_ROUTES.SCHEMAS.BASE, payload);
       }
       setMessage({ type: 'success', text: isEditMode ? 'Schema updated!' : 'Schema created!' });
     } catch (error) {
@@ -263,18 +309,31 @@ const SchemaForm = () => {
     }
   };
 
-  const renderField = useCallback(
-    (field) => {
-      // Handle conditional fields
-      if (field.conditionalOn) {
+  const renderField = useCallback((field, index) => {
+    // Handle conditional fields
+    if (field.conditionalOn) {
+      // Support compound conditions
+      if (field.conditionalOn.all) {
+        const shouldRender = field.conditionalOn.all.every(cond => {
+          const val = formData[cond.field];
+          if (cond.hasOwnProperty('not')) {
+            return val !== cond.not;
+          }
+          return val === cond.value;
+        });
+        if (!shouldRender) return null;
+      } else {
         const dependentValue = formData[field.conditionalOn.field];
-        if (dependentValue !== field.conditionalOn.value) {
-          return null;
+        if (field.conditionalOn.hasOwnProperty('not')) {
+          if (dependentValue === field.conditionalOn.not) return null;
+        } else {
+          if (dependentValue !== field.conditionalOn.value) return null;
         }
       }
+    }
 
       const commonProps = {
-        key: field.name,
+        // key: field.name,
         label: field.label,
         name: field.name,
         value: formData[field.name] || '',
@@ -285,17 +344,17 @@ const SchemaForm = () => {
       switch (field.type) {
         case 'DIV':
           return (
-            <div className="col-xl-6" key={field.name}></div>
+            <div className="col-xl-6" key={`${field.name}-${index}`}></div>
           )
         case 'unit':
           return (
-            <div className="col-xl-6" key={field.name}>
+            <div className="col-xl-6" key={`${field.name}-${index}`}>
               <FormInputWithUnit {...commonProps} type={field.inputType || 'text'} unit={field.unit} />
             </div>
           );
         case 'textarea':
           return (
-            <div className="col-xl-12" key={field.name}>
+            <div className="col-xl-12" key={`${field.name}-${index}`}>
               <div className='site-input-groups'>
                 <label className="box-input-label" htmlFor={field.name}>{field.label}</label>
                 <textarea
@@ -309,7 +368,7 @@ const SchemaForm = () => {
           );
         case 'select':
           return (
-            <div className="col-xl-6" key={field.name}>
+            <div className="col-xl-6" key={`${field.name}-${index}`}>
               <label className="box-input-label" htmlFor={field.name}>
                 {field.label}
               </label>
@@ -331,7 +390,7 @@ const SchemaForm = () => {
           );
         case 'radio':
           return (
-            <div className="col-xl-6" key={field.name}>
+            <div className="col-xl-6" key={`${field.name}-${index}`}>
               <label className="box-input-label">{field.label}</label>
               <div className="switch-field same-type">
                 {field.options.map((opt) => (
@@ -352,7 +411,7 @@ const SchemaForm = () => {
           );
         case 'multiselect':
           return (
-            <div className="col-xl-12" key={field.name}>
+            <div className="col-xl-12" key={`${field.name}-${index}`}>
               <label className="box-input-label" htmlFor={field.name}>
                 {field.label}
               </label>
@@ -374,21 +433,26 @@ const SchemaForm = () => {
             </div>
           );
         case 'toggle':
+          const isStake = formData.investmentType === 'STAKE';
+          const disableForStake = isStake && (field.name === 'schemaType' || field.name === 'returnType');
+
           return (
-            <div className="col-xl-6" key={field.name}>
+            <div className="col-xl-6" key={`${field.name}-${index}`}>
               <label className="box-input-label">{field.label}</label>
               <Switch
                 name={field.name}
                 enabled={!!formData[field.name]} // Coerce to boolean
                 labels={field.labels}
+                disabled={disableForStake}
                 style={{ padding: '13px 16px' }}
                 onToggle={(name, value) => handleToggle(name, value)}
               />
+
             </div>
           );
         case 'number_with_select':
           return (
-            <div className="col-xl-6" key={field.name}>
+            <div className="col-xl-6" key={`${field.name}-${index}`}>
               <FormInputWithSelect
                 label={field.label}
                 inputName={field.name} // returnRate
@@ -406,7 +470,7 @@ const SchemaForm = () => {
           );
         case 'number':
           return (
-            <div className="col-xl-6" key={field.name}>
+            <div className="col-xl-6" key={`${field.name}-${index}`}>
               <FormInput
                 {...commonProps}
                 type={field.inputType || 'number'}
@@ -418,7 +482,7 @@ const SchemaForm = () => {
           );
         case 'range':
           return (
-            <div className="col-xl-6 row" key={field.name}>
+            <div className="col-xl-6 row" key={`${field.name}-${index}`}>
               <FormInputRange
                 minValue={formData.minimumInvestmentAmount || ''}
                 maxValue={formData.maximumInvestmentAmount || ''}
@@ -433,7 +497,7 @@ const SchemaForm = () => {
           );
         default:
           return (
-            <div className="col-xl-6" key={field.name}>
+            <div className="col-xl-6" key={`${field.name}-${index}`}>
               <FormInput {...commonProps} type={field.inputType || 'text'} />
             </div>
           );
@@ -471,7 +535,7 @@ const SchemaForm = () => {
                 </div>
 
                 <form onSubmit={handleSubmit} className="row">
-                  <div className="row mb-4">{fields.map(renderField)}</div>
+                  <div className="row mb-4">{fields.map((field, index) => renderField(field, index))}</div>
 
                   <button type="submit" className="site-btn-sm primary-btn w-100" disabled={loading}>
                     {loading ? (isEditMode ? 'Updating...' : 'Saving...') : isEditMode ? 'Update Schema' : 'Create Schema'}
@@ -484,6 +548,13 @@ const SchemaForm = () => {
                   )}
                 </form>
               </div>
+              {toast && (
+                <Toast
+                  message={toast.message}
+                  type={toast.type}
+                  onClose={() => setToast(null)}
+                />
+              )}
             </div>
           </div>
         </div>

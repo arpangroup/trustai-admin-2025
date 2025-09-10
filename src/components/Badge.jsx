@@ -30,6 +30,7 @@ const Badge = ({ value, style = null }) => {
     case 'yes':
     case 'completed':
     case 'crypto':
+    case 'stake':
     case 'cilver':
     case 'premium':
     case 'true':

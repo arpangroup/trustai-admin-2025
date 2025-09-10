@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { LuPlus, LuTrash } from "react-icons/lu";
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from "../../routes";
-import { SCHEDULE_OPTIONS } from "../../constants/config";
+import { CURRENCY_SYMBOL, SCHEDULE_OPTIONS } from "../../constants/config";
 import FormInput from "../../components/form/FormInput";
 import FormDropdown from "../../components/form/FormDropdown";
 import SchemaInputField from "./components/SchemaInputField ";
@@ -12,20 +12,22 @@ import ImageUploadCell from "../../components/form/file/ImageUploadCell";
 import FileUploadWithInput from "../../components/form/upload/FileUploadWithInput ";
 
 const FIELD_DEFINITIONS = [
-  { key: "linkedRank", label: "Linked Rank", type: "select", optionsKey: "rankOptions", thStyle: { minWidth: "120px" } },
-  { key: "minimumInvestmentAmount", label: "Min Invest", type: "number", blurHandler: "handleMinInvestmentBlur", validationKey: true },
-  { key: "price", label: "Stake Price", type: "number", disabled: false },
-  { key: "returnRate", label: "Return Rate (%)", type: "number" },
-  { key: "handlingFee", label: "Handling Fee", type: "number", disabled: true },
+  // { key: "linkedRank", label: "Linked Rank", type: "select", optionsKey: "rankOptions", thStyle: { minWidth: "120px" } },
+  // { key: "minimumInvestmentAmount", label: "Min Invest", type: "number", blurHandler: "handleMinInvestmentBlur", validationKey: true },
+  
+  { key: "name", label: "Stake Name", type: "text", disabled: false, thStyle: { minWidth: "250px" } },
+  { key: "price", label: `Stake Price(${CURRENCY_SYMBOL})`, type: "number", disabled: false },
+  { key: "returnRate", label: "Return Rate(%)", type: "number" },
+  { key: "handlingFee", label: `Handling Fee(${CURRENCY_SYMBOL})`, type: "number", disabled: true },
   { key: "minimumWithdrawalAmount", label: "Minimum Withdraw", type: "number", disabled: true },
   { key: "totalReturnPeriods", label: "Duration (Days)", type: "number" },
-  { key: "returnSchedule.id", label: "Schedule", type: "select", optionsKey: "SCHEDULE_OPTIONS" },
-  { key: "imageUrl", label: "Image", type: "image", thStyle: { minWidth: "150px" } },
+  { key: "returnSchedule.id", label: "Return Schedule", type: "select", optionsKey: "SCHEDULE_OPTIONS" },
+  { key: "imageUrl", label: "Stake Image", type: "image", thStyle: { minWidth: "80px" } },
   { key: "capitalReturned", label: "Capital Returned", type: "checkbox" },
   { key: "active", label: "Active", type: "checkbox" },
 ];
 
-const StakeEditor = () => {
+const Stakes = () => {
   const [schemas, setSchemas] = useState([]);
   const [rankOptions, setRankOptions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -53,13 +55,18 @@ const StakeEditor = () => {
         );
         const enrichedSchemas = (stakes).map((schema) => ({
           ...schema,
+          name: schema.name || "",
           linkedRank: schema.linkedRank || "",
           returnSchedule: { id: schema.returnSchedule?.id || 2 },
           imageUrl: schema.imageUrl ? { file: schema.imageUrl, preview: schema.imageUrl } : null,
           _original: {
+            name: schema.name || "",
+            price: schema.price,
             minimumInvestmentAmount: schema.minimumInvestmentAmount,
             maximumInvestmentAmount: schema.maximumInvestmentAmount,
             returnRate: schema.returnRate,
+            handlingFee: schema.handlingFee,
+            minimumWithdrawalAmount: schema.minimumWithdrawalAmount,
             totalReturnPeriods: schema.totalReturnPeriods,
             returnScheduleId: schema.returnSchedule?.id,
             linkedRankCode: schema.linkedRank,
@@ -293,6 +300,25 @@ const StakeEditor = () => {
                 {FIELD_DEFINITIONS.map((field) => {
                   const keys = field.key.split(".");
                   const value = keys.reduce((obj, k) => obj?.[k], schema);
+
+                  const originalValue = (() => {
+                    if (!schema._original) return undefined;
+                    if (field.key === "returnSchedule.id") {
+                      return schema._original.returnScheduleId;
+                    }
+                    if (field.key === "linkedRank") {
+                      return schema._original.linkedRankCode;
+                    }
+                    if (field.key === "imageUrl") {
+                      return schema._original.imageUrl;
+                    }
+                    return schema._original[field.key];
+                  })();
+                  const isPrimitive = (val) => val === null || typeof val !== 'object';
+                  const hasChanged = isPrimitive(value)
+                    ? value !== originalValue
+                    : JSON.stringify(value) !== JSON.stringify(originalValue);
+
                   const onChange = (e) => {
                     const val = field.type === "checkbox" ? e.target.checked : e.target.value;
                     handleChange(index, field.key, field.type === "number" ? Number(val) : val);
@@ -315,7 +341,7 @@ const StakeEditor = () => {
                   if (field.type === "select") {
                     const options = field.optionsKey === "SCHEDULE_OPTIONS" ? SCHEDULE_OPTIONS : rankOptions;
                     return (
-                      <td key={field.key}>
+                      <td key={field.key} className={hasChanged ? "cell-changed" : ""}>
                         {/* <SchemaSelectField {...sharedProps} options={options} /> */}
                        <FormDropdown
                           name={field.key}
@@ -335,7 +361,7 @@ const StakeEditor = () => {
 
                   if (field.type === "checkbox") {
                     return (
-                      <td key={field.key} className="text-center">
+                      <td key={field.key} className={`text-center hasChanged ? "cell-changed" : ""`}>
                         <input
                           type="checkbox"
                           className="form-check-input"
@@ -361,10 +387,10 @@ const StakeEditor = () => {
                   }
 
                   return (
-                    <td key={field.key}>
+                    <td key={field.key} className={hasChanged ? "cell-changed" : ""}>
                       {/* <SchemaInputField type="number" {...sharedProps} /> */}
                       <FormInput
-                        type="number"
+                        type={field.type}
                         name={field.key}
                         value={value}
                         onChange={onChange}
@@ -398,4 +424,4 @@ const StakeEditor = () => {
   );
 };
 
-export default StakeEditor;
+export default Stakes;

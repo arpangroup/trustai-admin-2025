@@ -73,6 +73,7 @@ import TicketDetails from '../pages/support/TicketDetails';
 
 // Custom CSS:
 import CustomCss from '../pages/custom_css/CustomCss';
+import Stakes from "../pages/schema/Stakes";
 
 
 export const WEB_ROUTES = {
@@ -109,7 +110,8 @@ export const WEB_ROUTES = {
     BASE:         { path: 'schemas', element: <Schema/> },
     CREATE:       { path: 'schemas/create', element: <SchemaForm/> },
     EDIT:         { path: 'schemas/edit/:schemaId', element: <SchemaForm/> },
-    STAKES:       { path: 'schemas/stakes', element: <StakeEditor/> },
+    // STAKES:       { path: 'schemas/stakes', element: <StakeEditor/> },
+    STAKES:       { path: 'schemas/stakes', element: <Stakes/> },
   },
 
   TRANSACTIONS:   { path: 'transactions', element: <Transactions/> },

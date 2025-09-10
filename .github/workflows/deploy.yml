@@ -2,7 +2,7 @@ name: Deploy TrustAI Admin App
 
 on:
   push:
-    branches: ["main", "fix-07-sept-25"]
+    branches: ["main", "fix-10-sept-schmea-editor"]
 
 env:
   DEPLOY_PATH: "/var/www/admin.trustai.co.in"
