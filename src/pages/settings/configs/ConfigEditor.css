@@ -23,10 +23,15 @@
 
 .button-container {
     text-align: right;
-
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
+}
+
+.reload-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 

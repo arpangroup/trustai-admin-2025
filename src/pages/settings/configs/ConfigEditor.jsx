@@ -96,7 +96,7 @@ const ConfigEditor = () => {
     const reloadConfig = async () => {
         try {
             await apiClient.post(API_ROUTES.CONFIGS.RELOAD);
-            console.log("Configs loaded successfully");
+            alert("Configs loaded successfully");
         } catch (err) {
             console.log("Failed to reload configs: " + err.message);
         }
@@ -212,7 +212,17 @@ const ConfigEditor = () => {
                 </div>
                 <div className="col-6">
                     <section className="card">
-                        <h5>Add New Configuration</h5>
+                        <div className="" style={{position: 'relative'}}>
+                            <h5>Add New Configuration</h5>
+                            
+                            <div className="reload-btn">
+                                <button className="btn btn-outline-secondary" onClick={reloadConfig}>
+                                    🔄 Reload Config
+                                </button>
+                            </div>                            
+                        </div>
+
+
                         <form className="row" onSubmit={handleAddConfig}>
                             <div className="mb-3">
                                 <label htmlFor="formGroupExampleInput" className="form-label">Key</label>
