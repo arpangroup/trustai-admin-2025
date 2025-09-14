@@ -74,6 +74,8 @@ import TicketDetails from '../pages/support/TicketDetails';
 // Custom CSS:
 import CustomCss from '../pages/custom_css/CustomCss';
 import Stakes from "../pages/schema/Stakes";
+import ConfigManagement from "../pages/settings/configs/ConfigManagement";
+import ConfigEditor from "../pages/settings/configs/ConfigEditor";
 
 
 export const WEB_ROUTES = {
@@ -141,6 +143,8 @@ export const WEB_ROUTES = {
   },
 
   SETTING: {
+    // CONFIGS:      { path: 'setting/configs', element: <ConfigManagement /> },
+    CONFIGS:      { path: 'setting/configs', element: <ConfigEditor /> },
     SITE:         { path: 'setting/site', element: <SiteSetting /> },
     MAIL:         { path: 'setting/mail', element: <EmailSetting /> },
     PLUGIN:       { path: 'setting/plugin', element: <PluginSetting /> },

@@ -177,6 +177,7 @@ const menuData = [
     label: ' Settings',
     icon: <LuSettings />,
     items: [
+      { label: 'Configs', href: '/setting/configs', icon: <LuSettings2 /> },
       { label: 'Site Settings', href: '/setting/site', icon: <LuSettings2 /> },
       { label: 'Email Settings', href: '/setting/mail', icon: <LuInbox /> },
       { label: 'Plugin Settings', href: '/setting/plugin', icon: <LuToyBrick /> },

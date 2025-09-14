@@ -20,7 +20,7 @@ const TreeViewer = ({ userId }) => {
     //   .catch(() => setTreeData({ error: true }));
 
     apiClient.get(API_ROUTES.REFERRAL_TREE(userId, maxLevel))
-    .then(setTreeData)
+    .then(response => setTreeData(response.data))
     .catch(() => setTreeData({ error: true }));
 
 

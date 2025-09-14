@@ -87,8 +87,10 @@ export const API_ROUTES = {
   },
 
   CONFIGS: {
-    GET: "http://localhost:8888/nft_app/dev",
-    UPDATE: "http://localhost:8888/api/v1/configs/update",
+    GET: "/api/v1/configs",
+    ADD: "/api/v1/configs/add",
+    UPDATE: "/api/v1/configs/update",
+    RELOAD: "/api/v1/configs/reload",
   },
 
   STORAGE: {
