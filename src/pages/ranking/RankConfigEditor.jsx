@@ -83,11 +83,11 @@ const RankConfigEditor = () => {
             <tr>
               <th>RANK ID</th>
               <th>RANK CODE</th>
-              <th>MINIMUM DEPOSIT BALANCE ($) </th>
+              <th>MINIMUM WALLET BALANCE ($) </th>
               <th>MINIMUM INVEST AMOUNT ($)</th>
               <th>TXN PER DAY</th>
               <th>RANK BONUS</th>
-              <th>COMISSION (%)</th>
+              <th>Daily Income COMISSION (%)</th>
               <th>DIRECT REFERRALS (Lv.A)</th>
               <th>LEVEL-B REQUIRED</th>
               <th>LEVEL-C REQUIRED</th>
