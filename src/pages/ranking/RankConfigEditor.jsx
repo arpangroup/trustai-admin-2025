@@ -77,74 +77,77 @@ const RankConfigEditor = () => {
 
   return (
     <div className="container mt-4">
-      <h3 className="mb-4">Rank Config Editor</h3>
-      <div className="table-responsive">
-        <table className="table table-bordered table-striped table-sm">
-          <thead className="thead-dark">
-            <tr>
-              <th>RANK ID</th>
-              <th>RANK CODE</th>
-              <th>MINIMUM WALLET BALANCE ($) </th>
-              <th>MINIMUM INVEST AMOUNT ($)</th>
-              <th>TXN PER DAY</th>
-              <th>RANK BONUS</th>
-              <th>Daily Income COMISSION (%)</th>
-              <th>DIRECT REFERRALS (Lv.A)</th>
-              <th>LEVEL-B REQUIRED</th>
-              <th>LEVEL-C REQUIRED</th>
-              {/* <th>REFERRAL DEPOSITS</th> */}
-              {/* <th>REFERRAL INVESTMENTS</th> */}
-              {/* <th>Income</th> */}
-            </tr>
-          </thead>
-          <tbody>
-            {ranks.map((rank) => (
-              <tr key={rank.id}>
-                <td>{rank.id}</td>
-                <td>
-                  <NavLink to={`/admin/rankings/edit/${rank.id}`}>
-                    {rank.code}
-                  </NavLink>
-                </td>
-                {[
-                  "minDepositAmount",
-                  "minInvestmentAmount",
-                  "txnPerDay",
-                  "rankBonus",
-                  "commissionPercentage",
-                  "minDirectReferrals",
-                  // "minLevel1Count",
-                  "minLevel2Count",
-                  "minLevel3Count",
-                  // "minReferralTotalDeposit",
-                  // "minReferralTotalInvestment",
-                  // "minTotalEarnings",
-                ].map((field) => (
-                  <td key={field}>
-                    <input
-                      type="number"
-                      className={`form-control form-control-sm ${isCellChanged(rank.id, field) ? "bg-warning" : ""
-                        }`}
-                      value={rank[field]}
-                      onChange={(e) =>
-                        handleChange(rank.id, field, Number(e.target.value))
-                      }
-                      onWheel={(e) => e.target.blur()}
-                    />
-                  </td>
-                ))}
+      <div className="row">
+
+        <h3 className="mb-4">Rank Config Editor</h3>
+        <div className="table-responsive">
+          <table className="table table-bordered table-striped table-sm">
+            <thead className="thead-dark">
+              <tr>
+                <th>RANK ID</th>
+                <th>RANK CODE</th>
+                <th>MINIMUM WALLET BALANCE ($) </th>
+                <th>MINIMUM INVEST AMOUNT ($)</th>
+                <th>TXN PER DAY</th>
+                <th>RANK BONUS</th>
+                <th>DAILY INCOME (%)</th>
+                <th>DIRECT REFERRALS (Lv.A)</th>
+                <th>LEVEL-B REQUIRED</th>
+                <th>LEVEL-C REQUIRED</th>
+                {/* <th>REFERRAL DEPOSITS</th> */}
+                {/* <th>REFERRAL INVESTMENTS</th> */}
+                {/* <th>Income</th> */}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      {Object.keys(changes).length > 0 && (
-        <div className="text-end mt-3">
-          <button className="btn btn-primary" onClick={handleUpdate}>
-            Update Changed Ranks
-          </button>
+            </thead>
+            <tbody>
+              {ranks.map((rank) => (
+                <tr key={rank.id}>
+                  <td>{rank.id}</td>
+                  <td>
+                    <NavLink to={`/admin/rankings/edit/${rank.id}`}>
+                      {rank.code}
+                    </NavLink>
+                  </td>
+                  {[
+                    "minDepositAmount",
+                    "minInvestmentAmount",
+                    "txnPerDay",
+                    "rankBonus",
+                    "commissionPercentage",
+                    "minDirectReferrals",
+                    // "minLevel1Count",
+                    "minLevel2Count",
+                    "minLevel3Count",
+                    // "minReferralTotalDeposit",
+                    // "minReferralTotalInvestment",
+                    // "minTotalEarnings",
+                  ].map((field) => (
+                    <td key={field}>
+                      <input
+                        type="number"
+                        className={`form-control form-control-sm ${isCellChanged(rank.id, field) ? "bg-warning" : ""
+                          }`}
+                        value={rank[field]}
+                        onChange={(e) =>
+                          handleChange(rank.id, field, Number(e.target.value))
+                        }
+                        onWheel={(e) => e.target.blur()}
+                      />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      )}
+        {Object.keys(changes).length > 0 && (
+          <div className="text-end mt-3">
+            <button className="btn btn-primary" onClick={handleUpdate}>
+              Update Changed Ranks
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
