@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import apiClient from "../../../api/apiClient"; // adjust path if needed
 import "./ConfigEditor.css"; // reuse your CSS
 import { API_ROUTES } from "../../../routes";
+import { toast } from "react-toastify";
 
 const ConfigEditor = () => {
     const [configs, setConfigs] = useState([]);
@@ -59,16 +60,17 @@ const ConfigEditor = () => {
             .map(([k, v]) => ({ key: k, value: v }));
 
         if (changed.length === 0) {
-            alert("No changes to update.");
+            toast.info('Copied to clipboard!');
             return;
         }
 
         try {
-            await apiClient.put(API_ROUTES.CONFIGS.UPDATE, changed);
-            alert("Configs updated successfully");
+            await apiClient.put(API_ROUTES.CONFIGS.UPDATE, changed);            
+            toast.success('Configs updated successfully');
             setDefaultConfigState({ ...configState });
         } catch (err) {
-            console.log("Failed to update configs: " + err.message);
+            console.log("Failed to update configs: " + err.message);         
+            toast.error("Failed to update configs: " + err.message);
         }
     };
 
@@ -77,7 +79,7 @@ const ConfigEditor = () => {
         e.preventDefault();
         try {
             await apiClient.post(API_ROUTES.CONFIGS.ADD, newConfig);
-            alert("Configuration added successfully");
+            toast.success('Configuration added successfully');
             setNewConfig({
                 key: "",
                 value: "",
@@ -89,6 +91,7 @@ const ConfigEditor = () => {
             await loadConfigs();
         } catch (err) {
             console.log("Failed to add configuration: " + err.message);
+            toast.error("Failed to add configuration: " + err.message);
         }
     };
 
@@ -96,7 +99,7 @@ const ConfigEditor = () => {
     const reloadConfig = async () => {
         try {
             await apiClient.post(API_ROUTES.CONFIGS.RELOAD);
-            alert("Configs loaded successfully");
+            toast("Configs loaded successfully");
         } catch (err) {
             console.log("Failed to reload configs: " + err.message);
         }
@@ -160,7 +163,7 @@ const ConfigEditor = () => {
                                             <span
                                                 className="info-icon"
                                                 title={cfg.info}
-                                                onClick={() => alert(cfg.info)}
+                                                onClick={() => toast(cfg.info)}
                                             >
                                                 ⓘ
                                             </span>

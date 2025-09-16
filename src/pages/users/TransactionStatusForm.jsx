@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Switch from '../../components/form/Switch';
 import apiClient from '../../api/apiClient';
 import { API_ROUTES } from '../../routes';
+import { toast } from 'react-toastify';
 
 const switchFields = [
     { label: 'Deposit Status', name: 'depositEnabled' },
@@ -49,7 +50,7 @@ const TransactionStatusForm = ({ initialStatus, userId }) => {
             }));
         } catch (err) {
             console.error('Error updating transaction status:', err);
-            alert(`Failed to update ${field}: ${err.message}`);
+            toast.error(`Failed to update ${field}: ${err.message}`);
         } finally {
             setLoadingField(null);
         }

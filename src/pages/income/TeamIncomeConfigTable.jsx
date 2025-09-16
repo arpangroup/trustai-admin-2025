@@ -4,6 +4,7 @@ import FormInputWithUnit from '../../components/form/FormInputWithUnit';
 import './TeamIncomeConfigTable.css';
 import { API_ROUTES } from '../../routes';
 import apiClient from '../../api/apiClient';
+import { toast } from 'react-toastify';
 
 const RANKS = ['RANK_1', 'RANK_2', 'RANK_3', 'RANK_4', 'RANK_5'];
 const LEVEL_LABELS = {
@@ -73,11 +74,11 @@ export default function TeamIncomeConfigTable() {
 
     try {
       await apiClient.put(API_ROUTES.TEAM_INCOME_CONFIGS, unpivoted);
-      alert('Update successful');
+      toast.success('Update successful');
       setOriginalData(unpivoted);
       setHasChanges(false);
     } catch (e) {
-      alert('Update failed');
+      toast.error('Update failed');
       console.error(e);
     }
   };

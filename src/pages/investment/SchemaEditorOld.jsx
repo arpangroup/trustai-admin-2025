@@ -4,6 +4,7 @@ import { CURRENCY_SYMBOL, SCHEDULE_OPTIONS } from "../../constants/config";
 import { LuPlus, LuTrash } from "react-icons/lu";
 import { API_ROUTES } from "../../constants/apiRoutes";
 import apiClient from "../../api/apiClient";
+import { toast } from "react-toastify";
 
 
 const SchemaEditor = () => {
@@ -30,7 +31,7 @@ const SchemaEditor = () => {
             })
             .catch((err) => {
                 console.error("Error loading schema or ranks", err);
-                alert("Failed to load data. See console for details.");
+                toast.error("Failed to load data. See console for details.");
             })
             .finally(() => {
                 setLoading(false);
@@ -113,7 +114,7 @@ const SchemaEditor = () => {
             setSchemas(prev => prev.filter(s => s.id !== schemaId));
         } catch (err) {
             console.error("Delete failed", err);
-            alert("Failed to delete schema.");
+            toast.error("Failed to delete schema.");
         }
     };
 

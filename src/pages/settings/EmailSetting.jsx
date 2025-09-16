@@ -7,6 +7,7 @@ import apiClient from "../../api/apiClient";
 import { API_ROUTES } from "../../routes";
 import './Loader.css';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 const EmailSetting = () => {
   const [formData, setFormData] = useState({
@@ -62,7 +63,7 @@ const EmailSetting = () => {
       setAlert({ message: "Settings saved successfully", type: "success" });
     } catch (err) {
       console.error("Failed to save settings:", err);
-      alert("Error saving settings");
+      toast.error("Error saving settings");
       setAlert({ message: "Error saving settings", type: "danger" });
     } finally {
       setLoading(false);
@@ -79,7 +80,7 @@ const EmailSetting = () => {
       setAlert({ message: "Connection test success : " + response.message, type: "success" });
     } catch (err) {
       console.error("Connection test failed:", err);
-      alert("Connection test failed: " + err.message);
+      toast.error("Connection test failed: " + err.message);
     } finally {
       setChecking(false);
     }

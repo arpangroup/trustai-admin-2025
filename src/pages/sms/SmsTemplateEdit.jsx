@@ -4,6 +4,7 @@ import axios from 'axios';
 import FormTextarea from '../../components/form/FormTextarea';
 import Switch from '../../components/form/Switch';
 import { API_ROUTES } from '../../routes';
+import { toast } from 'react-toastify';
 
 const SmsTemplateEdit = ({ type = "sms" }) => {
     const { id } = useParams();
@@ -39,17 +40,17 @@ const SmsTemplateEdit = ({ type = "sms" }) => {
         });
 
         if (Object.keys(changedFields).length === 0) {
-            alert("No changes detected.");
+            toast.info("No changes detected.");
             return;
         }
 
         try {
             await axios.put(API_ROUTES.TEMPLATE_BY_ID(type, id), changedFields);
-            alert("Template updated successfully.");
+            toast.success("Template updated successfully.");
             setOriginalData({ ...formData });
         } catch (error) {
             console.error("Error updating template:", error);
-            alert("Failed to update template.");
+            toast.error("Failed to update template.");
         }
     };
 

@@ -10,6 +10,7 @@ import SchemaSelectField from "./components/SchemaSelectField";
 import './StakeEditor.css';
 import ImageUploadCell from "../../components/form/file/ImageUploadCell";
 import FileUploadWithInput from "../../components/form/upload/FileUploadWithInput ";
+import { toast } from "react-toastify";
 
 const FIELD_DEFINITIONS = [
   { key: "linkedRank", label: "Linked Rank", type: "select", optionsKey: "rankOptions", thStyle: { minWidth: "120px" } },
@@ -196,7 +197,7 @@ const StakeEditor = () => {
       await apiClient.delete(API_ROUTES.RANK_CONFIGS_BY_ID(schemaId));
       setSchemas((prev) => prev.filter((s) => s.id !== schemaId));
     } catch {
-      alert("Failed to delete schema.");
+      toast.error("Failed to delete schema.");
     }
   };
 
@@ -260,10 +261,10 @@ const StakeEditor = () => {
 
     try {
       await apiClient.post(API_ROUTES.RANK_CONFIGS_BULK_UPSERT, payload);
-      alert("Schemas updated successfully");
+      toast.success("Schemas updated successfully");
       window.location.reload();
     } catch (err) {
-      alert("Update failed");
+      toast.error("Update failed");
     }
   };
 

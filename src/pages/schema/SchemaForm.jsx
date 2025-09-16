@@ -201,7 +201,7 @@ const SchemaForm = () => {
       const file = files[0];
       const allowedTypes = ["image/jpeg", "image/png"];
       if (!allowedTypes.includes(file.type)) {
-        alert("Only JPG and PNG files are allowed!");
+        toast.info("Only JPG and PNG files are allowed!");
         return;
       }
       setScreenshotFile(file);

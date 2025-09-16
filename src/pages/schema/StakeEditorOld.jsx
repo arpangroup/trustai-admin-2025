@@ -3,6 +3,7 @@ import { SCHEDULE_OPTIONS } from "../../constants/config";
 import { LuPlus, LuTrash } from "react-icons/lu";
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from "../../constants/apiRoutes";
+import { toast } from "react-toastify";
 
 const StakeEditor = () => {
   const [schemas, setSchemas] = useState([]);
@@ -143,7 +144,7 @@ const StakeEditor = () => {
       setSchemas(prev => prev.filter(s => s.id !== schemaId));
     } catch (err) {
       console.error("Delete failed", err);
-      alert("Failed to delete schema.");
+      toast.error("Failed to delete schema.");
     }
   };
 
@@ -197,11 +198,11 @@ const StakeEditor = () => {
 
     try {
       await apiClient.post(API_ROUTES.RANK_CONFIGS_BULK_UPSERT, payload);
-      alert("Schemas updated successfully");
+      toast.success("Schemas updated successfully");
       window.location.reload();
     } catch (err) {
       console.error("Submit error", err);
-      alert("Update failed with error: " + err.message);
+      toast.error("Update failed with error: " + err.message);
     }
   };
 

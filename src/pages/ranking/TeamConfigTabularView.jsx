@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useFetchJson } from '../../hooks/useFetchJson';
 import PageTitle from '../../components/page_title/PageTitle';
 import { LuPlus, LuSettings } from 'react-icons/lu';
+import { toast } from 'react-toastify';
 
 const incomeConfigBaseUrl = '/api/v1/config/income';
 const ranks = ['RANK_2', 'RANK_3', 'RANK_4', 'RANK_5'];
@@ -66,10 +67,10 @@ export default function TeamConfigTabularView() {
         });
 
         if (resp.ok) {
-            alert('Team config updated successfully');
+            toast.success('Team config updated successfully');
             setTeamChanged(false);
         } else {
-            alert('Team config update failed');
+            toast.error('Team config update failed');
         }
     };
 

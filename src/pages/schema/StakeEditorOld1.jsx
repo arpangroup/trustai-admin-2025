@@ -5,6 +5,7 @@ import { API_ROUTES } from "../../constants/apiRoutes";
 import { SCHEDULE_OPTIONS } from "../../constants/config";
 import SchemaInputField from "./components/SchemaInputField ";
 import SchemaSelectField from "./components/SchemaSelectField";
+import { toast } from "react-toastify";
 
 const StakeEditor = () => {
   const [schemas, setSchemas] = useState([]);
@@ -124,7 +125,7 @@ const StakeEditor = () => {
       await apiClient.delete(API_ROUTES.RANK_CONFIGS_BY_ID(schemaId));
       setSchemas((prev) => prev.filter((s) => s.id !== schemaId));
     } catch (err) {
-      alert("Failed to delete schema.");
+      toast.error("Failed to delete schema.");
     }
   };
 
@@ -174,10 +175,10 @@ const StakeEditor = () => {
 
     try {
       await apiClient.post(API_ROUTES.RANK_CONFIGS_BULK_UPSERT, payload);
-      alert("Schemas updated successfully");
+      toast.success("Schemas updated successfully");
       window.location.reload();
     } catch (err) {
-      alert("Update failed");
+      toast.error("Update failed");
     }
   };
 

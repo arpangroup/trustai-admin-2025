@@ -5,6 +5,7 @@ import FilePreview from "./FilePreview";
 import { ACCEPTED_FILE_TYPES } from "../../../constants/config";
 import apiClient from "../../../api/apiClient";
 import { API_ROUTES } from "../../../routes";
+import { toast } from "react-toastify";
 
 const ImageUploadModal = ({ show, onClose, onSelect }) => {
   const [tab, setTab] = useState("upload");
@@ -21,7 +22,7 @@ const ImageUploadModal = ({ show, onClose, onSelect }) => {
 
     const filteredFiles = files.filter(file => allowedTypes.includes(file.type));
     if (filteredFiles.length !== files.length) {
-      alert("Some files were not images and have been ignored.");
+      toast("Some files were not images and have been ignored.");
     }
 
     const newPreviews = files.map(file => ({
@@ -68,7 +69,7 @@ const ImageUploadModal = ({ show, onClose, onSelect }) => {
       setTab("select");
     } catch (err) {
       console.error("Error uploading files:", err);
-      alert("Failed to upload files. Please try again.");
+      toast.error("Failed to upload files. Please try again.");
     }
   };
 
@@ -110,11 +111,11 @@ const ImageUploadModal = ({ show, onClose, onSelect }) => {
             setTab("select");
           } catch (err) {
             console.error("Error parsing upload response:", err);
-            alert("Upload failed. Invalid server response.");
+            toast.error("Upload failed. Invalid server response.");
           }
         } else {
           console.error("Upload failed with status:", xhr.status);
-          alert("Failed to upload files. Please try again.");
+          toast.error("Failed to upload files. Please try again.");
         }
       }
     };
@@ -154,7 +155,7 @@ const ImageUploadModal = ({ show, onClose, onSelect }) => {
       setTab("select");
     } catch (error) {
       console.error("Upload failed:", error.message);
-      alert("Failed to upload files. Please try again.");
+      toast.error("Failed to upload files. Please try again.");
     } finally {
       setIsUploading(false);
       setUploadProgress(0);

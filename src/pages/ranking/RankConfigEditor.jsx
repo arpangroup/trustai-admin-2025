@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { API_ROUTES } from "../../routes";
 import apiClient from "../../api/apiClient";
+import { toast } from "react-toastify";
 
 const RankConfigEditor = () => {
   const [ranks, setRanks] = useState([]);
@@ -63,12 +64,12 @@ const RankConfigEditor = () => {
     apiClient
       .patch(API_ROUTES.RANKINGS.UPDATE, payload)
       .then(() => {
-        alert("Ranks updated successfully!");
+        toast.success("Ranks updated successfully!");
         setChanges({});
       })
       .catch((err) => {
         console.error(err);
-        alert("Error updating ranks.");
+        toast.error("Error updating ranks.");
       });
   };
 

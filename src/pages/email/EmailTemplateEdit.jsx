@@ -6,6 +6,7 @@ import FormTextarea from '../../components/form/FormTextarea';
 import Switch from '../../components/form/Switch';
 import FileInput from '../../components/form/FileInput';
 import { API_ROUTES } from '../../routes';
+import { toast } from 'react-toastify';
 
 const EmailTemplateEdit = ({ type = "email" }) => {
   const { id } = useParams();
@@ -30,7 +31,7 @@ const EmailTemplateEdit = ({ type = "email" }) => {
       const file = files[0];
       const allowedTypes = ["image/jpeg", "image/png"];
       if (!allowedTypes.includes(file.type)) {
-        alert("Only JPG and PNG files are allowed!");
+        toast("Only JPG and PNG files are allowed!");
         return;
       }
       setScreenshotFile(file);
@@ -56,7 +57,7 @@ const EmailTemplateEdit = ({ type = "email" }) => {
     const isDataChanged = Object.keys(changedFields).length > 0;
 
     if (!isDataChanged && !hasFileChanged) {
-      alert("No changes detected.");
+      toast("No changes detected.");
       return;
     }
 
@@ -78,12 +79,12 @@ const EmailTemplateEdit = ({ type = "email" }) => {
         await axios.put(API_ROUTES.TEMPLATE_BY_ID(type, id), changedFields);
       }
 
-      alert("Template updated successfully.");
+      toast.success("Template updated successfully.");
       setOriginalData({ ...formData }); // Update original to match saved state
       setScreenshotFile(null); // Reset file state
     } catch (error) {
       console.error("Error updating template:", error);
-      alert("Failed to update template.");
+      toast.error("Failed to update template.");
     }
   };
 

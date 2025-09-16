@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import FormInput from "../../../components/form/FormInput";
+import { toast } from 'react-toastify';
 
 const ProfileBasicInfoTab = ({ activeTab, userInfo, onFormChange }) => {
   const isActive = activeTab === "info";
@@ -50,10 +51,10 @@ const ProfileBasicInfoTab = ({ activeTab, userInfo, onFormChange }) => {
       
       const result = await response.json();
       console.log("Success:", result);
-      alert("Profile updated successfully!");
+      toast.success("Profile updated successfully!");
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred while updating the profile.");
+      toast.error("An error occurred while updating the profile.");
     }
   };
 
@@ -76,10 +77,10 @@ const ProfileBasicInfoTab = ({ activeTab, userInfo, onFormChange }) => {
       
       const result = await response.json();
       console.log("Success:", result);
-      alert("password updated successfully!");
+      toast.success("password updated successfully!");
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred while updating the password.");
+      toast.error("An error occurred while updating the password.");
     }
   }
 

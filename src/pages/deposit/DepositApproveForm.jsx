@@ -3,6 +3,7 @@ import { LuCheck, LuX, LuDownload  } from 'react-icons/lu';
 import FormTextarea from '../../components/form/FormTextarea';
 import apiClient from "../../api/apiClient";
 import { API_ROUTES } from '../../routes';
+import { toast } from 'react-toastify';
 
 const DepositApproveForm = ({ depositData, onClose }) => {
   const { linkedTxnId: txnRefId, id: depositId, imageUrl } = depositData;
@@ -31,7 +32,7 @@ const DepositApproveForm = ({ depositData, onClose }) => {
     try {
       await apiClient.post(API_ROUTES.DEPOSITS.ACTION(action, depositId), payload);
 
-      alert(`Deposit successfully ${action}ed.`);
+      toast(`Deposit successfully ${action}ed.`);
       // Optionally trigger a page reload, modal close, or callback
       if (onClose) onClose(); 
       window.location.reload(); // Optional: hard reload
