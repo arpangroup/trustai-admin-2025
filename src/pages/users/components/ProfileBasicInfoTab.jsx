@@ -13,6 +13,7 @@ const ProfileBasicInfoTab = ({ activeTab, userInfo, onFormChange }) => {
     { label: "Phone", name: "mobile", disabled: true, valueKey: "phone" },
     { label: "Username", name: "username", disabled: true },
     { label: "Email", name: "email", disabled: true },
+    { label: "Wallet Address", name: "walletAddress", disabled: true },
     { label: "Gender", name: "gender", disabled: true },
     { label: "Date of Birth", name: "dob", disabled: true },
     { label: "City", name: "city" },

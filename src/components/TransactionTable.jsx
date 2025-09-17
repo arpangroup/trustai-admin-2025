@@ -66,7 +66,7 @@ const TransactionTable = ({ userId = null, pageSize = 9999 }) => {
     ...(!userId ? [{ field: "user", headerName: 'USER', width: 100, cellRenderer: UserCell }] : []),
     { field: "txnRefId", headerName: 'TXN_ID', width: 220 },
     {
-      field: "txnTypeDisplayName",
+      field: "txnType",
       headerName: 'TYPE',
       width: 150,
       cellRenderer: (params) => (
