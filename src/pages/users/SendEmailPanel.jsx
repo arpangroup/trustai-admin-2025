@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from 'react-dom';
 import './Users.css';
 import FormInput from "../../components/form/FormInput";
@@ -9,22 +9,76 @@ import MultiSelectDropdown from "../../components/form/multiselect/MultiSelectDr
 import FormDropdown from "../../components/form/FormDropdown";
 import { toast } from "react-toastify";
 
-const twmplates = [
-    { value: "", label: "--Select Notification Template--", disabled: true },
-    { value: "MAIL_CONNECTION_TEST", label: "MAIL_CONNECTION_TEST", disabled: true },
-    { value: "WELCOME_EMAIL", label: "WELCOME_EMAIL", disabled: true },
-    { value: "OTP_SMS", label: "OTP_SMS", disabled: true },
-    { value: "NEW_OFFER_PUSH", label: "NEW_OFFER_PUSH", disabled: true },
+// const twmplates = [
+//     { value: "", label: "--Select Notification Template--", disabled: true },
+//     { value: "MAIL_CONNECTION_TEST", label: "MAIL_CONNECTION_TEST", disabled: true },
+//     { value: "WELCOME_EMAIL", label: "WELCOME_EMAIL", disabled: true },
+//     { value: "OTP_SMS", label: "OTP_SMS", disabled: true },
+//     { value: "NEW_OFFER_PUSH", label: "NEW_OFFER_PUSH", disabled: true },
 
-    { value: "NEW_OFFER_PUSH", label: "NEW_OFFER_PUSH", disabled: true },
-    { value: "NEW_OFFER_PUSH", label: "NEW_OFFER_PUSH", disabled: true },
-];
+//     { value: "NEW_OFFER_PUSH", label: "NEW_OFFER_PUSH", disabled: true },
+//     { value: "NEW_OFFER_PUSH", label: "NEW_OFFER_PUSH", disabled: true },
+// ];
 
 const SendEmailPanel = ({ email, userId, username, sendToAll = false, isOpen, onClose }) => {
     const [subject, setSubject] = useState("");
     const [message, setMessage] = useState("");
+    const [immediate, setImmediate] = useState(true);
     const [alert, setAlert] = useState({ message: "", type: "" }); // type: 'success' | 'danger'
-    const [selected, setSelected] = useState(["IN_APP"]);
+    const [selected, setSelected] = useState(["EMAIL"]);
+    const [templates, setTemplates] = useState([]);
+    const [selectedTemplate, setSelectedTemplate] = useState("");
+
+    // 🔹 Fetch templates when single channel selected
+    useEffect(() => {
+        loadTemplates();
+    }, [selected]);
+
+    const loadTemplates = async () => {
+        if (selected.length === 1) {
+            try {
+                const type = selected[0].toLowerCase(); // api expects lower-case
+
+                if (!["email", "sms", "push"].includes(type)) {
+                    setTemplates([]);
+                    setSelectedTemplate("");
+                    return;
+                }
+
+                const res = await apiClient.get(API_ROUTES.NOTIFICATIONS.TEMPLATE_LIST(type));
+                const options = [
+                    { value: "", label: "--Select Template--", disabled: true },
+                    ...res.data.content.map(t => ({
+                        value: t.id,   // use id for value
+                        label: t.code  // show code in dropdown
+                    }))
+                ];
+                setTemplates(options);
+            } catch (err) {
+                console.error("Error fetching templates:", err);
+                toast.error("Failed to load templates");
+            }
+        } else {
+            setTemplates([]);
+            setSelectedTemplate("");
+        }
+    };
+
+    // 🔹 Fetch template details when template code changes
+    useEffect(() => {
+        const loadTemplateDetails = async () => {
+            if (!selectedTemplate || selected.length !== 1) return;
+            try {
+                const type = selected[0].toLowerCase();
+                const res = await apiClient.get(API_ROUTES.NOTIFICATIONS.TEMPLATE_BY_ID(type, selectedTemplate));
+                setMessage(res.data.messageBody || "");
+            } catch (err) {
+                console.error("Error fetching template details:", err);
+                toast.error("Failed to load template details");
+            }
+        };
+        loadTemplateDetails();
+    }, [selectedTemplate, selected]);
 
 
     const resolveRecipient = () => {
@@ -52,7 +106,7 @@ const SendEmailPanel = ({ email, userId, username, sendToAll = false, isOpen, on
             title: subject, // using subject as title
             message,
             properties: {}, // always empty object, laterwe may imple,emt it
-            immediate: true,
+            immediate,
         }
 
         try {
@@ -62,6 +116,7 @@ const SendEmailPanel = ({ email, userId, username, sendToAll = false, isOpen, on
             setSubject("");
             setMessage("");
             setSelected([]);
+            setSelectedTemplate("");
         } catch (error) {
             const errorMessage = error?.response?.data.message || 'Failed to send notification.';
             console.error('Error sending email:', error);
@@ -73,24 +128,24 @@ const SendEmailPanel = ({ email, userId, username, sendToAll = false, isOpen, on
     return (
         <div>
             <form onSubmit={handleSubmit}>
-
+                
+                {/* Channels */}
                 <div className="d-flex align-items-center justify-content-between">
                     <MultiSelectDropdown
-                        options={["EMAIL", "SMS", "PUSH", "IN_APP", "WhatsApp"]}
+                        options={["EMAIL", "SMS", "PUSH", "IN_APP", "WhatsApp", "Firebase", "Facebook"]}
                         selected={selected}
                         // onChange={setSelected}
                         onChange={(newSelected) => {
                             if (sendToAll) {
                                 // allow multiple
-                                setSelected(newSelected);
+                                setSelected(newSelected); // allow multiple
                             } else {
                                 // allow only one
-                                setSelected(newSelected.slice(-1));
+                                setSelected(newSelected.slice(-1)); // only one allowed
                             }
                         }}
                         placeholder="Choose Notification Channel"
                     />
-                    {/* <p>Selected: {selected.join(", ")}</p> */}
 
                     <div className="form-check ms-3">
                         <input
@@ -103,7 +158,7 @@ const SendEmailPanel = ({ email, userId, username, sendToAll = false, isOpen, on
                 </div>
                 <p className="text-danger small ms-1"> Currently we are only supporting <b>Email</b> and <b>IN_APP</b> notifications </p>
 
-                <div className="row">
+                <div className="row mt-3">
                     <div className="col-8">
                         <FormInput
                             label="Subject / Title"
@@ -118,12 +173,12 @@ const SendEmailPanel = ({ email, userId, username, sendToAll = false, isOpen, on
                     <div className="col-4">
                         <FormDropdown
                             wrapperClass="col-12 site-input-groups mt-"
-                            key="template"
                             label="Template"
-                            value={""}
+                            key="template"
                             name="templateCode"
-                            options={twmplates}
-                            onChange={() => { }}
+                            value={selectedTemplate}
+                            options={templates}
+                            onChange={(e) => setSelectedTemplate(e.target.value)}
                         // required={field.required}
                         />
                     </div>
@@ -157,7 +212,11 @@ const SendEmailPanel = ({ email, userId, username, sendToAll = false, isOpen, on
                 <div className="d-flex align-items-center justify-content-between">
 
                     <div className="site-input-groups">
-                        <input type="checkbox" checked={true} />
+                        <input 
+                            type="checkbox" 
+                            checked={immediate}  
+                            onChange={(e) => setImmediate(e.target.checked)} 
+                            readOnly />
                         <label style={{ marginLeft: '12px', marginTop: '-6px' }}>Immediate</label>
                     </div>
 
