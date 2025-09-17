@@ -226,7 +226,7 @@ export default function EditUserV1() {
             {panel === 'sendMail' &&
                 <RightPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)}>
                     <h3 className="mb-4">{`Send Mail to ${userInfo.username}`}</h3>
-                    <SendEmailPanel username={userInfo.username} email={userInfo.email} onClose={handleClosePanel} />
+                    <SendEmailPanel username={userInfo.username} email={userInfo.email} userId={userInfo.id} onClose={handleClosePanel} />
                 </RightPanel>
             }
 

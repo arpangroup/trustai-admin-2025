@@ -60,7 +60,7 @@ const ConfigEditor = () => {
             .map(([k, v]) => ({ key: k, value: v }));
 
         if (changed.length === 0) {
-            toast.info('Copied to clipboard!');
+            toast.warning('No configuration changes to update');
             return;
         }
 
@@ -208,7 +208,7 @@ const ConfigEditor = () => {
                                 </div>
                             ))}
                         </div>
-                        <button onClick={updateConfigs} className="update-button">
+                        <button onClick={() => updateConfigs} className="update-button">
                             Update Configs
                         </button>
                     </section>
