@@ -18,6 +18,7 @@ export default function TeamIncomeConfigTable() {
   const [originalData, setOriginalData] = useState([]);
   const [hasChanges, setHasChanges] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState(null);
 
   // Fetch and pivot
   useEffect(() => {
@@ -39,6 +40,7 @@ export default function TeamIncomeConfigTable() {
   }, []);
 
   const handleInputChange = (depth, rank, value) => {
+    setMessage(null)
     const numericValue = parseFloat(value) || 0;
 
     const updatedPivot = {
@@ -74,12 +76,12 @@ export default function TeamIncomeConfigTable() {
 
     try {
       await apiClient.put(API_ROUTES.TEAM_INCOME_CONFIGS, unpivoted);
-      toast.success('Update successful');
       setOriginalData(unpivoted);
       setHasChanges(false);
+      setMessage({ text: "Update successful", type: "success" });
     } catch (e) {
-      toast.error('Update failed');
       console.error(e);
+      setMessage({ text: "Update failed", type: "error" });
     }
   };
 
@@ -138,6 +140,14 @@ export default function TeamIncomeConfigTable() {
             Update
           </button>
         </div>
+        {message && (
+          <div
+            className={`alert mt-3 alert-${message.type === "success" ? "success" : "danger"}`}
+            role="alert"
+          >
+            {message.text}
+          </div>
+        )}
       </div>
     </div>
   );

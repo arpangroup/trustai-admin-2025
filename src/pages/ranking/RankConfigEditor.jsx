@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 const RankConfigEditor = () => {
   const [ranks, setRanks] = useState([]);
   const [changes, setChanges] = useState({});
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     const fetchRanks = async () => {
@@ -28,6 +29,7 @@ const RankConfigEditor = () => {
   }, []);
 
   const handleChange = (id, field, value) => {
+    setMessage(null)
     setRanks((prev) =>
       prev.map((rank) =>
         rank.id === id ? { ...rank, [field]: value } : rank
@@ -64,12 +66,12 @@ const RankConfigEditor = () => {
     apiClient
       .patch(API_ROUTES.RANKINGS.UPDATE, payload)
       .then(() => {
-        toast.success("Ranks updated successfully!");
+        setMessage({ text: "Ranks updated successfully!", type: "success" });
         setChanges({});
       })
       .catch((err) => {
         console.error(err);
-        toast.error("Error updating ranks.");
+        setMessage({ text: "Error updating ranks.", type: "error" });
       });
   };
 
@@ -147,6 +149,14 @@ const RankConfigEditor = () => {
             </button>
           </div>
         )}
+      {message && (
+        <div
+          className={`alert mt-3 alert-${message.type === "success" ? "success" : "danger"}`}
+          role="alert"
+        >
+          {message.text}
+        </div>
+      )}
       </div>
     </div>
   );
