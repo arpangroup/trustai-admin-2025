@@ -55,6 +55,7 @@ const ConfigEditor = () => {
 
     // 🚀 Update configs
     const updateConfigs = async () => {
+        console.log("updateConfigs.....");
         const changed = Object.entries(configState)
             .filter(([k, v]) => v !== defaultConfigState[k])
             .map(([k, v]) => ({ key: k, value: v }));
@@ -208,7 +209,7 @@ const ConfigEditor = () => {
                                 </div>
                             ))}
                         </div>
-                        <button onClick={() => updateConfigs} className="update-button">
+                        <button onClick={updateConfigs} className="update-button">
                             Update Configs
                         </button>
                     </section>
