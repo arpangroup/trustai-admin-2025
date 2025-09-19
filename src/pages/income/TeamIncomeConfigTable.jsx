@@ -139,6 +139,15 @@ export default function TeamIncomeConfigTable() {
               Update
             </button>
 
+            {message && (
+              <div
+                className={`alert mt-3 alert-${message.type === "success" ? "success" : "danger"}`}
+                role="alert"
+              >
+                {message.text}
+              </div>
+            )}
+
 
           {/* ===== Description Section START ===== */}
           <div className="mt-4">
@@ -174,15 +183,7 @@ export default function TeamIncomeConfigTable() {
           </div>
           {/* ===== Description Section END ===== */}
 
-        </div>
-        {message && (
-          <div
-            className={`alert mt-3 alert-${message.type === "success" ? "success" : "danger"}`}
-            role="alert"
-          >
-            {message.text}
-          </div>
-        )}
+        </div>        
       </div>
     </div>
   );
