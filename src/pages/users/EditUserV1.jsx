@@ -26,7 +26,9 @@ import InvestNow from "../investment/InvestNow";
 import DepositSuccess from "../deposit/DepositSuccess";
 import SendMoney from "../deposit/SendMoney";
 import WithdrawRequest from "../deposit/WithdrawRequest";
-import { CURRENCY_UNIT } from "../../constants/config";
+import { CURRENCY_UNIT, RANK_LABEL_MAP } from "../../constants/config";
+import { FiRefreshCcw } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 
 
@@ -94,20 +96,36 @@ export default function EditUserV1() {
     };
 
     useEffect(() => {
-        const fetchUserInfo = async () => {
-            try {
-                const response = await apiClient.get(API_ROUTES.USERS.BY_ID(userId));
-                const data = response.data;
-                setUserInfo(data);
-            } catch (err) {
-                console.error("Error fetching user info:", err);
-            }
-        };
-
         if (userId) {
-            fetchUserInfo();
+            fetchUserInfo(userId);
         }
     }, [userId]);
+
+    const fetchUserInfo = async (userId) => {
+        try {
+            const response = await apiClient.get(API_ROUTES.USERS.BY_ID(userId));
+            const data = response.data;
+            setUserInfo(data);
+        } catch (err) {
+            console.error("Error fetching user info:", err);
+        }
+    };
+
+    const reEvaluateRank = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await apiClient.post(API_ROUTES.RANKINGS.EVALUATE_RANK_BY_USERID(userId));
+            const data = response.data;
+            fetchUserInfo(userId);
+            toast.success(data?.message || '✅ Ranks re-evaluated successfully!');
+        } catch (error) {
+            console.error('❌ Failed to re-evaluate rank:', error.message);
+
+            const message = error?.message || error?.response?.data?.message || '❌ Failed to re-evaluate ranks. Please try again later.';
+            toast.error(message);
+        }
+    }
+
 
     return (
         <div className="main-content">
@@ -134,6 +152,13 @@ export default function EditUserV1() {
                                         {panel.icon} <span className="ms-2">{panel.label}</span>
                                     </a>
                                 ))}
+                                                
+                                <a href="#" className="btn btn-outline-primary btn-sm me-2"
+                                    onClick={reEvaluateRank}
+                                >
+                                    <FiRefreshCcw />
+                                    <span className="ms-2">Re-evaluate Rank</span>
+                                </a>
 
 
                             </div>
@@ -153,6 +178,7 @@ export default function EditUserV1() {
                                 <div className="title-des">
                                     <h4>{userInfo.username}</h4>
                                     <p>{userInfo.country}</p>
+                                    <h4>🏆 {RANK_LABEL_MAP[userInfo.rankCode]} <small>({userInfo.rankCode})</small></h4>
                                 </div>
 
                                 <ButtonsWithTooltips onButtonClick={handleButtonClick} />

@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
-import { LuPencilLine, LuMail, LuTrash } from "react-icons/lu";
+import { LuPencilLine, LuMail, LuTrash, LuPlus } from "react-icons/lu";
 import './Users.css';
 
 import { API_ROUTES, WEB_ROUTES } from "../../routes";
@@ -15,6 +15,9 @@ import RightPanel from "../../components/panel/RightPanel";
 import { usePaginatedFetch } from "../../api/usePaginatedFetch";
 import { DataGrid } from '@mui/x-data-grid';
 import { TextField } from '@mui/material';
+import { FiRefreshCcw } from "react-icons/fi";
+import { toast } from "react-toastify";
+import apiClient from "../../api/apiClient";
 
 // ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -128,9 +131,39 @@ const Users = ({status = ""}) => {
     );
   }, [searchText]);
 
+  const reEvaluateRank = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await apiClient.post(API_ROUTES.RANKINGS.EVALUATE_ALL_RANKS);
+      console.log("RESPONSE: ", response);
+      const data = response.data;
+      toast.success(data?.message || '✅ Ranks re-evaluated successfully!');
+    } catch (error) {
+      console.error('❌ Failed to re-evaluate rank:', error.message);      
+      
+      const message = error?.message || error?.response?.data?.message || '❌ Failed to re-evaluate ranks. Please try again later.';
+      toast.error(message);
+    }
+  }
+
   return (
     <div className="main-content">
-      <PageTitle title={`${status || 'All '} Customers`} />
+      {/* <PageTitle title={`${status || 'All '} Customers`} /> */}
+
+      
+      <div className="page-title">                
+          <div className='site-card-header d-flex justify-content-between align-items-center'>
+              <h4 className="title mb-0">{`${status || 'All '} Customers`}</h4>
+              <div>                  
+                <a href="#" className="btn btn-outline-primary btn-sm me-2"
+                    onClick={reEvaluateRank}
+                >
+                    <FiRefreshCcw />
+                    <span className="ms-2">Re-evaluate Ranks</span>
+                </a>
+              </div>
+          </div>
+      </div>
 
       <div className="container-fluid">
         <div className="row">

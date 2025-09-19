@@ -43,6 +43,8 @@ export const API_ROUTES = {
     BASE: "/api/v1/rankings",
     BY_ID: (rankId) => `/api/v1/rankings/${rankId}`,
     UPDATE: "/api/v1/rankings/update",
+    EVALUATE_ALL_RANKS: "/api/v1/rankings/re-evaluate/batch",
+    EVALUATE_RANK_BY_USERID: (userId) => `/api/v1/rankings/re-evaluate/${userId}`
   },
 
    //...
