@@ -76,8 +76,6 @@ export const API_ROUTES = {
     // BY_USER: (userId) => `/api/v1/investments/user/${userId}`,
   },
 
-  REFERRAL_TREE: (userId, maxLevel = 3) => `/api/v1/tree/${userId}?maxLevel=${maxLevel}`,
-
   NOTIFICATIONS: {
     MAIL_TEST: "/api/v1/notifications/mail-connection-test",
     SEND_MAIL: "/api/v1/notifications/send-email",
@@ -111,7 +109,7 @@ export const API_ROUTES = {
 
 
   // Referral tree View
-  REFERRAL_TREE: (userId, maxLevel = 3) => `/api/v1/tree/${userId}?maxLevel=${maxLevel}`,
+  REFERRAL_TREE: (userId, maxLevel = 4) => `/api/v1/tree/${userId}?maxLevel=${maxLevel}`,
   // Notification Templates
   // Configs...
   CONFIG_PROPERTIES: "http://localhost:8888/nft_app/dev",

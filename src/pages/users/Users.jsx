@@ -171,7 +171,7 @@ const Users = ({status = ""}) => {
             <div className="site-card">
               <div className="site-card-body table-responsive">
                 <div className="site-datatable">
-                  <div style={{ height: 400 }} className="ag-theme-alpine">
+                  <div style={{ height: 600 }} className="ag-theme-alpine">
                      {/* <TextField
                         label="Search"
                         variant="outlined"
@@ -190,8 +190,9 @@ const Users = ({status = ""}) => {
                       defaultColDef={defaultColDef}
                       pagination={true}                      
                       paginationPageSize={10}
-                      paginationPageSizeSelector={[10, 20, 50, 100]}
-                      onPaginationChanged={onPaginationChanged} />
+                      // paginationPageSizeSelector={[10, 20, 50, 100]}
+                      // onPaginationChanged={onPaginationChanged} 
+                    />
                   </div>
                 </div>
               </div>

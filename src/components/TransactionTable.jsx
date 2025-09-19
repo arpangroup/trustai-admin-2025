@@ -90,7 +90,7 @@ const TransactionTable = ({ userId = null, pageSize = 9999 }) => {
   }, []);
 
   return (
-    <div style={{ height: 500, width: '100%' }} className="ag-theme-alpine">
+    <div style={{ height: 600, width: '100%' }} className="ag-theme-alpine">
       <AgGridReact
         theme={"legacy"}
         rowData={data}
@@ -99,9 +99,9 @@ const TransactionTable = ({ userId = null, pageSize = 9999 }) => {
         defaultColDef={defaultColDef}
         pagination={true}
         paginationPageSize={10}
-        onPaginationChanged={onPaginationChanged}
-        paginationPageSizeSelector={[10, 20, 50, 100]}
-        rowHeight={40}
+        // onPaginationChanged={onPaginationChanged}
+        // paginationPageSizeSelector={[10, 20, 50, 100]}
+        // rowHeight={40}
       />
     </div>
   );

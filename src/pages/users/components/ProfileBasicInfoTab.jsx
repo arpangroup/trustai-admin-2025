@@ -19,6 +19,7 @@ const ProfileBasicInfoTab = ({ activeTab, userInfo, onFormChange }) => {
     { label: "City", name: "city" },
     { label: "Zip Code", name: "zipCode", disabled: true },
     { label: "Address", name: "address", disabled: true },
+    { label: "ReferralCode", name: "referralCode", disabled: true },
     { label: "Joining Date", name: "createdAt", disabled: true },
   ];
 

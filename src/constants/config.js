@@ -6,7 +6,8 @@ export const APP_NAME = 'TrustAI'
 export const CURRENCY_UNIT = "USDT";
 export const CURRENCY_UNIT_DEFAULT = "INR";
 export const CURRENCY_SYMBOL = "$"; // "₹"
-export const CURRENCY_SYMBOL_DEFAULT = "₹"; 
+export const CURRENCY_SYMBOL_DEFAULT = "₹";
+export const REFERRAL_TREE_MAX_DEPTH = 4;
 
 export const SCHEDULE_OPTIONS = [
   { label: "Hourly", value: 1, disabled: true,},

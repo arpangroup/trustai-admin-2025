@@ -4,7 +4,7 @@ import SideNavV1 from '../components/sidenavV1/SideNavV1';
 import { Outlet } from 'react-router-dom';
 
 const DefaultLayout = () => {
-  const [navFolded, setNavFolded] = useState(false);
+  const [navFolded, setNavFolded] = useState(true);
 
   const toggleSidebar = () => {
     setNavFolded((prev) => !prev);

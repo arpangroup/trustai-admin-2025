@@ -7,7 +7,7 @@ import { LuPlus, LuSettings } from 'react-icons/lu';
 import { toast } from 'react-toastify';
 
 const incomeConfigBaseUrl = '/api/v1/config/income';
-const ranks = ['RANK_2', 'RANK_3', 'RANK_4', 'RANK_5'];
+const ranks = ['RANK_0', 'RANK_1', 'RANK_2', 'RANK_3', 'RANK_4', 'RANK_5'];
 const levelLabels = { 1: 'Lv.A / Depth-1', 2: 'Lv.B / Depth-2', 3: 'Lv.C / Depth-3' };
 
 export default function TeamConfigTabularView() {
@@ -30,11 +30,18 @@ export default function TeamConfigTabularView() {
 
     const pivotTeamData = (raw) => {
         const pivot = { 1: {}, 2: {}, 3: {} };
-        raw.forEach(entry => {
+        /*raw.forEach(entry => {
             if (!entry.incomePercentages) return;
             Object.entries(entry.incomePercentages).forEach(([level, value]) => {
                 pivot[level][entry.rank] = value;
             });
+        });*/
+        raw.forEach(({ id, payoutPercentage }) => {
+            if (!id) return;
+            const { uplineRank: rank, downlineDepth: level } = id;
+            if ([1, 2, 3].includes(level) && rank) {
+                pivot[level][rank] = payoutPercentage ?? 0;
+            }
         });
         return pivot;
     };
