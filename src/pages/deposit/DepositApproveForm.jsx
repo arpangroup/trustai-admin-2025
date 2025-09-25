@@ -14,6 +14,7 @@ const DepositApproveForm = ({ depositData, onClose }) => {
   const [error, setError] = useState('');
 
   const handleSubmit = async (action) => {
+    if (submitting) return;  // prevent multiple calls if already submitting
     setError('');
     setIsRejecting(action === 'reject');
 

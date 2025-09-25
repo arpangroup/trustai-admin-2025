@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from 'react';
+import { generatePath, NavLink } from 'react-router-dom';
 import PageTitle from "../../components/page_title/PageTitle";
 import Badge from "../../components/Badge";
 
 import { AgGridReact } from "ag-grid-react";
-import { NavLink } from 'react-router-dom';
-import { API_ROUTES } from '../../routes';
+import { API_ROUTES, WEB_ROUTES } from '../../routes';
 import { usePaginatedFetch } from '../../api/usePaginatedFetch';
 import { formatDate } from '../../utils/dateUtils';
 import { LuEye } from 'react-icons/lu';
@@ -19,13 +19,12 @@ const DepositHistory = ({ status = '', pageSize = 9999 }) => {
   const [selectedDeposit, setSelectedDeposit] = useState({});
 
   const UserCell = ({ data }) => {
-    const { userId, user } = data;
-    return (
-      <NavLink to={`/admin/users/${userId}/edit`}>
-        {user}
-      </NavLink>
-    )
-  }
+    const { createdBy } = data;
+    if (!createdBy) return;
+
+    const url = generatePath(WEB_ROUTES.USERS.USER_EDIT.path, { userId: createdBy });
+    return <NavLink to={url}>{createdBy}</NavLink>;
+  };
 
   
   const ActionLink = ({data}) => {
@@ -62,6 +61,7 @@ const DepositHistory = ({ status = '', pageSize = 9999 }) => {
   const colDefs = () => {
     const baseCols = [
       { field: "txnDate", headerName: "DATE", width: 220, cellRenderer: DateCell },
+      { field: "createdBy", headerName: "User", width: 100, cellRenderer: UserCell },
       { field: "txnRefId", headerName: "TRANSACTION ID", width: 230 },
       { field: "amount", headerName: "AMOUNT", width: 120, cellRenderer: AmountCell },
       { field: "paymentGateway", headerName: "GATEWAY", width: 120 },

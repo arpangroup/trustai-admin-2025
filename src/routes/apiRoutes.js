@@ -63,6 +63,7 @@ export const API_ROUTES = {
    
 
   INCOME: {
+    ACTIVITY_REWARD: "/api/v1/income/activity-reward",
     TEAM_CONFIGS: "/api/v1/income/configs",
   },
 

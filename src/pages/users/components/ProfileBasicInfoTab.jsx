@@ -2,24 +2,28 @@ import React, { useState } from 'react';
 
 import FormInput from "../../../components/form/FormInput";
 import { toast } from 'react-toastify';
+import apiClient from '../../../api/apiClient';
+import { API_ROUTES } from '../../../routes';
 
 const ProfileBasicInfoTab = ({ activeTab, userInfo, onFormChange }) => {
   const isActive = activeTab === "info";
+  const [loading, setLoading] = useState(false);
 
   const basicFields = [
     { label: "First Name", name: "firstname" },
     { label: "Last Name", name: "lastname" },
     { label: "Country", name: "country", defaultValue:"INDIA", disabled: true },
-    { label: "Phone", name: "mobile", disabled: true, valueKey: "phone" },
+    { label: "Phone", name: "phone", disabled: true, valueKey: "phone" },
     { label: "Username", name: "username", disabled: true },
     { label: "Email", name: "email", disabled: true },
-    { label: "Wallet Address", name: "walletAddress", disabled: true },
-    { label: "Gender", name: "gender", disabled: true },
-    { label: "Date of Birth", name: "dob", disabled: true },
+    { label: "State", name: "state" },
     { label: "City", name: "city" },
-    { label: "Zip Code", name: "zipCode", disabled: true },
     { label: "Address", name: "address", disabled: true },
+    { label: "Zip Code", name: "zipCode", disabled: true },
+    { label: "Date of Birth", name: "dob", disabled: true },
+    { label: "Gender", name: "gender", disabled: true },
     { label: "ReferralCode", name: "referralCode", disabled: true },
+    { label: "Wallet Address", name: "walletAddress", disabled: true },
     { label: "Joining Date", name: "createdAt", disabled: true },
   ];
 
@@ -36,6 +40,30 @@ const ProfileBasicInfoTab = ({ activeTab, userInfo, onFormChange }) => {
     //   [name]: value,
     // }));
   };
+
+  const applyActivityReward = async (e) => {
+    if(loading) return; // Prevent multiple submissions
+    e.preventDefault();
+    try {
+      setLoading(true);
+      console.log("USER_INFO", userInfo);
+      const payload = {
+        userId: userInfo.id,
+        rewardAmount: parseFloat(e.target.rewardAmount.value),
+        message: e.target.message.value,
+      };
+
+      const response = await apiClient.post(API_ROUTES.INCOME.ACTIVITY_REWARD, payload);
+      const data = response.data;
+      toast.success("Reward applied successfully!");
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred while applying the reward." + (error.response?.data?.message || error.message));
+    } finally {
+      setLoading(false);
+    }
+
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -122,6 +150,49 @@ const ProfileBasicInfoTab = ({ activeTab, userInfo, onFormChange }) => {
 
                   <div className="col-xl-12">
                     <button type="submit" className="site-btn-sm primary-btn w-100 centered"> Save Changes </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      {/* Activity Reward */}
+      <div className="row">
+        <div className="col-xl-12">
+          <div className="site-card">
+            <div className="site-card-header">
+              <h3 className="title">Activity Reward</h3>
+            </div>
+            <div className="site-card-body">
+              <form onSubmit={applyActivityReward}>
+                <div className="row">
+                  <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+                      <FormInput
+                        label="Reward Amount"
+                        name="rewardAmount"
+                        type="number"
+                        required
+                      />
+                  </div>
+                  <div className="col-xl-8 col-lg-8 col-md-8 col-sm-6">
+                      <FormInput
+                        label="Message"
+                        name="message"
+                        type="text"
+                        required
+                      />
+                  </div>
+
+                  <div className="col-xl-12">
+                    <button
+                      type="submit"
+                      className="site-btn-sm primary-btn w-100 centered"
+                    >
+                      Apply Reward
+                    </button>
                   </div>
                 </div>
               </form>

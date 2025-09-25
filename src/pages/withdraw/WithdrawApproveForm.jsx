@@ -15,6 +15,7 @@ const WithdrawApproveForm = ({ withdrawRequest, onClose }) => {
 
 
     const handleSubmit = async (action) => {
+        if (submitting) return;  // prevent multiple calls if already submitting
         setError('');
         setIsRejecting(action === 'reject');
 
