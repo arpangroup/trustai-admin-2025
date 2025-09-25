@@ -34,6 +34,7 @@ const Badge = ({ value, style = null }) => {
     case 'cilver':
     case 'premium':
     case 'true':
+    case 'approved':
       badgeType = 'success';
       break;
     case 'deactivated':

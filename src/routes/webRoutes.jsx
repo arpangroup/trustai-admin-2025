@@ -131,7 +131,8 @@ export const WEB_ROUTES = {
   WITHDRAW: {
     AUTO:         { path: 'withdraw/method/auto', element: <WithdrawMethodManual /> },
     MANUAL:       { path: 'withdraw/method/manual', element: <WithdrawMethodManual /> },
-    PENDING:      { path: 'withdraw/pending', element: <WithdrawMethodManual /> },
+    // PENDING:      { path: 'withdraw/pending', element: <WithdrawMethodManual /> },
+    PENDING:      { path: 'withdraw/pending', element: <WithdrawHistory status="PENDING" /> },
     SCHEDULE:     { path: 'withdraw/schedule', element: <WithdrawSchedule /> },
     HISTORY:      { path: 'withdraw/history', element: <WithdrawHistory /> },
   },

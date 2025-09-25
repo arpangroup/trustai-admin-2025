@@ -103,8 +103,8 @@ const DepositHistory = ({ status = '', pageSize = 9999 }) => {
                       columnDefs={colDefs()}
                       pagination={true}
                       paginationPageSize={10}
-                      onPaginationChanged={onPaginationChanged}
-                      paginationPageSizeSelector={[10, 20, 50, 100]}
+                      // onPaginationChanged={onPaginationChanged}
+                      // paginationPageSizeSelector={[10, 20, 50, 100]}
                       rowHeight={40}
                     />
                   </div>
