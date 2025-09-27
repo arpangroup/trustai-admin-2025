@@ -78,9 +78,9 @@ const SendMoney = ({ senderId, senderName }) => {
                     </div>
 
                     <div className="action-btns">
-                        <button type="submit" className="site-btn-sm primary-btn me-2" disabled={true}>
+                        {/* <button type="submit" className="site-btn-sm primary-btn me-2" disabled={true}>
                             <LuSend />  &nbsp; Send Money
-                        </button>
+                        </button> */}
                     </div>
                 </form>
                 {/* Alert Message */}

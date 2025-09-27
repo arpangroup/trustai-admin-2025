@@ -25,7 +25,9 @@ const DepositNow = ({ userId, onClose }) => {
     });
     const [screenshotFile, setScreenshotFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState("");
-    const [alert, setAlert] = useState({ message: "", type: "" }); // type: 'success' | 'danger'
+    //const [alert, setAlert] = useState({ message: "", type: "" }); // type: 'success' | 'danger'
+    const [alert, setAlert] = useState({ type: "danger", message: "Deposit feature is currently not available" });
+    
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
@@ -180,10 +182,10 @@ const DepositNow = ({ userId, onClose }) => {
                     </div>
                 )}
 
-                <div className="action-btns">
-                    <button type="submit" className="site-btn-sm primary-btn me-2">
+                <div className="action-btns mt-2">
+                    {/* <button type="submit" className="site-btn-sm primary-btn me-2" disabled={true}>
                         <LuSend /> &nbsp; PROCEED TO PAYMENT
-                    </button>
+                    </button> */}
                 </div>
             </form>
 
