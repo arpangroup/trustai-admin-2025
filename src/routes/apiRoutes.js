@@ -35,6 +35,8 @@ export const API_ROUTES = {
 
 
   WITHDRAWAL: {
+    RULES: "/api/v1/withdraw-rules",
+    UPDATE_RULE: "/api/v1/withdraw-rules/update",
     BASE: "/api/v1/withdraws",
     ACTION: (action, id) => `/api/v1/withdraws/${action}/${id}`,  // ['approve', 'reject']
   },

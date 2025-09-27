@@ -60,13 +60,13 @@ const WithdrawApproveForm = ({ withdrawRequest, onClose }) => {
                     <div className="text-end">{amount}</div>
                 </div>
                 <div className="d-flex justify-content-between mb-2">
-                    <div>Service Charge:</div>
+                    <div>Transaction Fee:</div>
                     <div className="text-end">{txnFee}</div>
                 </div>
                 <hr />
                 <div className="d-flex justify-content-between fw-bold fs-5">
-                    <div>Total Deduction:</div>
-                    <div className="text-end">{amount + txnFee}</div>
+                    <div>Total Wallet Deduction:</div>
+                    <div className="text-end">{amount - txnFee}</div>
                 </div>
             </div>
 

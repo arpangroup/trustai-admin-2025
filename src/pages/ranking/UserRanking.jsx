@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Navigate, NavLink } from 'react-router-dom';
 import { AgGridReact } from 'ag-grid-react';
-import { LuAnchor, LuCast, LuPencilLine, LuPlus, LuSettings, LuUser } from 'react-icons/lu';
+import { LuAirVent, LuAnchor, LuCast, LuPencilLine, LuPlus, LuSettings, LuUser, LuWifi } from 'react-icons/lu';
 
 import PageTitle from '../../components/page_title/PageTitle';
 import Badge from '../../components/Badge';
@@ -22,6 +22,8 @@ import { CURRENCY_SYMBOL } from '../../constants/config';
 import TeamIncomeConfigTable from '../income/TeamIncomeConfigTable';
 import InvestmentSchemaSummary from '../schema/InvestmentSchemaSummary';
 import apiClient from '../../api/apiClient';
+import WithdrawRuleEditor from '../withdraw/WithdrawRuleEditor';
+import { toast } from 'react-toastify';
 
 
 const fallbackIcons = {
@@ -36,6 +38,7 @@ const fallbackIcons = {
 const sidePanelButtons = [
     { id: "team_rebate_config", label: "Team Rebate Config",  disabled: true, icon: <LuAnchor /> },
     { id: "rank_config_editor", label: "Rank Config Editor",  disabled: true, icon: <LuCast /> },
+    { id: "withdraw_rules_editor", label: "Withdraw Rules Editor",  disabled: true, icon: <LuAirVent /> },
 ];
 
 const UserRanking = (props) => {
@@ -59,6 +62,16 @@ const UserRanking = (props) => {
         setLoading(false);
     }
 
+     // 🔄 Reload
+    const reloadConfig = async () => {
+        try {
+            await apiClient.post(API_ROUTES.CONFIGS.RELOAD);
+            toast("Configs loaded successfully");
+        } catch (err) {
+            console.log("Failed to reload configs: " + err.message);
+        }
+    };
+
 
       const ActionLinkAddNew = (props) => {
         return (
@@ -67,6 +80,7 @@ const UserRanking = (props) => {
                     <LuSettings />
                     <span> Rank Config</span>
                 </button>
+
 
                 <a href="/rankings/create"
                     className="title-btn">
@@ -169,6 +183,12 @@ const UserRanking = (props) => {
                                 {panel.icon} <span className="ms-2">{panel.label}</span>
                             </a>
                         ))}
+
+                        
+                       
+                        <button className="btn btn-outline-secondary btn-sm me-2" onClick={reloadConfig}>
+                            🔄 Reload Config
+                        </button>   
                         
                         <a href="/rankings/create" className="btn btn-outline-primary btn-sm me-2">
                             <LuPlus />
@@ -223,6 +243,11 @@ const UserRanking = (props) => {
             {panel === 'rank_config_editor' &&
                  <RightPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)} style={{width: '1200px'}}>
                     <RankConfigEditor/>
+                </RightPanel>
+            }
+            {panel === 'withdraw_rules_editor' &&
+                 <RightPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)} style={{width: '1000px'}}>
+                   <WithdrawRuleEditor/>
                 </RightPanel>
             }
         </div>
