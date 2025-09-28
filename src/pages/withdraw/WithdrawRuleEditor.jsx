@@ -74,9 +74,9 @@ const WithdrawRuleEditor = () => {
             <thead className="thead-dark">
               <tr>
                 <th>RANK CODE</th>
-                <th>REQUIRED TOTAL MEMBERS</th>
+                {/* <th>REQUIRED TOTAL MEMBERS</th> */}
                 <th>REQUIRED DIRECT REFERRALS</th>
-                <th>WITHDRAW LIMIT (per day)</th>
+                <th>WITHDRAW LIMIT</th>
                 <th>MAX WITHDRAW AMOUNT ($)</th>
               </tr>
             </thead>
@@ -84,7 +84,7 @@ const WithdrawRuleEditor = () => {
               {rules.map((rule) => (
                 <tr key={rule.id}>
                   <td>{rule.rankCode}</td>
-                  {["requiredTotalMembers", "requiredDirectReferrals", "withdrawLimit", "maxWithdrawAmount"].map(
+                  {["requiredDirectReferrals", "withdrawLimit", "maxWithdrawAmount"].map(
                     (field) => (
                       <td key={field}>
                         <input
