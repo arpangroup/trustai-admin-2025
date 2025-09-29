@@ -76,7 +76,7 @@ export const API_ROUTES = {
   INVESTMENTS: {
     BASE: "/api/v1/investments",
     SUBSCRIBE: "/api/v1/investments/subscribe",
-    // BY_USER: (userId) => `/api/v1/investments/user/${userId}`,
+    BY_USER: (userId) => `/api/v1/investments/user/${userId}`,
   },
 
   NOTIFICATIONS: {
