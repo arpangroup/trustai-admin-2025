@@ -179,6 +179,23 @@ const Stakes = () => {
     setHighlightedIndices((prev) => [...prev, index + 1]);
   };
 
+  // 🔄 Schedule
+  const schedule = async (type) => { // PROFIT, MATURITY, ALL
+    const scheduleRoutes = {
+      PROFIT: API_ROUTES.INVESTMENTS.SCHEDULE_DAILY,
+      MATURITY: API_ROUTES.INVESTMENTS.SCHEDULE_MATURITY,
+      ALL: API_ROUTES.INVESTMENTS.SCHEDULE_ALL,
+    };
+    const url = scheduleRoutes[type] || API_ROUTES.INVESTMENTS.SCHEDULE_ALL;
+
+    try {
+      await apiClient.post(url);
+      toast("Schedule loaded successfully");
+    } catch (err) {
+      console.error("Failed to schedule:", err.message);
+    }
+  };
+
   const handleAddNewStake = () => {
     const newRow = {
       linkedRank: "RANK_0",
@@ -279,12 +296,36 @@ const Stakes = () => {
 
   return (
     <div className="main-content">
-      <div className="title-content mt-4 d-flex justify-content-between align-items-center">
+      {/* <div className="title-content mt-4 d-flex justify-content-between align-items-center">
         <h2>Stakes</h2>
         <button className="btn btn-primary btn-sm" onClick={handleAddNewStake}>
         + Add New Stake
       </button>
+      </div> */}
+
+      <div className="page-title">      
+        <div className='site-card-header d-flex justify-content-between align-items-center'>
+          <h4 className="title mb-0">Stakes</h4>
+            <div> 
+               <button className="btn btn-outline-secondary btn-sm me-2" onClick={() => schedule("PROFIT")}>
+                  🔄 Schedule Profit
+              </button> 
+               <button className="btn btn-outline-secondary btn-sm me-2" onClick={() => schedule("MATURITY")}>
+                  🔄 Schedule Maturity
+              </button> 
+               <button className="btn btn-outline-secondary btn-sm me-2" onClick={() => schedule("ALL")}>
+                  🔄 Schedule All
+              </button> 
+              <button className="btn btn-primary btn-sm" onClick={handleAddNewStake}>
+                + Add New Stake
+              </button>       
+            </div>
+        </div>
       </div>
+
+
+
+
       <div className="table-responsive">
         <table className="table table-bordered table-striped table-sm align-middle">
           <thead className="table-light">

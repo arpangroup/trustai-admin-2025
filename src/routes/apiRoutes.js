@@ -62,7 +62,7 @@ export const API_ROUTES = {
     BULK_UPSERT: "/api/v1/investment-schemas/bulk-upsert",
   },
 
-   
+    
 
   INCOME: {
     ACTIVITY_REWARD: "/api/v1/income/activity-reward",
@@ -77,6 +77,10 @@ export const API_ROUTES = {
     BASE: "/api/v1/investments",
     SUBSCRIBE: "/api/v1/investments/subscribe",
     BY_USER: (userId) => `/api/v1/investments/user/${userId}`,
+
+    SCHEDULE_DAILY: "/api/v1/investments/scheduler/run-daily",
+    SCHEDULE_MATURITY: "/api/v1/investments/scheduler/run-maturity",
+    SCHEDULE_ALL: "/api/v1/investments/scheduler/run-all",
   },
 
   NOTIFICATIONS: {

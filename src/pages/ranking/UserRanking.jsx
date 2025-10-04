@@ -246,7 +246,7 @@ const UserRanking = (props) => {
                 </RightPanel>
             }
             {panel === 'withdraw_rules_editor' &&
-                 <RightPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)} style={{width: '600px'}}>
+                 <RightPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)} style={{width: '1000px'}}>
                    <WithdrawRuleEditor/>
                 </RightPanel>
             }
