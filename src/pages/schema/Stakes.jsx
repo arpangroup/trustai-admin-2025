@@ -307,7 +307,7 @@ const Stakes = () => {
         <div className='site-card-header d-flex justify-content-between align-items-center'>
           <h4 className="title mb-0">Stakes</h4>
             <div> 
-               <button className="btn btn-outline-secondary btn-sm me-2" onClick={() => schedule("PROFIT")}>
+               {/* <button className="btn btn-outline-secondary btn-sm me-2" onClick={() => schedule("PROFIT")}>
                   🔄 Schedule Profit
               </button> 
                <button className="btn btn-outline-secondary btn-sm me-2" onClick={() => schedule("MATURITY")}>
@@ -315,7 +315,7 @@ const Stakes = () => {
               </button> 
                <button className="btn btn-outline-secondary btn-sm me-2" onClick={() => schedule("ALL")}>
                   🔄 Schedule All
-              </button> 
+              </button>  */}
               <button className="btn btn-primary btn-sm" onClick={handleAddNewStake}>
                 + Add New Stake
               </button>       
