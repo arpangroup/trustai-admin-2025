@@ -71,7 +71,8 @@ const WithdrawRuleEditor = () => {
               <th>Max Withdraw From Wallet</th>
               <th>Max Withdraw From Profit</th>
               <th>Daily Withdraw Limit</th>
-              <th>Total Withdraw Limit (per Rank)</th>
+              <th>Total Wallet Withdraw Limit (per Rank)</th>
+              <th>Total Profit Withdraw Limit (per Rank)</th>
             </tr>
           </thead>
           <tbody>
@@ -86,6 +87,7 @@ const WithdrawRuleEditor = () => {
                   "maxWithdrawFromProfitWallet",
                   "dailyWithdrawLimit",
                   "totalWithdrawLimit",
+                  "totalProfitWithdrawLimit"
                 ].map((field) => (
                   <td key={field}>
                     <input
