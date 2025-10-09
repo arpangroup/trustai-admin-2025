@@ -1,10 +1,11 @@
 import ReactDOM from 'react-dom';
+import UploadIcon from '../../assets/icons/upload.svg';
 
 const PaypalSetting = () => {
     return (
         <div class="modal-body">
             <div class="row">
-                <form action="https://81habibi.com/admin/gateway/update/1" class="row" method="post" enctype="multipart/form-data"></form>
+                <form action="#" class="row" method="post" enctype="multipart/form-data"></form>
                 <input type="hidden" name="_token" value="UxHRxI8okXCHHDgRwrJUxpenkQOC6aqZl9fbKbwJ" />
                 <div class="col-xl-12">
                     <div class="row">
@@ -13,8 +14,8 @@ const PaypalSetting = () => {
                                 <label class="box-input-label" for="">Upload Logo:</label>
                                 <div class="wrap-custom-file">
                                     <input type="file" name="logo" id="schema-icon" accept=".gif, .jpg, .png" />
-                                    <label for="schema-icon" class="file-ok" style={{ backgroundImage: 'url(https://81habibi.com/assets/global/gateway/stripe.png)' }}>
-                                        <img class="upload-icon" src="https://81habibi.com/assets/global/materials/upload.svg" alt="" />
+                                    <label for="schema-icon" class="file-ok" style={{ backgroundImage: 'url(https://trustai.co.in/gateway/stripe.png)' }}>
+                                        <img class="upload-icon" src={UploadIcon} alt="" />
                                         <span>Update Logo</span>
                                     </label>
                                 </div>

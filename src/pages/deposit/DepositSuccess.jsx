@@ -4,6 +4,7 @@ import FormInput from "../../components/form/FormInput";
 import { LuSend } from "react-icons/lu";
 import './DepositSuccess.css';
 import { LuPlus, LuCheck  } from "react-icons/lu";
+import { WEB_ROUTES } from "../../routes";
 
 const DepositSuccess = ({ userId, username }) => {
     return (
@@ -16,7 +17,7 @@ const DepositSuccess = ({ userId, username }) => {
                     <h2>₹ 100 Deposit Pending</h2>
                     <p>The amount has been Pending added into your account</p>
                     <p>Transaction ID: TRXIU1NL7RPT1</p>
-                    <a href="https://81habibi.com/user/deposit" class="site-btn">
+                    <a href={WEB_ROUTES.DEPOSIT.HISTORY.path} class="site-btn">
                         <LuPlus/>Deposit again
                     </a>
                 </div>

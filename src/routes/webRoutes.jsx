@@ -73,6 +73,9 @@ import TicketDetails from '../pages/support/TicketDetails';
 
 // Custom CSS:
 import CustomCss from '../pages/custom_css/CustomCss';
+import Stakes from "../pages/schema/Stakes";
+import ConfigManagement from "../pages/settings/configs/ConfigManagement";
+import ConfigEditor from "../pages/settings/configs/ConfigEditor";
 
 
 export const WEB_ROUTES = {
@@ -109,7 +112,8 @@ export const WEB_ROUTES = {
     BASE:         { path: 'schemas', element: <Schema/> },
     CREATE:       { path: 'schemas/create', element: <SchemaForm/> },
     EDIT:         { path: 'schemas/edit/:schemaId', element: <SchemaForm/> },
-    STAKES:       { path: 'schemas/stakes', element: <StakeEditor/> },
+    // STAKES:       { path: 'schemas/stakes', element: <StakeEditor/> },
+    STAKES:       { path: 'schemas/stakes', element: <Stakes/> },
   },
 
   TRANSACTIONS:   { path: 'transactions', element: <Transactions/> },
@@ -119,7 +123,7 @@ export const WEB_ROUTES = {
 
 
   DEPOSIT: {
-    HISTORY:      { path: 'deposit/history', element: <DepositHistory status='PENDING' /> },
+    HISTORY:      { path: 'deposit/history', element: <DepositHistory /> },
     PENDING:      { path: 'deposit/pending', element: <DepositHistory status='PENDING' /> },
     REJECTED:     { path: 'deposit/rejected', element: <DepositHistory status='REJECTED' /> },
   },
@@ -127,7 +131,8 @@ export const WEB_ROUTES = {
   WITHDRAW: {
     AUTO:         { path: 'withdraw/method/auto', element: <WithdrawMethodManual /> },
     MANUAL:       { path: 'withdraw/method/manual', element: <WithdrawMethodManual /> },
-    PENDING:      { path: 'withdraw/pending', element: <WithdrawMethodManual /> },
+    // PENDING:      { path: 'withdraw/pending', element: <WithdrawMethodManual /> },
+    PENDING:      { path: 'withdraw/pending', element: <WithdrawHistory status="PENDING" /> },
     SCHEDULE:     { path: 'withdraw/schedule', element: <WithdrawSchedule /> },
     HISTORY:      { path: 'withdraw/history', element: <WithdrawHistory /> },
   },
@@ -139,6 +144,8 @@ export const WEB_ROUTES = {
   },
 
   SETTING: {
+    // CONFIGS:      { path: 'setting/configs', element: <ConfigManagement /> },
+    CONFIGS:      { path: 'setting/configs', element: <ConfigEditor /> },
     SITE:         { path: 'setting/site', element: <SiteSetting /> },
     MAIL:         { path: 'setting/mail', element: <EmailSetting /> },
     PLUGIN:       { path: 'setting/plugin', element: <PluginSetting /> },

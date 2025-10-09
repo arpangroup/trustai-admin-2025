@@ -1,32 +1,109 @@
+import { useState } from 'react';
 import ReactDOM from 'react-dom';
+import { LuCheck, LuX } from 'react-icons/lu';
+import FormTextarea from '../../components/form/FormTextarea';
+import { API_ROUTES } from '../../routes';
+import apiClient from '../../api/apiClient';
+import { toast } from 'react-toastify';
 
-const WithdrawApproveForm = ({ isOpen, onClose, userId, depositRequestId }) => {
+const WithdrawApproveForm = ({ withdrawRequest, onClose }) => {
+    const { id: withdrawRequestId, amount, txnFee, walletAddress, txnDate, } = withdrawRequest || {};
+    const [message, setMessage] = useState('');
+    const [isRejecting, setIsRejecting] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+    const [error, setError] = useState('');
+
+
+    const handleSubmit = async (action) => {
+        if (submitting) return;  // prevent multiple calls if already submitting
+        setError('');
+        setIsRejecting(action === 'reject');
+
+        if (action === 'reject' && message.trim() === '') {
+            // Don't proceed if rejecting and no message
+            return;
+        }
+
+        setSubmitting(true);
+
+        let payload = {};
+        if (action === 'reject') {
+            payload = { rejectionReason: message }
+        }
+
+        try {
+            await apiClient.post(API_ROUTES.WITHDRAWAL.ACTION(action, withdrawRequestId), payload);
+
+            toast(`Withdraw successfully ${action}ed.`);
+            // Optionally trigger a page reload, modal close, or callback
+            if (onClose) onClose();
+            window.location.reload(); // Optional: hard reload
+        } catch (err) {
+            setError(err.message || 'Something went wrong.');
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
+
     return (
         <>
-
-            <ul class="list-group mb-4">
-                <li class="list-group-item">
-                    UPI BANK ACCOUNT:  <strong>oaaoaosjwn27646ybl</strong>
+            <ul className="list-group mb-4">
+                <li className="list-group-item">
+                    Wallet Address:  <strong>{walletAddress}</strong>
                 </li>
             </ul>
 
-            <form action="https://81habibi.com/admin/withdraw/action-now" method="post">
+            <div className="card p-3 mb-4" style={{ maxWidth: '400px' }}>
+                <div className="d-flex justify-content-between mb-2">
+                    <div>Requested Amount:</div>
+                    <div className="text-end">{amount}</div>
+                </div>
+                <div className="d-flex justify-content-between mb-2">
+                    <div>Transaction Fee:</div>
+                    <div className="text-end">{txnFee}</div>
+                </div>
+                <hr />
+                <div className="d-flex justify-content-between fw-bold fs-5">
+                    <div>Total Wallet Deduction:</div>
+                    <div className="text-end">{amount - txnFee}</div>
+                </div>
+            </div>
+
+            <form action="#" method="post">
                 <input type="hidden" name="_token" value="6uNwVKwHHRc8JgwVXPyPPcMCbWrA8kRaWXOJrYqQ" />
                 <input type="hidden" name="id" value="188" />
 
-                <div class="site-input-groups">
-                    <label for="" class="box-input-label">Details Message(Optional)</label>
-                    <textarea name="message" class="form-textarea mb-0" placeholder="Details Message"></textarea>
+                <div className="site-input-groups mb-4">
+                    <FormTextarea
+                    label="Details Message(Optional)"
+                    name="message"
+                    value={message}
+                    required={true}
+                    rows={2}
+                    onChange={(e) => setMessage(e.target.value)}
+                    warning={isRejecting && message.trim() === '' ? 'This field is required for rejection.' : ''}
+                    />
                 </div>
 
-                <div class="action-btns">
-                    <button type="submit" name="approve" value="yes" class="site-btn-sm primary-btn me-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" icon-name="check" class="lucide lucide-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        Approve
+                {error && <div className="text-danger mt-2 mb-2">{error}</div>}
+
+                <div className="action-btns">
+                   <button
+                    type="button"
+                    disabled={submitting}
+                    className="site-btn-sm primary-btn me-2"
+                    onClick={() => handleSubmit('approve')}
+                    >
+                        <LuCheck /> Approve
                     </button>
-                    <button type="submit" name="reject" value="yes" class="site-btn-sm red-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" icon-name="x" class="lucide lucide-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
-                        Reject
+                    <button
+                    type="button"
+                    disabled={submitting}
+                    className="site-btn-sm red-btn"
+                    onClick={() => handleSubmit('reject')}
+                    >
+                        <LuX /> Reject
                     </button>
                 </div>
 

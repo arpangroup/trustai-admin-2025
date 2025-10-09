@@ -14,7 +14,7 @@ const WithdrawSchedule = ({ name }) => {
                         <div className="site-card">
                             {/* ##################### */}
                             <div class="site-card-body">
-                                <form action="https://81habibi.com/admin/withdraw/schedule-update" method="post">
+                                <form action="#" method="post">
                                     <input type="hidden" name="_token" value="6uNwVKwHHRc8JgwVXPyPPcMCbWrA8kRaWXOJrYqQ" />
                                     <div class="site-input-groups row">
                                         <div class="col-sm-4 col-label pt-0">Sunday</div>

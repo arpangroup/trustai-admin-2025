@@ -17,7 +17,8 @@ const InvestNow = ({ userId, onClose }) => {
     const [schemaDetailsMap, setSchemaDetailsMap] = useState({});
     const [screenshotFile, setScreenshotFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState("");
-    const [alert, setAlert] = useState({ message: "", type: "" });
+   // const [alert, setAlert] = useState({ message: "", type: "" });
+    const [alert, setAlert] = useState({ type: "danger", message: "Invest feature is currently not available" });
 
     // Fetch schemas on mount
     useEffect(() => {
@@ -166,9 +167,9 @@ const InvestNow = ({ userId, onClose }) => {
                     )}
 
                     <div className="action-btns mt-4">
-                        <button type="submit" className="site-btn-sm primary-btn me-2">
+                        {/* <button type="submit" className="site-btn-sm primary-btn me-2">
                             <LuSend /> &nbsp; PROCEED TO INVEST
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             </form>

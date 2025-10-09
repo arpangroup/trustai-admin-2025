@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { API_ROUTES } from "../../routes";
 import apiClient from "../../api/apiClient";
 import FormInput from "../../components/form/FormInput";
+import { toast } from "react-toastify";
 
-const defaultImageUrl = 'https://81habibi.com/assets/global/images/wIzOWakjUq1xWMgBg6vh.jpg';
+const defaultImageUrl = 'https://www.uidai.gov.in/images/Aadhaar_letter_large.png';
 
 const KycDetailsPanel = ({ kycId }) => {
   const [kycData, setKycData] = useState(null);
@@ -41,7 +42,7 @@ const KycDetailsPanel = ({ kycId }) => {
         kycId,
         action: "approve",
       });
-      alert("KYC approved successfully.");
+      toast.success("KYC approved successfully.");
     } catch (err) {
       setAlert({ message: err.message || "Failed to approve KYC.", type: 'danger' });
     } finally {
@@ -58,7 +59,7 @@ const KycDetailsPanel = ({ kycId }) => {
 
     // Second click: submit
     if (!kycRejectionReason.trim()) {
-      alert("Rejection reason is required.");
+      toast.error("Rejection reason is required.");
       return;
     }
 
@@ -71,7 +72,7 @@ const KycDetailsPanel = ({ kycId }) => {
         action: "reject",
         reason: kycRejectionReason,
       });
-      alert("KYC rejected successfully.");
+      toast.success("KYC rejected successfully.");
     } catch (err) {
       setAlert({ message: err.message || "Failed to reject KYC.", type: 'danger' });
     } finally {

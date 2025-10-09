@@ -3,8 +3,9 @@ import axios from 'axios';
 import FormInputWithUnit from '../../components/form/FormInputWithUnit';
 import './TeamIncomeConfigTable.css';
 import { API_ROUTES } from '../../routes';
+import apiClient from '../../api/apiClient';
 
-const RANKS = ['RANK_1', 'RANK_2', 'RANK_3', 'RANK_4', 'RANK_5'];
+const RANKS = ['RANK_0', 'RANK_1', 'RANK_2', 'RANK_3', 'RANK_4', 'RANK_5'];
 const LEVEL_LABELS = {
   1: 'Lv.A / Depth-1',
   2: 'Lv.B / Depth-2',
@@ -16,10 +17,11 @@ export default function TeamIncomeConfigTable() {
   const [originalData, setOriginalData] = useState([]);
   const [hasChanges, setHasChanges] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState(null);
 
   // Fetch and pivot
   useEffect(() => {
-    axios.get(API_ROUTES.TEAM_INCOME_CONFIGS).then(res => {
+    apiClient.get(API_ROUTES.TEAM_INCOME_CONFIGS).then(res => {
       const rawData = res.data;
       const pivot = { 1: {}, 2: {}, 3: {} };
 
@@ -37,6 +39,7 @@ export default function TeamIncomeConfigTable() {
   }, []);
 
   const handleInputChange = (depth, rank, value) => {
+    setMessage(null)
     const numericValue = parseFloat(value) || 0;
 
     const updatedPivot = {
@@ -71,13 +74,13 @@ export default function TeamIncomeConfigTable() {
     });
 
     try {
-      await axios.put(API_ROUTES.TEAM_INCOME_CONFIGS, unpivoted);
-      alert('Update successful');
+      await apiClient.put(API_ROUTES.TEAM_INCOME_CONFIGS, unpivoted);
       setOriginalData(unpivoted);
       setHasChanges(false);
+      setMessage({ text: "Update successful", type: "success" });
     } catch (e) {
-      alert('Update failed');
       console.error(e);
+      setMessage({ text: "Update failed", type: "error" });
     }
   };
 
@@ -116,7 +119,7 @@ export default function TeamIncomeConfigTable() {
                             name={`${depth}-${rank}`}
                             value={currentValue}
                             unit="%"
-                            inputClassName={`${isChanged ? 'border-yellow-500 bg-yellow-100' : 'border-gray-300'} w-full`}
+                            inputClassName={`form-control ${isChanged ? 'bg-warning border-warning' : ''}`}
                             onChange={e => handleInputChange(depth, rank, e.target.value)}
                           />
                         </td>
@@ -128,14 +131,59 @@ export default function TeamIncomeConfigTable() {
             </table>
           )}
 
-          <button
-            onClick={handleUpdate}
-            disabled={!hasChanges}
-            className={`mt-3 px-4 py-2 rounded text-white ${hasChanges ? 'site-btn-sm primary-btn' : 'bg-gray-400 cursor-not-allowed'}`}
-          >
-            Update
-          </button>
-        </div>
+            <button
+              onClick={handleUpdate}
+              disabled={!hasChanges}
+              className={`btn ${hasChanges ? 'btn-primary' : 'btn-secondary'} mt-3 ps-4 pe-4`}
+            >
+              Update
+            </button>
+
+            {message && (
+              <div
+                className={`alert mt-3 alert-${message.type === "success" ? "success" : "danger"}`}
+                role="alert"
+              >
+                {message.text}
+              </div>
+            )}
+
+
+          {/* ===== Description Section START ===== */}
+          <div className="mt-4">
+            <h5>🛈 How This Configuration Table Works</h5>
+            <p>This table defines the <strong>team income payout percentages</strong> based on two key factors:</p>
+            <ul>
+              <li><strong>Level (Depth)</strong>: 
+                <ul>
+                  <li><strong>Lv.A / Depth-1</strong>: Direct downline (first-level referrals)</li>
+                  <li><strong>Lv.B / Depth-2</strong>: Second-level downline</li>
+                  <li><strong>Lv.C / Depth-3</strong>: Third-level downline</li>
+                </ul>
+              </li>
+              <li><strong>Upline Rank</strong>: Columns RANK_0 to RANK_5 represent the rank of the person earning the income.</li>
+            </ul>
+
+            <p><strong>Each cell</strong> shows the percentage (%) that an upline at a specific rank receives from a downline member at a certain depth level.</p>
+            
+            <p><em>For example:</em> If a user at <strong>RANK_3</strong> earns income from someone at <strong>Depth-2</strong> (Lv.B), the system uses the value in the <strong>Lv.B row, RANK_3 column</strong>.</p>
+
+            <h6>✅ How to Use</h6>
+            <ul>
+              <li>Edit the payout % in any cell as needed.</li>
+              <li>Changed values will be highlighted in yellow.</li>
+              <li>Click the <strong>Update</strong> button to save your changes.</li>
+            </ul>
+
+            <h6>⚠️ Note</h6>
+            <ul>
+              <li>All values should be numbers (the '%' is automatically shown).</li>
+              <li>Ensure your configuration aligns with your compensation structure.</li>
+            </ul>
+          </div>
+          {/* ===== Description Section END ===== */}
+
+        </div>        
       </div>
     </div>
   );

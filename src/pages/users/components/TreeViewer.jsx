@@ -3,6 +3,7 @@ import styles from './TreeViewer.module.css';
 import { LuMaximize2, LuRefreshCw, LuZoomIn, LuZoomOut } from 'react-icons/lu';
 import { API_ROUTES } from '../../../routes';
 import apiClient from '../../../api/apiClient';
+import { REFERRAL_TREE_MAX_DEPTH } from '../../../constants/config';
 
 const TreeViewer = ({ userId }) => {
   const [treeData, setTreeData] = useState(null);
@@ -12,7 +13,7 @@ const TreeViewer = ({ userId }) => {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const maxLevel = urlParams.get('level') || 3;
+    const maxLevel = urlParams.get('level') || REFERRAL_TREE_MAX_DEPTH;
 
     // fetch(`/api/v1/tree/${userId}?maxLevel=${maxLevel}`)
     //   .then(res => res.json())
@@ -20,7 +21,7 @@ const TreeViewer = ({ userId }) => {
     //   .catch(() => setTreeData({ error: true }));
 
     apiClient.get(API_ROUTES.REFERRAL_TREE(userId, maxLevel))
-    .then(setTreeData)
+    .then(response => setTreeData(response.data))
     .catch(() => setTreeData({ error: true }));
 
 

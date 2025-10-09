@@ -10,7 +10,8 @@ const BalancePanel = ({ userId, username = '', onClose }) => {
   const [wallet, setWallet] = useState("main");
   const [amount, setAmount] = useState("");
   const [remarks, setRemarks] = useState("");
-  const [alert, setAlert] = useState({ message: "", type: "" }); // type: 'success' | 'danger'
+  //const [alert, setAlert] = useState({ message: "", type: "" }); // type: 'success' | 'danger'
+  const [alert, setAlert] = useState({ type: "danger", message: "Balance adjustment feature is currently not available" });
 
 
   const handleToggle = (_, value) => setIsAddMode(value);
@@ -92,7 +93,7 @@ const BalancePanel = ({ userId, username = '', onClose }) => {
             required={true}
           />
         </div>
-        <button type="submit" className="site-btn primary-btn w-100">Apply Now</button>
+        {/* <button type="submit" className="site-btn primary-btn w-100">Apply Now</button> */}
       </form>
       {/* Alert Message */}
       {alert.message && (

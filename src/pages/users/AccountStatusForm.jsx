@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Switch from '../../components/form/Switch';
 import apiClient from '../../api/apiClient';
 import { API_ROUTES } from "../../routes";
+import { toast } from 'react-toastify';
 
 const switchFields = [
     { label: 'Account Status', name: 'accountActive' },
@@ -49,7 +50,7 @@ const AccountStatusForm = ({ initialStatus, userId }) => {
             }));
         } catch (err) {
             console.error('Error updating account status:', err);
-            alert(`Failed to update ${field}: ${err.message}`);
+            toast,error(`Failed to update ${field}: ${err.message}`);
         } finally {
             setLoadingField(null);
         }

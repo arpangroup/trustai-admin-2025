@@ -3,6 +3,7 @@ import axios from 'axios';
 import FormInputWithUnit from '../../components/form/FormInputWithUnit';
 import './TeamIncomeConfigTable.css';
 import { API_ROUTES } from '../../constants/apiRoutes';
+import { toast } from 'react-toastify';
 
 
 const RANKS = ['RANK_2', 'RANK_3', 'RANK_4', 'RANK_5'];
@@ -69,11 +70,11 @@ export default function TeamIncomeConfigTable() {
 
         try {
             await axios.put(`${API_ROUTES.TEAM_INCOME_CONFIGS}`, unpivoted);
-            alert('Update successful');
+            toast.success('Update successful');
             setOriginalData(unpivoted);
             setHasChanges(false);
         } catch (e) {
-            alert('Update failed');
+            toast.error('Update failed');
             console.error(e);
         }
     };

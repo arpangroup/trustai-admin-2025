@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Navigate, NavLink } from 'react-router-dom';
 import { AgGridReact } from 'ag-grid-react';
-import { LuAnchor, LuCast, LuPencilLine, LuPlus, LuSettings, LuUser } from 'react-icons/lu';
+import { LuAirVent, LuAnchor, LuCast, LuPencilLine, LuPlus, LuSettings, LuUser, LuWifi } from 'react-icons/lu';
 
 import PageTitle from '../../components/page_title/PageTitle';
 import Badge from '../../components/Badge';
@@ -22,16 +22,9 @@ import { CURRENCY_SYMBOL } from '../../constants/config';
 import TeamIncomeConfigTable from '../income/TeamIncomeConfigTable';
 import InvestmentSchemaSummary from '../schema/InvestmentSchemaSummary';
 import apiClient from '../../api/apiClient';
+import WithdrawRuleEditor from '../withdraw/WithdrawRuleEditor';
+import { toast } from 'react-toastify';
 
-
-// const fallbackIcons = {
-//   1: "https://cdn-icons-png.flaticon.com/512/8037/8037137.png",
-//   2: "https://81habibi.com/assets/global/images/sCQgIyl0OKzFiO73nmWF.svg",
-//   3: "https://81habibi.com/assets/global/images/TQDUvbD48kmhmV9qifzh.svg",
-//   4: "https://81habibi.com/assets/global/images/hGHllGGCIYfpx5Z2VKrW.svg",
-//   5: "https://81habibi.com/assets/global/images/SaNfYL7WD2pzAAME8Sqb.svg",
-//   6: rank5,
-// };
 
 const fallbackIcons = {
   1: rank0,
@@ -45,6 +38,7 @@ const fallbackIcons = {
 const sidePanelButtons = [
     { id: "team_rebate_config", label: "Team Rebate Config",  disabled: true, icon: <LuAnchor /> },
     { id: "rank_config_editor", label: "Rank Config Editor",  disabled: true, icon: <LuCast /> },
+    { id: "withdraw_rules_editor", label: "Withdraw Rules Editor",  disabled: true, icon: <LuAirVent /> },
 ];
 
 const UserRanking = (props) => {
@@ -63,10 +57,20 @@ const UserRanking = (props) => {
 
 
     const fetchRanks = async () => {
-        const data = await apiClient.get(API_ROUTES.RANK_CONFIGS);
-        setData(data);
+        const response = await apiClient.get(API_ROUTES.RANKINGS.BASE);
+        setData(response.data);
         setLoading(false);
     }
+
+     // 🔄 Reload
+    const reloadConfig = async () => {
+        try {
+            await apiClient.post(API_ROUTES.CONFIGS.RELOAD);
+            toast("Configs loaded successfully");
+        } catch (err) {
+            console.log("Failed to reload configs: " + err.message);
+        }
+    };
 
 
       const ActionLinkAddNew = (props) => {
@@ -76,6 +80,7 @@ const UserRanking = (props) => {
                     <LuSettings />
                     <span> Rank Config</span>
                 </button>
+
 
                 <a href="/rankings/create"
                     className="title-btn">
@@ -178,6 +183,12 @@ const UserRanking = (props) => {
                                 {panel.icon} <span className="ms-2">{panel.label}</span>
                             </a>
                         ))}
+
+                        
+                       
+                        <button className="btn btn-outline-secondary btn-sm me-2" onClick={reloadConfig}>
+                            🔄 Reload Config
+                        </button>   
                         
                         <a href="/rankings/create" className="btn btn-outline-primary btn-sm me-2">
                             <LuPlus />
@@ -208,7 +219,8 @@ const UserRanking = (props) => {
                                             defaultColDef={defaultColDef}
                                             pagination={true}                      
                                             paginationPageSize={10}
-                                            paginationPageSizeSelector={[10, 20, 50, 100]} />
+                                            // paginationPageSizeSelector={[10, 20, 50, 100]} 
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -231,6 +243,11 @@ const UserRanking = (props) => {
             {panel === 'rank_config_editor' &&
                  <RightPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)} style={{width: '1200px'}}>
                     <RankConfigEditor/>
+                </RightPanel>
+            }
+            {panel === 'withdraw_rules_editor' &&
+                 <RightPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)} style={{width: '1000px'}}>
+                   <WithdrawRuleEditor/>
                 </RightPanel>
             }
         </div>

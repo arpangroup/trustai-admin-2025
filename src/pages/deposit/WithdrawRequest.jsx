@@ -10,15 +10,15 @@ const withdrawAccountList = [
 ];
 
 const WithdrawRequest = ({ senderId, senderName }) => {
+  //const [alert, setAlert] = useState({ type: "", message: "" });
+  const [alert, setAlert] = useState({ type: "danger", message: "Withdraw feature is currently not available" });
+
   const [formData, setFormData] = useState({
     withdrawAccount: "",
     amount: "",
     withdrawFee: "",
     upiId: "",
   });
-
-  const [alert, setAlert] = useState({ type: "", message: "" });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -135,9 +135,9 @@ const WithdrawRequest = ({ senderId, senderName }) => {
         })}
 
         <div className="action-btns">
-          <button type="submit" className="site-btn-sm primary-btn me-2">
+          {/* <button type="submit" className="site-btn-sm primary-btn me-2">
             <LuSend /> &nbsp; Withdraw Money
-          </button>
+          </button> */}
         </div>
       </form>
 

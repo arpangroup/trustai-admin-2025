@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { API_ROUTES } from "../../routes";
 import apiClient from "../../api/apiClient";
+import { toast } from "react-toastify";
 
 const RankConfigEditor = () => {
   const [ranks, setRanks] = useState([]);
   const [changes, setChanges] = useState({});
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     const fetchRanks = async () => {
       try {
-        const res = await apiClient.get(API_ROUTES.RANK_CONFIGS);
-        const flattened = res.map((rank) => ({
+        const response = await apiClient.get(API_ROUTES.RANKINGS.BASE);
+        const flattened = response.data.map((rank) => ({
           ...rank,
           minLevel1Count: rank.requiredLevelCounts?.["1"] || 0,
           minLevel2Count: rank.requiredLevelCounts?.["2"] || 0,
@@ -28,6 +29,7 @@ const RankConfigEditor = () => {
   }, []);
 
   const handleChange = (id, field, value) => {
+    setMessage(null)
     setRanks((prev) =>
       prev.map((rank) =>
         rank.id === id ? { ...rank, [field]: value } : rank
@@ -61,15 +63,15 @@ const RankConfigEditor = () => {
       return updated;
     });
 
-    axios
-      .patch(`${API_ROUTES.RANK_CONFIGS_UPDATE}`, payload)
+    apiClient
+      .patch(API_ROUTES.RANKINGS.UPDATE, payload)
       .then(() => {
-        alert("Ranks updated successfully!");
+        setMessage({ text: "Ranks updated successfully!", type: "success" });
         setChanges({});
       })
       .catch((err) => {
         console.error(err);
-        alert("Error updating ranks.");
+        setMessage({ text: "Error updating ranks.", type: "error" });
       });
   };
 
@@ -77,74 +79,85 @@ const RankConfigEditor = () => {
 
   return (
     <div className="container mt-4">
-      <h3 className="mb-4">Rank Config Editor</h3>
-      <div className="table-responsive">
-        <table className="table table-bordered table-striped table-sm">
-          <thead className="thead-dark">
-            <tr>
-              <th>RANK ID</th>
-              <th>RANK CODE</th>
-              <th>MINIMUM DEPOSIT BALANCE ($) </th>
-              <th>MINIMUM INVEST AMOUNT ($)</th>
-              <th>TXN PER DAY</th>
-              <th>RANK BONUS</th>
-              <th>COMISSION (%)</th>
-              <th>DIRECT REFERRALS (Lv.A)</th>
-              <th>LEVEL-B REQUIRED</th>
-              <th>LEVEL-C REQUIRED</th>
-              {/* <th>REFERRAL DEPOSITS</th> */}
-              {/* <th>REFERRAL INVESTMENTS</th> */}
-              {/* <th>Income</th> */}
-            </tr>
-          </thead>
-          <tbody>
-            {ranks.map((rank) => (
-              <tr key={rank.id}>
-                <td>{rank.id}</td>
-                <td>
-                  <NavLink to={`/admin/rankings/edit/${rank.id}`}>
-                    {rank.code}
-                  </NavLink>
-                </td>
-                {[
-                  "minDepositAmount",
-                  "minInvestmentAmount",
-                  "txnPerDay",
-                  "rankBonus",
-                  "commissionPercentage",
-                  "minDirectReferrals",
-                  // "minLevel1Count",
-                  "minLevel2Count",
-                  "minLevel3Count",
-                  // "minReferralTotalDeposit",
-                  // "minReferralTotalInvestment",
-                  // "minTotalEarnings",
-                ].map((field) => (
-                  <td key={field}>
-                    <input
-                      type="number"
-                      className={`form-control form-control-sm ${isCellChanged(rank.id, field) ? "bg-warning" : ""
-                        }`}
-                      value={rank[field]}
-                      onChange={(e) =>
-                        handleChange(rank.id, field, Number(e.target.value))
-                      }          
-                      onWheel={(e) => e.target.blur()}
-                    />
-                  </td>
-                ))}
+      <div className="row">
+
+        <h3 className="mb-4">Rank Config Editor</h3>
+        <div className="table-responsive">
+          <table className="table table-bordered table-striped table-sm">
+            <thead className="thead-dark">
+              <tr>
+                <th>RANK ID</th>
+                <th>RANK CODE</th>
+                <th>MINIMUM WALLET BALANCE ($) </th>
+                <th>MINIMUM INVEST AMOUNT ($)</th>
+                <th>TXN PER DAY</th>
+                <th>RANK BONUS</th>
+                <th>DAILY INCOME (%)</th>
+                <th>DIRECT REFERRALS (Lv.A)</th>
+                <th>LEVEL-B REQUIRED</th>
+                <th>LEVEL-C REQUIRED</th>
+                {/* <th>REFERRAL DEPOSITS</th> */}
+                {/* <th>REFERRAL INVESTMENTS</th> */}
+                {/* <th>Income</th> */}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      {Object.keys(changes).length > 0 && (
-        <div className="text-end mt-3">
-          <button className="btn btn-primary" onClick={handleUpdate}>
-            Update Changed Ranks
-          </button>
+            </thead>
+            <tbody>
+              {ranks.map((rank) => (
+                <tr key={rank.id}>
+                  <td>{rank.id}</td>
+                  <td>
+                    <NavLink to={`/admin/rankings/edit/${rank.id}`}>
+                      {rank.code}
+                    </NavLink>
+                  </td>
+                  {[
+                    "minDepositAmount",
+                    "minInvestmentAmount",
+                    "txnPerDay",
+                    "rankBonus",
+                    "commissionPercentage",
+                    "minDirectReferrals",
+                    // "minLevel1Count",
+                    "minLevel2Count",
+                    "minLevel3Count",
+                    // "minReferralTotalDeposit",
+                    // "minReferralTotalInvestment",
+                    // "minTotalEarnings",
+                  ].map((field) => (
+                    <td key={field}>
+                      <input
+                        type="number"
+                        className={`form-control form-control-sm ${isCellChanged(rank.id, field) ? "bg-warning" : ""
+                          }`}
+                        value={rank[field]}
+                        onChange={(e) =>
+                          handleChange(rank.id, field, Number(e.target.value))
+                        }
+                        onWheel={(e) => e.target.blur()}
+                      />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {Object.keys(changes).length > 0 && (
+          <div className="text-end mt-3">
+            <button className="btn btn-primary" onClick={handleUpdate}>
+              Update Changed Ranks
+            </button>
+          </div>
+        )}
+      {message && (
+        <div
+          className={`alert mt-3 alert-${message.type === "success" ? "success" : "danger"}`}
+          role="alert"
+        >
+          {message.text}
         </div>
       )}
+      </div>
     </div>
   );
 };

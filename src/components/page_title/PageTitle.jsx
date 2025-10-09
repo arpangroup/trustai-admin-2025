@@ -10,7 +10,7 @@ const capitalizeWords = (str) => {
     .join(' ');
 }
 
-const PageTitle = ({ title, isBack = false, actionLink = null }) => {
+const PageTitle = ({ title, subtitle="", isBack = false, actionLink = null }) => {
     const navigate = useNavigate();
 
     const handleBack = (e) => {
@@ -33,6 +33,13 @@ const PageTitle = ({ title, isBack = false, actionLink = null }) => {
                             }
                             {actionLink}
                         </div>
+                        {subtitle && (
+                        <div
+                            className="text"
+                            dangerouslySetInnerHTML={{ __html: subtitle }}
+                        />
+                        )}
+                        
                     </div>
                 </div>
             </div>

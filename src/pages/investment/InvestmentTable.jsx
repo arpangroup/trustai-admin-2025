@@ -18,20 +18,22 @@ import InvestmentSummary from "./InvestmentSummary";
 
 // Main component
 const InvestmentTable = ({ userId = null, pageSize = 9999 }) => {
-  const [page, setPage] = useState(0);
-  const { data, totalPages, loading, error } = usePaginatedFetch(API_ROUTES.INVESTMENTS.BASE, page, pageSize);
+  const [page, setPage] = useState(0);  
+  const url = userId ? API_ROUTES.INVESTMENTS.BY_USER(userId) : API_ROUTES.INVESTMENTS.BASE;
+  const { data, totalPages, loading, error } = usePaginatedFetch(url, page, pageSize);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState({});
 
 
   const UserCell = ({ data }) => {
-    const { userId, user } = data;
-    const url = generatePath(WEB_ROUTES.USERS.USER_EDIT.path, { userId });
+    const { createdBy } = data;
+    if(!createdBy) return;
+    const url = generatePath(WEB_ROUTES.USERS.USER_EDIT.path, { userId: createdBy });
 
     WEB_ROUTES
     return (
       <NavLink to={url}>
-        {user}
+        {createdBy}
       </NavLink>
     )
   }

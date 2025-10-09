@@ -22,7 +22,7 @@ const NotificationTuneSetting = ({ name }) => {
                 <div class="single-gateway">
                   <div class="gateway-name">
                     <div class="gateway-icon">
-                      <img src="https://81habibi.com/assets/global/tune-icon/bewitched.png" alt="" />
+                      <img src="https://trustai.co.in/tune-icon/bewitched.png" alt="" />
                     </div>
                     <div class="gateway-title">
                       <h4>Bewitched</h4>
@@ -30,7 +30,7 @@ const NotificationTuneSetting = ({ name }) => {
                   </div>
                   <div class="gateway-right">
                     <div class="gateway-status m-0 me-2">
-                      <button type="button" value="1" data-tune-preview="https://81habibi.com/assets/global/tune/bewitched.mp3" class="site-btn-xs primary-btn audioPlay">
+                      <button type="button" value="1" data-tune-preview="https://trustai.co.in/assets/global/tune/bewitched.mp3" class="site-btn-xs primary-btn audioPlay">
                         <span class="play-1 play"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play" class="lucide lucide-play play" icon-name="play"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></span>
                         <span class="stop-1 hidden stop"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="pause" icon-name="pause" class="lucide lucide-pause"><rect width="4" height="16" x="6" y="4"></rect><rect width="4" height="16" x="14" y="4"></rect></svg></span>
                         <span class="tune-status-1 status-text">Play</span>
@@ -45,7 +45,7 @@ const NotificationTuneSetting = ({ name }) => {
                 <div class="single-gateway">
                   <div class="gateway-name">
                     <div class="gateway-icon">
-                      <img src="https://81habibi.com/assets/global/tune-icon/crunchy.png" alt="" />
+                      <img src="https://trustai.co.in/assets/global/tune-icon/crunchy.png" alt="" />
                     </div>
                     <div class="gateway-title">
                       <h4>Crunchy</h4>
@@ -53,7 +53,7 @@ const NotificationTuneSetting = ({ name }) => {
                   </div>
                   <div class="gateway-right">
                     <div class="gateway-status m-0 me-2">
-                      <button type="button" value="2" data-tune-preview="https://81habibi.com/assets/global/tune/crunchy.mp3" class="site-btn-xs primary-btn audioPlay">
+                      <button type="button" value="2" data-tune-preview="https://trustai.co.in/assets/global/tune/crunchy.mp3" class="site-btn-xs primary-btn audioPlay">
                         <span class="play-2 play"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play" class="lucide lucide-play play" icon-name="play"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></span>
                         <span class="stop-2 hidden stop"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="pause" icon-name="pause" class="lucide lucide-pause"><rect width="4" height="16" x="6" y="4"></rect><rect width="4" height="16" x="14" y="4"></rect></svg></span>
                         <span class="tune-status-2 status-text">Play</span>
@@ -68,7 +68,7 @@ const NotificationTuneSetting = ({ name }) => {
                 <div class="single-gateway">
                   <div class="gateway-name">
                     <div class="gateway-icon">
-                      <img src="https://81habibi.com/assets/global/tune-icon/expert_notification.png" alt="" />
+                      <img src="https://trustai.co.in/assets/global/tune-icon/expert_notification.png" alt="" />
                     </div>
                     <div class="gateway-title">
                       <h4>Expert Notification</h4>
@@ -76,7 +76,7 @@ const NotificationTuneSetting = ({ name }) => {
                   </div>
                   <div class="gateway-right">
                     <div class="gateway-status m-0 me-2">
-                      <button type="button" value="3" data-tune-preview="https://81habibi.com/assets/global/tune/expert_notification.mp3" class="site-btn-xs primary-btn audioPlay">
+                      <button type="button" value="3" data-tune-preview="https://trustai.co.in.com/assets/global/tune/expert_notification.mp3" class="site-btn-xs primary-btn audioPlay">
                         <span class="play-3 play"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play" class="lucide lucide-play play" icon-name="play"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></span>
                         <span class="stop-3 hidden stop"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="pause" icon-name="pause" class="lucide lucide-pause"><rect width="4" height="16" x="6" y="4"></rect><rect width="4" height="16" x="14" y="4"></rect></svg></span>
                         <span class="tune-status-3 status-text">Play</span>
@@ -91,7 +91,7 @@ const NotificationTuneSetting = ({ name }) => {
                 <div class="single-gateway">
                   <div class="gateway-name">
                     <div class="gateway-icon">
-                      <img src="https://81habibi.com/assets/global/tune-icon/knock_knock.png" alt="" />
+                      <img src="https://trustai.co.in/assets/global/tune-icon/knock_knock.png" alt="" />
                     </div>
                     <div class="gateway-title">
                       <h4>knock knock</h4>
@@ -99,7 +99,7 @@ const NotificationTuneSetting = ({ name }) => {
                   </div>
                   <div class="gateway-right">
                     <div class="gateway-status m-0 me-2">
-                      <button type="button" value="4" data-tune-preview="https://81habibi.com/assets/global/tune/knock_knock.mp3" class="site-btn-xs primary-btn audioPlay">
+                      <button type="button" value="4" data-tune-preview="https://trustai.co.in/assets/global/tune/knock_knock.mp3" class="site-btn-xs primary-btn audioPlay">
                         <span class="play-4 play"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play" class="lucide lucide-play play" icon-name="play"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></span>
                         <span class="stop-4 hidden stop"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="pause" icon-name="pause" class="lucide lucide-pause"><rect width="4" height="16" x="6" y="4"></rect><rect width="4" height="16" x="14" y="4"></rect></svg></span>
                         <span class="tune-status-4 status-text">Play</span>
@@ -114,7 +114,7 @@ const NotificationTuneSetting = ({ name }) => {
                 <div class="single-gateway">
                   <div class="gateway-name">
                     <div class="gateway-icon">
-                      <img src="https://81habibi.com/assets/global/tune-icon/silencer.png" alt="" />
+                      <img src="https://trustai.co.in/assets/global/tune-icon/silencer.png" alt="" />
                     </div>
                     <div class="gateway-title">
                       <h4>Silencer</h4>
@@ -122,7 +122,7 @@ const NotificationTuneSetting = ({ name }) => {
                   </div>
                   <div class="gateway-right">
                     <div class="gateway-status m-0 me-2">
-                      <button type="button" value="5" data-tune-preview="https://81habibi.com/assets/global/tune/silencer.mp3" class="site-btn-xs primary-btn audioPlay">
+                      <button type="button" value="5" data-tune-preview="https://trustai.co.in/assets/global/tune/silencer.mp3" class="site-btn-xs primary-btn audioPlay">
                         <span class="play-5 play"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play" class="lucide lucide-play play" icon-name="play"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></span>
                         <span class="stop-5 hidden stop"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="pause" icon-name="pause" class="lucide lucide-pause"><rect width="4" height="16" x="6" y="4"></rect><rect width="4" height="16" x="14" y="4"></rect></svg></span>
                         <span class="tune-status-5 status-text">Play</span>
@@ -137,7 +137,7 @@ const NotificationTuneSetting = ({ name }) => {
                 <div class="single-gateway">
                   <div class="gateway-name">
                     <div class="gateway-icon">
-                      <img src="https://81habibi.com/assets/global/tune-icon/sticky.png" alt="" />
+                      <img src="https://trustai.co.in/assets/global/tune-icon/sticky.png" alt="" />
                     </div>
                     <div class="gateway-title">
                       <h4>Sticky</h4>
@@ -145,7 +145,7 @@ const NotificationTuneSetting = ({ name }) => {
                   </div>
                   <div class="gateway-right">
                     <div class="gateway-status m-0 me-2">
-                      <button type="button" value="6" data-tune-preview="https://81habibi.com/assets/global/tune/sticky.mp3" class="site-btn-xs primary-btn audioPlay">
+                      <button type="button" value="6" data-tune-preview="https://trustai.co.in/assets/global/tune/sticky.mp3" class="site-btn-xs primary-btn audioPlay">
                         <span class="play-6 play"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play" class="lucide lucide-play play" icon-name="play"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></span>
                         <span class="stop-6 hidden stop"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="pause" icon-name="pause" class="lucide lucide-pause"><rect width="4" height="16" x="6" y="4"></rect><rect width="4" height="16" x="14" y="4"></rect></svg></span>
                         <span class="tune-status-6 status-text">Play</span>
@@ -160,7 +160,7 @@ const NotificationTuneSetting = ({ name }) => {
                 <div class="single-gateway">
                   <div class="gateway-name">
                     <div class="gateway-icon">
-                      <img src="https://81habibi.com/assets/global/tune-icon/vopvoopvooop.png" alt="" />
+                      <img src="https://trustai.co.in/assets/global/tune-icon/vopvoopvooop.png" alt="" />
                     </div>
                     <div class="gateway-title">
                       <h4>Vopvoopvooop</h4>
@@ -168,7 +168,7 @@ const NotificationTuneSetting = ({ name }) => {
                   </div>
                   <div class="gateway-right">
                     <div class="gateway-status m-0 me-2">
-                      <button type="button" value="7" data-tune-preview="https://81habibi.com/assets/global/tune/vopvoopvooop.mp3" class="site-btn-xs primary-btn audioPlay">
+                      <button type="button" value="7" data-tune-preview="https://trustai.co.in/assets/global/tune/vopvoopvooop.mp3" class="site-btn-xs primary-btn audioPlay">
                         <span class="play-7 play"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play" class="lucide lucide-play play" icon-name="play"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></span>
                         <span class="stop-7 hidden stop"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="pause" icon-name="pause" class="lucide lucide-pause"><rect width="4" height="16" x="6" y="4"></rect><rect width="4" height="16" x="14" y="4"></rect></svg></span>
                         <span class="tune-status-7 status-text">Play</span>

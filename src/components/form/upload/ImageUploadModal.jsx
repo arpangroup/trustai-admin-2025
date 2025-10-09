@@ -3,6 +3,9 @@ import React, { useEffect, useRef, useState } from "react";
 import ImageGallery from "./ImageGallery";
 import FilePreview from "./FilePreview";
 import { ACCEPTED_FILE_TYPES } from "../../../constants/config";
+import apiClient from "../../../api/apiClient";
+import { API_ROUTES } from "../../../routes";
+import { toast } from "react-toastify";
 
 const ImageUploadModal = ({ show, onClose, onSelect }) => {
   const [tab, setTab] = useState("upload");
@@ -19,7 +22,7 @@ const ImageUploadModal = ({ show, onClose, onSelect }) => {
 
     const filteredFiles = files.filter(file => allowedTypes.includes(file.type));
     if (filteredFiles.length !== files.length) {
-      alert("Some files were not images and have been ignored.");
+      toast("Some files were not images and have been ignored.");
     }
 
     const newPreviews = files.map(file => ({
@@ -38,16 +41,26 @@ const ImageUploadModal = ({ show, onClose, onSelect }) => {
     });
 
     try {
-      const response = await fetch("/api/v1/files/upload-multiple", {
-        method: "POST",
-        body: formData,
+      // const response = await fetch(API_ROUTES.STORAGE.UPLOAD, {
+      //   method: "POST",
+      //   body: formData,
+      // });
+      
+      // if (!response.ok) {
+      //   throw new Error("Upload failed");
+      // }
+      
+      // const result = await response.json(); // This should return a map of filename -> fileId
+
+      const response = await apiClient.post(API_ROUTES.STORAGE.UPLOAD, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
 
-      if (!response.ok) {
-        throw new Error("Upload failed");
-      }
+      const result = response.data; // Should be a map of filename -> fileId
 
-      const result = await response.json(); // This should return a map of filename -> fileId
+
       //const uploadedUrls = Object.values(result).map(fileId => `/api/v1/files/${fileId}`); // Assuming this forms the URL
       const uploadedUrls = Object.values(result);
 
@@ -56,11 +69,11 @@ const ImageUploadModal = ({ show, onClose, onSelect }) => {
       setTab("select");
     } catch (err) {
       console.error("Error uploading files:", err);
-      alert("Failed to upload files. Please try again.");
+      toast.error("Failed to upload files. Please try again.");
     }
   };
 
-  const uploadFilesWithProgress = async () => {
+  const uploadFilesWithProgress_old = async () => {
     if (previews.length === 0) return;
 
     const formData = new FormData();
@@ -98,17 +111,55 @@ const ImageUploadModal = ({ show, onClose, onSelect }) => {
             setTab("select");
           } catch (err) {
             console.error("Error parsing upload response:", err);
-            alert("Upload failed. Invalid server response.");
+            toast.error("Upload failed. Invalid server response.");
           }
         } else {
           console.error("Upload failed with status:", xhr.status);
-          alert("Failed to upload files. Please try again.");
+          toast.error("Failed to upload files. Please try again.");
         }
       }
     };
 
     xhr.open("POST", "/api/v1/files/upload-multiple");
     xhr.send(formData);
+  };
+
+  const uploadFilesWithProgress = async () => {
+    if (previews.length === 0) return;
+
+    const formData = new FormData();
+    previews.forEach(p => {
+      formData.append("files", p.file);
+    });
+
+    try {
+      setIsUploading(true);
+      setUploadProgress(0);
+
+      const response = await apiClient.post(API_ROUTES.STORAGE.UPLOAD, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          onUploadProgress: (progressEvent) => {
+            const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            setUploadProgress(percent);
+          },
+        }
+      );
+
+      const result = response.data;
+      // const uploadedUrls = Object.values(result);
+      const uploadedUrls = Object.values(result).map(file => file.downloadUrl);
+      setUploadedImages(prev => [...uploadedUrls, ...prev]);
+      setPreviews([]);
+      setTab("select");
+    } catch (error) {
+      console.error("Upload failed:", error.message);
+      toast.error("Failed to upload files. Please try again.");
+    } finally {
+      setIsUploading(false);
+      setUploadProgress(0);
+    }
   };
 
   const simulateUpload = () => {
@@ -154,16 +205,28 @@ const ImageUploadModal = ({ show, onClose, onSelect }) => {
 
   useEffect(() => {
     if (show) {
-      fetch("/api/v1/files")
-        .then(res => res.json())
-        .then(data => {
-          const urls = data.map(url => url.downloadUrl);
-          setUploadedImages((prev) => {
-            // Avoid duplicates (optional)
-            const unique = Array.from(new Set([...prev, ...urls]));
-            return unique;
-          });
+      // fetch("/api/v1/files")
+      //   .then(res => res.json())
+      //   .then(data => {
+      //     const urls = data.map(url => url.downloadUrl);
+      //     setUploadedImages((prev) => {
+      //       // Avoid duplicates (optional)
+      //       const unique = Array.from(new Set([...prev, ...urls]));
+      //       return unique;
+      //     });
+      //   });
+      apiClient.get(API_ROUTES.STORAGE.IMAGES)
+      .then(res => {
+        const urls = res.data.map(file => file.downloadUrl);
+        setUploadedImages(prev => {
+          const unique = Array.from(new Set([...prev, ...urls]));
+          return unique;
         });
+      })
+      .catch(error => {
+        console.error('Failed to fetch files:', error.message);
+        // Optional: Show error message in UI
+      });
     }
   }, [show]);
 

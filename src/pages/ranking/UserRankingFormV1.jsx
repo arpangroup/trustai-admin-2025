@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import UploadIcon from '../../assets/icons/upload.svg';
 
 import PageTitle from '../../components/page_title/PageTitle';
 import FormInput from "../../components/form/FormInput";
@@ -88,7 +89,8 @@ const UserRankingFormV1 = () => {
     const fetchRanking = async () => {
       setLoading(true);
       try {         
-        const data = await apiClient.get(API_ROUTES.RANK_CONFIGS_BY_ID(rankingId));
+        const response = await apiClient.get(API_ROUTES.RANKINGS.BY_ID(rankingId));
+        const data = response.data;
         const dataObj = {
           ...data,
           icon: null,
@@ -296,11 +298,11 @@ const UserRankingFormV1 = () => {
                         htmlFor="image6"
                         id="image-old"
                         className="file-ok"
-                        style={{ backgroundImage: 'url(https://81habibi.com/assets/global/images/sCQgIyl0OKzFiO73nmWF.svg)' }}
+                        style={{ backgroundImage: 'url(https://trustai.co.in/rank_1.svg)' }}
                       >
                         <img
                           className="upload-icon"
-                          src="https://81habibi.com/assets/global/materials/upload.svg"
+                          src={UploadIcon}
                           alt=""
                         />
                         <span>Update Icon</span>

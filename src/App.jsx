@@ -8,6 +8,10 @@ import DefaultLayout from './layout/DefaultLayout'
 import ProtectedRoute from './utils/ProtectedRoute'
 
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import './assets/css/bootstrap.min.css';
 import './assets/css/styles.css';
@@ -58,6 +62,9 @@ function App() {
           </Route>
         </Route>
       </Routes>
+      
+      {/* Add this ONCE, globally */}
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 }

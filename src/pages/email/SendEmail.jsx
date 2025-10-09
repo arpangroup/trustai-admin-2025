@@ -4,12 +4,15 @@ import SendEmailPanel from "../users/SendEmailPanel";
 export default function SendEmail() {
     return (
         <div className="main-content">
-            <PageTitle title="Send Email to All" />
+            <PageTitle 
+                title="Send Notification to All" 
+                subtitle="<small>Notification will be sent to all <b>ACTIVE</b> members only</small>"
+            />
 
 
-            <div class="container-fluid">
-                <div class="row">
-                    <SendEmailPanel isAllEmail={true} />
+            <div className="container-fluid">
+                <div className="row">
+                    <SendEmailPanel sendToAll={true} />
                 </div>
             </div>
         </div>

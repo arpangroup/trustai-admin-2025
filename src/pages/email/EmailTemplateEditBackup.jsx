@@ -3,6 +3,7 @@ import FormInput from '../../components/form/FormInput';
 import FormTextarea from '../../components/form/FormTextarea';
 import Switch from '../../components/form/Switch';
 import { useState } from 'react';
+import UploadIcon from '../../assets/icons/upload.svg';
 
 const EmailTemplateEdit = () => {
   const [formData, setFormData] = useState({});
@@ -83,7 +84,7 @@ const EmailTemplateEdit = () => {
                         >
                           <img
                             className="upload-icon"
-                            src="https://81habibi.com/assets/global/materials/upload.svg"
+                            src={UploadIcon}
                             alt=""
                           />
                           <span>
