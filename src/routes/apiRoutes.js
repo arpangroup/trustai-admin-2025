@@ -113,8 +113,16 @@ export const API_ROUTES = {
     TEMPLATE_BY_ID: (type, id) => `/api/v1/templates/${type}/${id}`,
   },
 
+  APP: {
+    BANNERS: "/api/app/banners",
+    SLIDERS: "/api/app/sliders",
+    HTML: "/api/app/html",
+  },
 
 
+  // HTML:
+
+  
   // Referral tree View
   REFERRAL_TREE: (userId, maxLevel = 4) => `/api/v1/tree/${userId}?maxLevel=${maxLevel}`,
   // Notification Templates
