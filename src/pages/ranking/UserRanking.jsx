@@ -235,7 +235,7 @@ const UserRanking = (props) => {
             }
 
             {panel === 'team_rebate_config' &&
-                 <RightPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)} style={{width: '800px'}}>
+                 <RightPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)} style={{width: '1000px'}}>
                     <TeamIncomeConfigTable/>
                 </RightPanel>
             }

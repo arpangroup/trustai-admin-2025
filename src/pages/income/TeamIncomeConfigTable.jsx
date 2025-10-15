@@ -89,7 +89,7 @@ export default function TeamIncomeConfigTable() {
       <div className='row'>
         <div className='col-xl-12 col-md-12'>
           <h3 className="card-title mb-4" style={{ fontWeight: '800' }}>Team Income Config Editor</h3>
-         <div className="alert alert-info" role="alert" style={{ fontStyle: 'italic' }}>
+         {/* <div className="alert alert-info" role="alert" style={{ fontStyle: 'italic' }}>
             <strong>Important:</strong> Enter percentage values in <u>decimal form</u>.  
             For example:
             <ul className="mb-0">
@@ -99,7 +99,16 @@ export default function TeamIncomeConfigTable() {
             If you enter <code>5</code>, it will be treated as <strong>500%</strong>, so please input values correctly.  
             <br />
             <em>The system does <strong>not</strong> divide values by 100 internally.</em>
+          </div> */}
+
+          
+          <div className="alert alert-info" role="alert" style={{ fontStyle: 'italic' }}>
+            <strong>Note:</strong> Enter the percentage as a whole number (e.g., <code>1</code> for 1%).  
+            The system will automatically divide the entered value by 100 during calculations.  
+            <br />
+            For example, if you enter <code>1</code>, the system will calculate it as <code>1 / 100 = 0.01</code>.
           </div>
+
 
           {loading ? (
             <p>Loading...</p>
