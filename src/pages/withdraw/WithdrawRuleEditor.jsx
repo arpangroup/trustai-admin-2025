@@ -60,6 +60,15 @@ const WithdrawRuleEditor = () => {
       <div className="row">
 
       <h3 className="mb-4">Withdraw Rule Editor</h3>
+      <div className="alert alert-info" role="alert" style={{ fontStyle: 'italic' }}>
+        <strong>Note:</strong> Enter the percentage as a whole number (e.g., <code>50</code> for 50%).  
+        The system will automatically divide the entered value by 100 during calculations.  
+        <br />
+        For example, if you enter <code>50</code>, the system will calculate it as <code>50 / 100 = 0.50</code>.
+      </div>
+
+
+
       <div className="table-responsive">
         <table className="table table-bordered table-striped table-sm">
           <thead className="thead-dark">

@@ -82,6 +82,15 @@ const RankConfigEditor = () => {
       <div className="row">
 
         <h3 className="mb-4">Rank Config Editor</h3>
+        
+        <div className="alert alert-info" role="alert" style={{ fontStyle: 'italic' }}>
+          <strong>Note:</strong> Enter the percentage as a whole number (e.g., <code>4.5</code> for 4.5%).  
+          The system will automatically divide the entered value by 100 during calculations.  
+          <br />
+          For example, if you enter <code>4.5</code>, the system will calculate it as <code>4.5 / 100 = 0.045</code>.
+        </div>
+
+
         <div className="table-responsive">
           <table className="table table-bordered table-striped table-sm">
             <thead className="thead-dark">
