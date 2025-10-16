@@ -66,7 +66,7 @@ export const API_ROUTES = {
 
   INCOME: {
     ACTIVITY_REWARD: "/api/v1/income/activity-reward",
-    TEAM_CONFIGS: "/api/v1/income/configs",
+    TEAM_CONFIGS: "/api/v1/income/configs",    
   },
 
   
@@ -123,8 +123,10 @@ export const API_ROUTES = {
   // HTML:
 
   
+  LOGS: "/api/v1/logs",
   // Referral tree View
   REFERRAL_TREE: (userId, maxLevel = 4) => `/api/v1/tree/${userId}?maxLevel=${maxLevel}`,
+  UPLINE_TREE: (userId) => `/api/v1/tree/upline/${userId}`,
   // Notification Templates
   // Configs...
   CONFIG_PROPERTIES: "http://localhost:8888/nft_app/dev",

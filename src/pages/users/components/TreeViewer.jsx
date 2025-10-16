@@ -39,7 +39,8 @@ const TreeViewer = ({ userId }) => {
           title={`User ID: ${node.userId}`}
           onClick={(e) => handleUserClick(node, e)}
         >
-          {node.username}
+          {node.username} 
+          <p>({node.userId})</p>
         </div>
         {node.children && node.children.length > 0 && (
           <ul>

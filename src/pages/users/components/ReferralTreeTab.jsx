@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import TreeViewer from './TreeViewer';
 import { LuExpand, LuMinimize } from 'react-icons/lu';
 import './ReferralTreeTab.css';
+import UplineViewer from './UplineViewer';
 
-const ReferralTreeTab = ({ userId }) => {
+const ReferralTreeTab = ({ userId, isUpline = false}) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [animationClass, setAnimationClass] = useState('');
   const fullscreenRef = useRef(null);
@@ -42,7 +43,7 @@ const ReferralTreeTab = ({ userId }) => {
               </div> */}
 
               <div className='site-card-header d-flex justify-content-between align-items-center'>
-                <h4 className="title mb-0">Referral Tree</h4>
+                <h4 className="title mb-0">{isUpline ? `Users Upline` : `Referral Tree`}</h4>
                 {/* <div>
                   {isFullscreen ? <LuMinimize /> : <LuExpand />}
                   <button className="btn btn-outline-primary btn-sm me-2">Zoom In</button>
@@ -59,7 +60,7 @@ const ReferralTreeTab = ({ userId }) => {
 
               <div className="site-card-body table-responsive">
                 {/* <p>No Referral user found</p> */}
-                <TreeViewer userId = {userId}/>
+                {isUpline ? <UplineViewer userId={userId} /> : <TreeViewer userId={userId} />}
               </div>
             </div>
           </div>

@@ -29,6 +29,7 @@ import WithdrawRequest from "../deposit/WithdrawRequest";
 import { CURRENCY_UNIT, RANK_LABEL_MAP } from "../../constants/config";
 import { FiRefreshCcw } from "react-icons/fi";
 import { toast } from "react-toastify";
+import LogTab from "./components/LogTab";
 
 
 
@@ -38,6 +39,8 @@ const tabs = [
     { id: "earnings", label: "Earnings", icon: <LuCreditCard /> },
     { id: "transactions", label: "Transactions", icon: <LuCast /> },
     { id: "referral", label: "Referral Tree", icon: <LuNetwork /> },
+    { id: "upline", label: "Upline Tree", icon: <LuNetwork /> },
+    { id: "logs", label: "Income Logs", icon: <LuWrench /> },
     { id: "tickets", label: "Ticket", icon: <LuWrench /> },
 ];
 
@@ -244,7 +247,9 @@ export default function EditUserV1() {
                             {activeTab === "transactions" && <TransactionTab userId={userInfo.id} />}
                             {/* <ReferralTreeTab activeTab={activeTab} /> */}                            
                             {activeTab === "referral" && <ReferralTreeTab userId={userInfo.id} />}
-                            <TicketsTab activeTab={activeTab} />
+                            {activeTab === "upline" && <ReferralTreeTab userId={userInfo.id} isUpline={true} />}
+                            {activeTab === "logs" && <LogTab userId={userInfo.id} />}
+                            {activeTab === "tickets" && <TicketsTab activeTab={activeTab} />}
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,99 @@
+/* compact, minimal */
+.upline-viewer-compact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin: 8px 0;
+}
+
+/* each node wrapper */
+.uv-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* small arrow between nodes */
+.uv-arrow {
+  font-size: 14px;
+  color: #9aa0a6;
+  margin: 4px 0;
+  line-height: 1;
+}
+
+/* card */
+.uv-card {
+  min-width: 140px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #f7f8fa;
+  border: 1px solid #e3e6ea;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(16,24,40,0.03);
+  font-size: 13px;
+}
+
+/* active ancestor */
+.uv-card.uv-active {
+  border-color: #2fa84f;
+  background: #eefaf0;
+}
+
+/* current user (last one) */
+.uv-card.uv-current {
+  background: linear-gradient(180deg, #dbeafe, #c7e0ff);
+  border-color: #2b6ef6;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(43,110,246,0.12);
+}
+
+/* top row: name and id */
+.uv-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  align-items: center;
+}
+
+/* username */
+.uv-name {
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* id small */
+.uv-id {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* meta */
+.uv-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.uv-rank {
+  font-size: 12px;
+  color: #4b5563;
+}
+
+.uv-balance {
+  font-size: 12px;
+  color: #4b5563;
+}
+
+/* depth */
+.uv-depth {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #8b8f97;
+}
+.uv-small { font-size: 13px; }
