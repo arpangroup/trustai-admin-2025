@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { LuUser, LuAnchor, LuCreditCard, LuCast, LuNetwork, LuWrench, } from "react-icons/lu";
+import { LuUser, LuAnchor, LuCreditCard, LuCast, LuNetwork, LuWrench, LuFileText, LuUsers, LuGitBranch} from "react-icons/lu";
 
 import { API_ROUTES, WEB_ROUTES } from "../../routes";
 
@@ -39,8 +39,8 @@ const tabs = [
     { id: "earnings", label: "Earnings", icon: <LuCreditCard /> },
     { id: "transactions", label: "Transactions", icon: <LuCast /> },
     { id: "referral", label: "Referral Tree", icon: <LuNetwork /> },
-    { id: "upline", label: "Upline Tree", icon: <LuNetwork /> },
-    { id: "logs", label: "Income Logs", icon: <LuWrench /> },
+    { id: "upline", label: "Upline Tree", icon: <LuGitBranch /> },
+    { id: "logs", label: "Income Logs", icon: <LuFileText /> },
     { id: "tickets", label: "Ticket", icon: <LuWrench /> },
 ];
 
