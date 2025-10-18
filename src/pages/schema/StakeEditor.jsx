@@ -39,7 +39,7 @@ const StakeEditor = () => {
 
   useEffect(() => {
     Promise.all([
-      apiClient.get(API_ROUTES.SCHEMAS.FILTER({ type: 'STAKE' })),
+      apiClient.get(API_ROUTES.SCHEMAS.FILTER({ type: 'STAKE', page:0, size:9999 })),
       apiClient.get(API_ROUTES.RANKINGS.BASE),
     ])
       .then(([schemaRes, rankRes]) => {
